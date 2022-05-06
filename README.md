@@ -60,6 +60,6 @@ Employee Reimbursment System (ERS) using Custom ORM
 
 * [x] Create a new private repository within this organization for your custom ORM (naming convention: ers_orm_name_p1; with orm_name being replaced by the name of your custom library)
 * [x] Make sure to add your trainer and team members as contributors to the repo
-* [ ] Create another new private repostory within this organization for your ERS web application (naming convention: ers_webapp_orm_name_p1; with orm_name being replaced by the name of your custom library)
-* [ ] Make sure to add your trainer and team members as contributors to the repo
+* [x] Create another new private repostory within this organization for your ERS web application (naming convention: ers_webapp_orm_name_p1; with orm_name being replaced by the name of your custom library)
+* [x] Make sure to add your trainer and team members as contributors to the repo
 
