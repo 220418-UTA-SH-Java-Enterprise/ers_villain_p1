@@ -8,11 +8,12 @@ import java.sql.SQLException;
 import com.revature.models.ReimbType;
 import com.revature.util.ConnectionUtil;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class ReimbTypeDAOImpl implements ReimbTypeDAO {
 
-    private static Logger logger = Logger.getLogger(ReimbTypeDAOImpl.class);
+    private static Logger logger = LogManager.getLogger(ReimbTypeDAO.class);
 
     @Override
     public ReimbType findById(int id) {
