@@ -40,7 +40,7 @@ public class UserDAOImpl implements UserDAO {
         genKey = rs.getInt(1);
       }
 
-      user.setId(genKey);
+      user.setUserId(genKey);
 
       logger.info("New user has been entered into the database.");
 
