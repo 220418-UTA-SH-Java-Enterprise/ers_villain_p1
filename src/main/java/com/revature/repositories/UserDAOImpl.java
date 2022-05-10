@@ -66,8 +66,37 @@ public class UserDAOImpl implements UserDAO {
 
   @Override
   public User login(String username, String password) {
-    // TODO Auto-generated method stub
-    return null;
+    logger.info("In DAO Layer: UserDAOImpl() - attemptint to login user.");
+    User user = new User();
+    try (Connection conn = ConnectionUtil.getConnection()) {
+      String sql = "SELECT * from users where username = ? AND password = ?;";
+
+      PreparedStatement stmt = conn.prepareStatement(sql);
+      stmt.setString(1, username);
+      stmt.setString(2, password);
+
+      ResultSet rs = stmt.executeQuery();
+
+      if (rs.next()) {
+        user.setUserId(rs.getInt("id"));
+        user.setUsername(rs.getString("username"));
+        // Don't return the password...
+        // user.setPassword(rs.getString("password"));
+        user.setFirstName(rs.getString("first_name"));
+        user.setLastName(rs.getString("last_name"));
+        user.setEmail(rs.getString("email"));
+        user.setRoleId(rs.getInt("role_id"));
+      }
+    } catch (SQLException e) {
+      logger.warn("Unable to execute query");
+      return null;
+    }
+    return user;
+  }
+
+  public boolean delete() {
+    // TODO: discuss delete or set inactive
+    return false;
   }
 
 }
