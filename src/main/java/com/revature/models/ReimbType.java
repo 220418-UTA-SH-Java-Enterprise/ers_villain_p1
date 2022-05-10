@@ -1,50 +1,41 @@
 package com.revature.models;
 
 public class ReimbType {
-    private int typeId; 
+    private int typeId;
     private String rType;
-    
-    
+
     public ReimbType() {
     }
-
 
     public ReimbType(String rType) {
         this.rType = rType;
     }
-
 
     public ReimbType(int typeId, String rType) {
         this.typeId = typeId;
         this.rType = rType;
     }
 
-
     public int getTypeId() {
         return typeId;
     }
-
 
     public void setTypeId(int typeId) {
         this.typeId = typeId;
     }
 
-
     public String getrType() {
         return rType;
     }
-
 
     public void setrType(String rType) {
         this.rType = rType;
     }
 
-
     @Override
     public String toString() {
         return "ReimbType [rType=" + rType + ", typeId=" + typeId + "]";
     }
-
 
     @Override
     public int hashCode() {
@@ -54,7 +45,6 @@ public class ReimbType {
         result = prime * result + typeId;
         return result;
     }
-
 
     @Override
     public boolean equals(Object obj) {
@@ -73,11 +63,6 @@ public class ReimbType {
         if (typeId != other.typeId)
             return false;
         return true;
-    } 
+    }
 
-    
-
-
-
-    
 }
