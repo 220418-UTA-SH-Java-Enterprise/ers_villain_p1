@@ -7,9 +7,8 @@ import java.sql.SQLException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-
 public class ConnectionUtil {
-    private static Logger logger = LogManager.getLogger(UserServiceImpl.class);
+    private static Logger logger = LogManager.getLogger(ConnectionUtil.class);
 
     public static Connection getConnection() {
         Connection conn = null;
