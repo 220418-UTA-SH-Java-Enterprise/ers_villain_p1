@@ -1,7 +1,6 @@
 package com.revature.repositories;
 
 import java.sql.Connection;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -40,7 +39,7 @@ public class UserDAOImpl implements UserDAO {
         genKey = rs.getInt(1);
       }
 
-      user.setId(genKey);
+      user.setUserId(genKey);
 
       logger.info("New user has been entered into the database.");
 
@@ -54,20 +53,48 @@ public class UserDAOImpl implements UserDAO {
 
   @Override
   public boolean update(User user) {
-    // TODO Auto-generated method stub
+    // TODO: Add update user method
     return false;
   }
 
   @Override
   public User findById(int id) {
-    // TODO Auto-generated method stub
+    // TODO: add findById method
     return null;
   }
 
   @Override
   public User login(String username, String password) {
-    // TODO Auto-generated method stub
-    return null;
+    logger.info("In DAO Layer: UserDAOImpl() - attemptint to login user.");
+    User user = new User();
+    try (Connection conn = ConnectionUtil.getConnection()) {
+      String sql = "SELECT * from users where username = ? AND password = ?;";
+
+      PreparedStatement stmt = conn.prepareStatement(sql);
+      stmt.setString(1, username);
+      stmt.setString(2, password);
+
+      ResultSet rs = stmt.executeQuery();
+
+      if (rs.next()) {
+        user.setUserId(rs.getInt("id"));
+        user.setUsername(rs.getString("username"));
+        // user.setPassword(rs.getString("password")); // Don't return the password...
+        user.setFirstName(rs.getString("first_name"));
+        user.setLastName(rs.getString("last_name"));
+        user.setEmail(rs.getString("email"));
+        user.setRoleId(rs.getInt("role_id"));
+      }
+    } catch (SQLException e) {
+      logger.warn("Unable to execute query");
+      return null;
+    }
+    return user;
+  }
+
+  public boolean delete(User user) {
+    // TODO: discuss delete or set inactive
+    return false;
   }
 
 }
