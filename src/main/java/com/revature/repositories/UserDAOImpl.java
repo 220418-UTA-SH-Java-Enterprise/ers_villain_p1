@@ -1,7 +1,6 @@
 package com.revature.repositories;
 
 import java.sql.Connection;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -54,13 +53,13 @@ public class UserDAOImpl implements UserDAO {
 
   @Override
   public boolean update(User user) {
-    // TODO Auto-generated method stub
+    // TODO: Add update user method
     return false;
   }
 
   @Override
   public User findById(int id) {
-    // TODO Auto-generated method stub
+    // TODO: add findById method
     return null;
   }
 
@@ -80,8 +79,7 @@ public class UserDAOImpl implements UserDAO {
       if (rs.next()) {
         user.setUserId(rs.getInt("id"));
         user.setUsername(rs.getString("username"));
-        // Don't return the password...
-        // user.setPassword(rs.getString("password"));
+        // user.setPassword(rs.getString("password")); // Don't return the password...
         user.setFirstName(rs.getString("first_name"));
         user.setLastName(rs.getString("last_name"));
         user.setEmail(rs.getString("email"));
@@ -94,7 +92,7 @@ public class UserDAOImpl implements UserDAO {
     return user;
   }
 
-  public boolean delete() {
+  public boolean delete(User user) {
     // TODO: discuss delete or set inactive
     return false;
   }
