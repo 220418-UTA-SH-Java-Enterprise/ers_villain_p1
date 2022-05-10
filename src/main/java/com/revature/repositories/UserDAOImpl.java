@@ -10,10 +10,11 @@ import java.sql.Statement;
 import com.revature.models.User;
 import com.revature.util.ConnectionUtil;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class UserDAOImpl implements UserDAO {
-  private static Logger logger = Logger.getLogger(UserDAOImpl.class);
+ private static Logger logger = LogManager.getLogger(UserServiceImpl.class);
 
   @Override
   public boolean insert(User user) {
