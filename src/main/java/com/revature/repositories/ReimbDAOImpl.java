@@ -38,7 +38,7 @@ public class ReimbDAOImpl implements ReimbDAO {
             stmt.setString(5, reimb.getDescription());
             stmt.setInt(6, reimb.getAuthorId());
             stmt.setInt(7, reimb.getResolverId());
-            stmt.setInt(8, reimb.getStatusid());
+            stmt.setInt(8, reimb.getStatusId());
             stmt.setInt(9, reimb.getTypeId());
 
             // Execute the statement
@@ -84,7 +84,7 @@ public class ReimbDAOImpl implements ReimbDAO {
             stmt.setString(5, reimb.getDescription());
             stmt.setInt(6, reimb.getAuthorId());
             stmt.setInt(7, reimb.getResolverId());
-            stmt.setInt(8, reimb.getStatusid());
+            stmt.setInt(8, reimb.getStatusId());
             stmt.setInt(9, reimb.getTypeId());
             stmt.setInt(10, reimb.getReimbId());
 
