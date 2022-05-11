@@ -4,12 +4,9 @@ DROP TABLE IF EXISTS ers_reimbursement_type;
 DROP TABLE IF EXISTS ers_reimbursement_status;
 DROP TABLE IF EXISTS ers_user_roles;
 
-
-
-
 CREATE TABLE ers_reimbursement_status(
 	status_id serial CONSTRAINT reimb_status_pk PRIMARY KEY,
-	reimb_type_id int
+	reimb_status varchar(10)
 );
 
 CREATE TABLE ers_reimbursement_type (
