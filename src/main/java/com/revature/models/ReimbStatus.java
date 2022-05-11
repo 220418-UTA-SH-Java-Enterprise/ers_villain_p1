@@ -4,7 +4,7 @@ public class ReimbStatus {
   private int reimbStatusId;
   private String reimbStatus;
 
-  public ReimbStatus() {    
+  public ReimbStatus() {
   }
 
   public ReimbStatus(String reimbStatus) {
@@ -45,26 +45,4 @@ public class ReimbStatus {
     result = prime * result + reimbStatusId;
     return result;
   }
-
-  @Override
-  public boolean equals(Object obj) {
-    if (this == obj)
-      return true;
-    if (obj == null)
-      return false;
-    if (getClass() != obj.getClass())
-      return false;
-    ReimbStatus other = (ReimbStatus) obj;
-    if (reimbStatus == null) {
-      if (other.reimbStatus != null)
-        return false;
-    } else if (!reimbStatus.equals(other.reimbStatus))
-      return false;
-    if (reimbStatusId != other.reimbStatusId)
-      return false;
-    return true;
-  }
-
-  
-
 }

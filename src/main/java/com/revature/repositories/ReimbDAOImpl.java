@@ -67,7 +67,6 @@ public class ReimbDAOImpl implements ReimbDAO {
 
     @Override
     public boolean update(Reimb reimb) {
-
         try (Connection conn = ConnectionUtil.getConnection()) {
             logger.info("In DAO layer: updating reimburement: " + reimb.getReimbId());
 
