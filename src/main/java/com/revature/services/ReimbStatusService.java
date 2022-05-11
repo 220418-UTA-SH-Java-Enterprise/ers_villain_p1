@@ -1,8 +1,10 @@
 package com.revature.services;
 
+import com.revature.models.ReimbStatus;
+
 public interface ReimbStatusService {
-  public boolean addNewStatus(ReimbStatus status);
-  public boolean updateStatus(ReimbStatus status);
-  public boolean deleteStatus(ReimbStatus status);
-  public ReimbStatus getStatusById(int id);
+  public boolean addNewReimbStatus(ReimbStatus status);
+  public boolean updateReimbStatus(ReimbStatus status);
+  public boolean deleteReimbStatus(ReimbStatus status);
+  public ReimbStatus getReimbStatusById(int id);
 }

@@ -1,8 +1,14 @@
 package com.revature.services;
 
+import com.revature.models.ReimbStatus;
+import com.revature.repositories.ReimbStatusDAOImpl;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class ReimbStatusServiceImpl implements ReimbStatusService {
-  private static Logger logger = LogManager.getLogger(ReimbStatusImpl.class);
-  private static ReimbStatusImpl reimbStatus = new ReimbStatusServiceImpl();
+  private static Logger logger = LogManager.getLogger(ReimbStatusServiceImpl.class);
+  private static ReimbStatusDAOImpl reimbStatus = new ReimbStatusDAOImpl();
 
   @Override
   public boolean addNewReimbStatus(ReimbStatus status) {
@@ -10,18 +16,18 @@ public class ReimbStatusServiceImpl implements ReimbStatusService {
   }
 
   @Override
-  public boolean updateStatus(ReimbStatus status) {
+  public boolean updateReimbStatus(ReimbStatus status) {
     return reimbStatus.update(status);
   }
 
   @Override
-  public boolean deleteStatus(ReimbStatus status) {
-    return reimbStatus.delele(status);
+  public boolean deleteReimbStatus(ReimbStatus status) {
+    return reimbStatus.delete(status);
   }
 
   @Override
-  public ReimbStatus getStatusById(int id) {
-    return findStatusById(int id);
+  public ReimbStatus getReimbStatusById(int id) {
+    return findStatusById(id);
   }
   
 }
