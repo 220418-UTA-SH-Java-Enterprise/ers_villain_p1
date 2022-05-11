@@ -51,8 +51,8 @@ public class ReimbDAOImpl implements ReimbDAO {
                 genKey = rs.getInt("reimb_id");
             }
 
-            // This will update the reim model with the auto generated id
-            reimb.setUserId(genKey);
+            // This will update the reimb model with the auto generated id
+            reimb.setReimbId(genKey);
 
             logger.info("New reimbursement has been entered into the database.");
         } catch (SQLException e) {
