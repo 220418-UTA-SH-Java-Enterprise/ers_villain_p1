@@ -26,10 +26,10 @@ CREATE TABLE ers_users(
 	user_id serial CONSTRAINT user_pk PRIMARY KEY,
 	username varchar(50) UNIQUE NOT NULL,
 	password varchar(50) NOT NULL,
-	user_first_name varchar(100) NOT NULL,
-	user_last_name varchar(100) NOT NULL,
-	user_email varchar(150) UNIQUE NOT NULL,
-	user_role_id int NOT NULL,
+	first_name varchar(100) NOT NULL,
+	last_name varchar(100) NOT NULL,
+	email varchar(150) UNIQUE NOT NULL,
+	role_id int NOT NULL,
 	
 	CONSTRAINT user_roles_fk
 	FOREIGN KEY (user_role_id)
