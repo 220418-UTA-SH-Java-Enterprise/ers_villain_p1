@@ -42,24 +42,4 @@ public class UserRole {
         result = prime * result + roleId;
         return result;
     }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        UserRole other = (UserRole) obj;
-        if (role == null) {
-            if (other.role != null)
-                return false;
-        } else if (!role.equals(other.role))
-            return false;
-        if (roleId != other.roleId)
-            return false;
-        return true;
-    }
-
 }
