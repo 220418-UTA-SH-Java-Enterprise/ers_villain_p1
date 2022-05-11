@@ -14,7 +14,7 @@ import org.apache.logging.log4j.Logger;
 
 public class UserDAOImpl implements UserDAO {
 
-  private Logger logger = LogManager.getLogger(UserDAOImpl.class);
+  private static Logger logger = LogManager.getLogger(UserDAOImpl.class);
 
   @Override
   public boolean insert(User user) {

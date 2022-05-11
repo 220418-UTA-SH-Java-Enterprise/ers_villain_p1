@@ -18,7 +18,7 @@ public class ReimbTypeDAOImpl implements ReimbTypeDAO {
     @Override
     public ReimbType findById(int id) {
         logger.info("In ReimbTypeDAO layer, retriving reimbursement type by id.");
-        ReimbType type = new ReimbType();
+        ReimbType reimbType = new ReimbType();
 
         try (Connection conn = ConnectionUtil.getConnection()) {
             String sql = "SELECT * FROM ers_reimbursement_type WHERE reimb_type_id = ?;";
@@ -27,15 +27,15 @@ public class ReimbTypeDAOImpl implements ReimbTypeDAO {
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
-                type.setTypeId(id);
+                reimbType.setTypeId(id);
             }
 
-            logger.info("Reimbursement type search by id was successful. " + type);
+            logger.info("Reimbursement type search by id was successful. " + reimbType);
         } catch (SQLException e) {
             logger.warn("Unable to execute SQL statement", e);
         }
 
-        return type;
+        return reimbType;
     }
 
 }
