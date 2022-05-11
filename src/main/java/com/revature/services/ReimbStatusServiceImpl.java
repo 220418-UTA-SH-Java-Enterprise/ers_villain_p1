@@ -27,7 +27,7 @@ public class ReimbStatusServiceImpl implements ReimbStatusService {
 
   @Override
   public ReimbStatus getReimbStatusById(int id) {
-    return findStatusById(id);
+    return reimbStatus.findStatusById(id);
   }
-  
+
 }
