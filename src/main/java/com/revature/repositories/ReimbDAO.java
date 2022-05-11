@@ -15,7 +15,7 @@ public interface ReimbDAO {
     public Reimb findById(int id);
 
     // View all request of single user
-    public <List> Reimb findByUserId(int userId);
+    public <List> ArrayList<Reimb> findByUserId(int userId);
 
     // View all requests by status type
     public <List> ArrayList<Reimb> findAllByStatusType(int statusTypeId);
