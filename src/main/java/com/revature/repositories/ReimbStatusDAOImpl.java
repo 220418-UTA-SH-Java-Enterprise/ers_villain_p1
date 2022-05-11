@@ -25,7 +25,7 @@ public class ReimbStatusDAOImpl implements ReimbStatusDAO {
   }
 
   @Override
-  public ReimbStatus findById(int id) {
+  public ReimbStatus findStatusById(int id) {
     // TODO Auto-generated method stub
     return null;
   }
