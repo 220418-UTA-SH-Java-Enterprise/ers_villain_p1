@@ -2,18 +2,18 @@ package com.revature.models;
 
 public class ReimbType {
     private int typeId;
-    private String rType;
+    private String type;
 
     public ReimbType() {
     }
 
-    public ReimbType(String rType) {
-        this.rType = rType;
+    public ReimbType(String type) {
+        this.type = type;
     }
 
-    public ReimbType(int typeId, String rType) {
+    public ReimbType(int typeId, String type) {
         this.typeId = typeId;
-        this.rType = rType;
+        this.type = type;
     }
 
     public int getTypeId() {
@@ -25,23 +25,23 @@ public class ReimbType {
     }
 
     public String getrType() {
-        return rType;
+        return type;
     }
 
-    public void setrType(String rType) {
-        this.rType = rType;
+    public void setrType(String type) {
+        this.type = type;
     }
 
     @Override
     public String toString() {
-        return "ReimbType [rType=" + rType + ", typeId=" + typeId + "]";
+        return "ReimbType [type=" + type + ", typeId=" + typeId + "]";
     }
 
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((rType == null) ? 0 : rType.hashCode());
+        result = prime * result + ((type == null) ? 0 : type.hashCode());
         result = prime * result + typeId;
         return result;
     }
@@ -55,10 +55,10 @@ public class ReimbType {
         if (getClass() != obj.getClass())
             return false;
         ReimbType other = (ReimbType) obj;
-        if (rType == null) {
-            if (other.rType != null)
+        if (type == null) {
+            if (other.type != null)
                 return false;
-        } else if (!rType.equals(other.rType))
+        } else if (!type.equals(other.type))
             return false;
         if (typeId != other.typeId)
             return false;
