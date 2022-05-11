@@ -3,7 +3,7 @@ package com.revature.models;
 import java.time.LocalDate;
 
 public class Reimb {
-    private int userId;
+    private int reimbId;
     private double amount;
     private LocalDate submitted;
     private LocalDate resolved;
@@ -30,9 +30,10 @@ public class Reimb {
         this.typeId = typeId;
     }
 
-    public Reimb(int userId, double amount, LocalDate submitted, LocalDate resolved, String description, String receipt,
+    public Reimb(int reimbId, double amount, LocalDate submitted, LocalDate resolved, String description,
+            String receipt,
             int authorId, int resolverId, int statusid, int typeId) {
-        this.userId = userId;
+        this.reimbId = reimbId;
         this.amount = amount;
         this.submitted = submitted;
         this.resolved = resolved;
@@ -44,12 +45,12 @@ public class Reimb {
         this.typeId = typeId;
     }
 
-    public int getUserId() {
-        return userId;
+    public int getReimbId() {
+        return reimbId;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setReimbId(int reimbId) {
+        this.reimbId = reimbId;
     }
 
     public double getAmount() {
@@ -128,7 +129,7 @@ public class Reimb {
     public String toString() {
         return "Reimb [amount=" + amount + ", authorId=" + authorId + ", description=" + description + ", receipt="
                 + receipt + ", resolved=" + resolved + ", resolverId=" + resolverId + ", statusid=" + statusid
-                + ", submitted=" + submitted + ", typeId=" + typeId + ", userId=" + userId + "]";
+                + ", submitted=" + submitted + ", typeId=" + typeId + ", reimbId=" + reimbId + "]";
     }
 
     @Override
@@ -146,7 +147,7 @@ public class Reimb {
         result = prime * result + statusid;
         result = prime * result + ((submitted == null) ? 0 : submitted.hashCode());
         result = prime * result + typeId;
-        result = prime * result + userId;
+        result = prime * result + reimbId;
         return result;
     }
 
@@ -189,7 +190,7 @@ public class Reimb {
             return false;
         if (typeId != other.typeId)
             return false;
-        if (userId != other.userId)
+        if (reimbId != other.reimbId)
             return false;
         return true;
     }
