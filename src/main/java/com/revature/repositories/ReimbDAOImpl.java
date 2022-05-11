@@ -26,7 +26,7 @@ public class ReimbDAOImpl implements ReimbDAO {
             logger.info("In DAO layer: making a reimbursement in db...");
 
             // SQL Statement to be executed for addition to the reimbursement table
-            String sql = "INSERT INTO ers_reimbursements (amount, submitted, resolved, description, receipt, author, resolver, status_id, type_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
+            String sql = "INSERT INTO ers_reimbursements (amount, submitted, resolved, description, receipt, author_id, resolver_id, status_id, type_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
             // Create the prepared statment variable
             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -72,7 +72,7 @@ public class ReimbDAOImpl implements ReimbDAO {
             logger.info("In DAO layer: updating reimburement: " + reimb.getReimbId());
 
             // SQL Statement to be executed for addition to the reimbursement table
-            String sql = "UPDATE ers_reimbursements SET amount = ? submitted = ?, resolved = ?, description = ?, receipt = ?, author = ?, resolver = ?, status_id = ?, type_id = ? WHERE id = ?;";
+            String sql = "UPDATE ers_reimbursements SET amount = ? submitted = ?, resolved = ?, description = ?, receipt = ?, author_id = ?, resolverid = ?, status_id = ?, type_id = ? WHERE reimb_id = ?;";
 
             // Create the prepared statment variable
             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -102,7 +102,7 @@ public class ReimbDAOImpl implements ReimbDAO {
 
     @Override
     public Reimb findById(int id) {
-        logger.info("In DAO Layer: getting reimbursement request with id: " + id);
+        logger.info("In DAO Layer: getting reimbursement request with reimb_id: " + id);
 
         // Create new Reimbursement object
         Reimb reimb = new Reimb();
@@ -125,17 +125,16 @@ public class ReimbDAOImpl implements ReimbDAO {
                 String resolvedDate = rs.getDate("resolved").toString();
 
                 // Update the object with the results of the query
-                reimb.setReimbId(rs.getInt("reimbId"));
+                reimb.setReimbId(rs.getInt("reimb_id"));
                 reimb.setAmount(rs.getDouble("amount"));
                 reimb.setSubmitted(LocalDate.parse(submittedDate, formatter));
                 reimb.setResolved(LocalDate.parse(resolvedDate, formatter));
                 reimb.setDescription(rs.getString("description"));
                 reimb.setReceipt(rs.getString("receipt"));
-                reimb.setAuthorId(rs.getInt("authorId"));
-                reimb.setResolverId(rs.getInt("resolverId"));
-                reimb.setStatusId(rs.getInt("statusId"));
-                reimb.setTypeId(rs.getInt("typeId"));
-
+                reimb.setAuthorId(rs.getInt("author_id"));
+                reimb.setResolverId(rs.getInt("resolver_id"));
+                reimb.setStatusId(rs.getInt("status_id"));
+                reimb.setTypeId(rs.getInt("type_id"));
             }
 
         } catch (SQLException e) {
@@ -147,9 +146,53 @@ public class ReimbDAOImpl implements ReimbDAO {
     }
 
     @Override
-    public <List> Reimb findByUserId(int userId) {
-        // TODO Auto-generated method stub
-        return null;
+    public ArrayList<Reimb> findByUserId(int authorId) {
+        logger.info("In DAO Layer: getting all reimbursement requests with author_id: " + authorId);
+
+        // Create list to hold ResultSet
+        ArrayList<Reimb> reimbList = new ArrayList<Reimb>();
+
+        try (Connection conn = ConnectionUtil.getConnection()) {
+            // Create Query string to find the reimbursement request
+            String sql = "SELECT * FROM ers_reimbursements WHERE author_id = " + authorId + ";";
+
+            // Set the query to a statement
+            Statement stmt = conn.createStatement();
+
+            // Execute and capture the data from the query
+            ResultSet rs = stmt.executeQuery(sql);
+
+            // Check to see what was returned
+            while (rs.next()) {
+                // Create new Reimbursement object
+                Reimb reimb = new Reimb();
+
+                // Need a date formatter for a couple of the fields
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                String submittedDate = rs.getDate("submitted").toString();
+                String resolvedDate = rs.getDate("resolved").toString();
+
+                // Update the object with the results of the query
+                reimb.setReimbId(rs.getInt("reimb_id"));
+                reimb.setAmount(rs.getDouble("amount"));
+                reimb.setSubmitted(LocalDate.parse(submittedDate, formatter));
+                reimb.setResolved(LocalDate.parse(resolvedDate, formatter));
+                reimb.setDescription(rs.getString("description"));
+                reimb.setReceipt(rs.getString("receipt"));
+                reimb.setAuthorId(rs.getInt("author_id"));
+                reimb.setResolverId(rs.getInt("resolver_id"));
+                reimb.setStatusId(rs.getInt("status_id"));
+                reimb.setTypeId(rs.getInt("type_id"));
+
+                // Add to the ReimbList
+                reimbList.add(reimb);
+            }
+
+        } catch (SQLException e) {
+            logger.warn("Unable to execute SQL statement: " + e.getMessage(), e);
+            return null;
+        }
+        return reimbList;
     }
 
     @Override
@@ -186,10 +229,10 @@ public class ReimbDAOImpl implements ReimbDAO {
                 reimb.setResolved(LocalDate.parse(resolvedDate, formatter));
                 reimb.setDescription(rs.getString("description"));
                 reimb.setReceipt(rs.getString("receipt"));
-                reimb.setAuthorId(rs.getInt("authorId"));
-                reimb.setResolverId(rs.getInt("resolverId"));
-                reimb.setStatusId(rs.getInt("statusId"));
-                reimb.setTypeId(rs.getInt("typeId"));
+                reimb.setAuthorId(rs.getInt("author_id"));
+                reimb.setResolverId(rs.getInt("resolver_id"));
+                reimb.setStatusId(rs.getInt("status_id"));
+                reimb.setTypeId(rs.getInt("type_id"));
 
                 // Add to the ReimbList
                 reimbList.add(reimb);
