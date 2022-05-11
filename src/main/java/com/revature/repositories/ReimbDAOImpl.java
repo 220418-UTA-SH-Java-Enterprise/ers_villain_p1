@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import com.revature.models.Reimb;
 import com.revature.util.ConnectionUtil;
@@ -99,7 +101,47 @@ public class ReimbDAOImpl implements ReimbDAO {
 
     @Override
     public Reimb findById(int id) {
-        // TODO Auto-generated method stub
+        logger.info("In DAO Layer: getting reimbursement request with id: " + id);
+
+        try (Connection conn = ConnectionUtil.getConnection()) {
+            // Create Query string to find the reimbursement request
+            String sql = "SELECT * FROM ers_reimbursements WHERE id = " + id + ";";
+
+            // Set the query to a statement
+            Statement stmt = conn.createStatement();
+
+            // Execute and capture the data from the query
+            ResultSet rs = stmt.executeQuery(sql);
+
+            // Check to see what was returned
+            if (rs.next()) {
+                // Create new Reimbursement object
+                Reimb reimb = new Reimb();
+
+                // Need a date formatter for a couple of the fields
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                String submittedDate = rs.getDate("submitted").toString();
+                String resolvedDate = rs.getDate("resolved").toString();
+
+                // Update the object with the results of the query
+                reimb.setReimbId(rs.getInt("reimbId"));
+                reimb.setAmount(rs.getDouble("amount"));
+                reimb.setSubmitted(LocalDate.parse(submittedDate, formatter));
+                reimb.setResolved(LocalDate.parse(resolvedDate, formatter));
+                reimb.setDescription(rs.getString("description"));
+                reimb.setReceipt(rs.getString("receipt"));
+                reimb.setAuthorId(rs.getInt("authorId"));
+                reimb.setResolverId(rs.getInt("resolverId"));
+                reimb.setStatusId(rs.getInt("statusId"));
+                reimb.setTypeId(rs.getInt("typeId"));
+
+                // Return the completed object
+                return reimb;
+            }
+
+        } catch (SQLException e) {
+            logger.warn("Unable to execute SQL statement: " + e.getMessage(), e);
+        }
         return null;
     }
 
