@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 import com.revature.models.Reimb;
 import com.revature.util.ConnectionUtil;
@@ -103,6 +104,9 @@ public class ReimbDAOImpl implements ReimbDAO {
     public Reimb findById(int id) {
         logger.info("In DAO Layer: getting reimbursement request with id: " + id);
 
+        // Create new Reimbursement object
+        Reimb reimb = new Reimb();
+
         try (Connection conn = ConnectionUtil.getConnection()) {
             // Create Query string to find the reimbursement request
             String sql = "SELECT * FROM ers_reimbursements WHERE id = " + id + ";";
@@ -115,6 +119,58 @@ public class ReimbDAOImpl implements ReimbDAO {
 
             // Check to see what was returned
             if (rs.next()) {
+                // Need a date formatter for a couple of the fields
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                String submittedDate = rs.getDate("submitted").toString();
+                String resolvedDate = rs.getDate("resolved").toString();
+
+                // Update the object with the results of the query
+                reimb.setReimbId(rs.getInt("reimbId"));
+                reimb.setAmount(rs.getDouble("amount"));
+                reimb.setSubmitted(LocalDate.parse(submittedDate, formatter));
+                reimb.setResolved(LocalDate.parse(resolvedDate, formatter));
+                reimb.setDescription(rs.getString("description"));
+                reimb.setReceipt(rs.getString("receipt"));
+                reimb.setAuthorId(rs.getInt("authorId"));
+                reimb.setResolverId(rs.getInt("resolverId"));
+                reimb.setStatusId(rs.getInt("statusId"));
+                reimb.setTypeId(rs.getInt("typeId"));
+
+            }
+
+        } catch (SQLException e) {
+            logger.warn("Unable to execute SQL statement: " + e.getMessage(), e);
+            return null;
+        }
+        // Return the completed object
+        return reimb;
+    }
+
+    @Override
+    public <List> Reimb findByUserId(int userId) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public ArrayList<Reimb> findAllByStatusType(int statusTypeId) {
+        logger.info("In DAO Layer: getting all reimbursement requests with StatusTypeId: " + statusTypeId);
+
+        // Create list to hold ResultSet
+        ArrayList<Reimb> reimbList = new ArrayList<Reimb>();
+
+        try (Connection conn = ConnectionUtil.getConnection()) {
+            // Create Query string to find the reimbursement request
+            String sql = "SELECT * FROM ers_reimbursements WHERE status_id = " + statusTypeId + ";";
+
+            // Set the query to a statement
+            Statement stmt = conn.createStatement();
+
+            // Execute and capture the data from the query
+            ResultSet rs = stmt.executeQuery(sql);
+
+            // Check to see what was returned
+            while (rs.next()) {
                 // Create new Reimbursement object
                 Reimb reimb = new Reimb();
 
@@ -135,26 +191,15 @@ public class ReimbDAOImpl implements ReimbDAO {
                 reimb.setStatusId(rs.getInt("statusId"));
                 reimb.setTypeId(rs.getInt("typeId"));
 
-                // Return the completed object
-                return reimb;
+                // Add to the ReimbList
+                reimbList.add(reimb);
             }
 
         } catch (SQLException e) {
             logger.warn("Unable to execute SQL statement: " + e.getMessage(), e);
+            return null;
         }
-        return null;
-    }
-
-    @Override
-    public <List> Reimb findByUserId(int userId) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public <List> Reimb findAll(int statusTypeId) {
-        // TODO Auto-generated method stub
-        return null;
+        return reimbList;
     }
 
 }

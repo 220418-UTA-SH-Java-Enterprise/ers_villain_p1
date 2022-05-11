@@ -1,5 +1,7 @@
 package com.revature.repositories;
 
+import java.util.ArrayList;
+
 import com.revature.models.Reimb;
 
 public interface ReimbDAO {
@@ -16,5 +18,5 @@ public interface ReimbDAO {
     public <List> Reimb findByUserId(int userId);
 
     // View all requests by status type
-    public <List> Reimb findAll(int statusTypeId);
+    public <List> ArrayList<Reimb> findAllByStatusType(int statusTypeId);
 }
