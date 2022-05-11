@@ -55,7 +55,7 @@
 | 14 | _Debugging/Troubleshooting_       |
 | 15 | _(**Ideally**) P1 Coding Finalized)_ |      
 | 16 |  |  |
-| 17 | _JuCale Presentation Practice_ |  
+| 17 | _JuCaLe Presentation Practice_ |  
 | 18 | _(**D-DAY**) P1 DEADLINE: Villain Presentation_  | 
 
 
