@@ -146,7 +146,7 @@ public class ReimbDAOImpl implements ReimbDAO {
     }
 
     @Override
-    public ArrayList<Reimb> findByUserId(int authorId) {
+    public ArrayList<Reimb> findByAuthId(int authorId) {
         logger.info("In DAO Layer: getting all reimbursement requests with author_id: " + authorId);
 
         // Create list to hold ResultSet
