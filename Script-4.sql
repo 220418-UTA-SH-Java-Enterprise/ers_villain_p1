@@ -10,8 +10,8 @@ CREATE TABLE ers_reimbursement_status(
 );
 
 CREATE TABLE ers_reimbursement_type (
-  type_id serial CONSTRAINT reimb_type_pk PRIMARY KEY, 
-  reimb_type VARCHAR(10) NOT NULL
+	type_id serial CONSTRAINT reimb_type_pk PRIMARY KEY, 
+  	reimb_type varchar(10) NOT NULL
 );
 
 CREATE TABLE ers_user_roles(
@@ -29,7 +29,7 @@ CREATE TABLE ers_users(
 	role_id int NOT NULL,
 	
 	CONSTRAINT user_roles_fk
-	FOREIGN KEY (user_role_id)
+	FOREIGN KEY (role_id)
 	REFERENCES ers_user_roles
 );
 
@@ -39,18 +39,18 @@ CREATE TABLE ers_reimbursements(
 	submitted date NOT NULL,
 	resolved date,
 	description varchar(250),
-	receipt bytea,
+	receipt bytea, -- this is going to require research to use properly in code
 	author_id int NOT NULL,
 	resolver_id int,
 	status_id int NOT NULL,
 	type_id int NOT NULL,
 
 CONSTRAINT user_fk_auth -- name from physical model chart
-FOREIGN KEY (author) -- name of column in current tbale
+FOREIGN KEY (author_id) -- name of column in current tbale
 REFERENCES ers_users(user_id), -- name of table (and column) in foreign table
 
 CONSTRAINT user_fk_resolver -- name from physical model chart
-FOREIGN KEY (resolver) -- name of column in current tbale
+FOREIGN KEY (resolver_id) -- name of column in current tbale
 REFERENCES ers_users(user_id), -- name of table (and column) in foreign table
 
 CONSTRAINT reimb_status_fk -- name from physical model chart
