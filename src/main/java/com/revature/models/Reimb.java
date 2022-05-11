@@ -11,14 +11,14 @@ public class Reimb {
     private String receipt;
     private int authorId;
     private int resolverId;
-    private int statusid;
+    private int statusId;
     private int typeId;
 
     public Reimb() {
     }
 
     public Reimb(double amount, LocalDate submitted, LocalDate resolved, String description, String receipt,
-            int authorId, int resolverId, int statusid, int typeId) {
+            int authorId, int resolverId, int statusId, int typeId) {
         this.amount = amount;
         this.submitted = submitted;
         this.resolved = resolved;
@@ -26,13 +26,13 @@ public class Reimb {
         this.receipt = receipt;
         this.authorId = authorId;
         this.resolverId = resolverId;
-        this.statusid = statusid;
+        this.statusId = statusId;
         this.typeId = typeId;
     }
 
     public Reimb(int reimbId, double amount, LocalDate submitted, LocalDate resolved, String description,
             String receipt,
-            int authorId, int resolverId, int statusid, int typeId) {
+            int authorId, int resolverId, int statusId, int typeId) {
         this.reimbId = reimbId;
         this.amount = amount;
         this.submitted = submitted;
@@ -41,7 +41,7 @@ public class Reimb {
         this.receipt = receipt;
         this.authorId = authorId;
         this.resolverId = resolverId;
-        this.statusid = statusid;
+        this.statusId = statusId;
         this.typeId = typeId;
     }
 
@@ -109,12 +109,12 @@ public class Reimb {
         this.resolverId = resolverId;
     }
 
-    public int getStatusid() {
-        return statusid;
+    public int getStatusId() {
+        return statusId;
     }
 
-    public void setStatusid(int statusid) {
-        this.statusid = statusid;
+    public void setStatusId(int statusId) {
+        this.statusId = statusId;
     }
 
     public int getTypeId() {
@@ -128,7 +128,7 @@ public class Reimb {
     @Override
     public String toString() {
         return "Reimb [amount=" + amount + ", authorId=" + authorId + ", description=" + description + ", receipt="
-                + receipt + ", resolved=" + resolved + ", resolverId=" + resolverId + ", statusid=" + statusid
+                + receipt + ", resolved=" + resolved + ", resolverId=" + resolverId + ", statusId=" + statusId
                 + ", submitted=" + submitted + ", typeId=" + typeId + ", reimbId=" + reimbId + "]";
     }
 
@@ -144,7 +144,7 @@ public class Reimb {
         result = prime * result + ((receipt == null) ? 0 : receipt.hashCode());
         result = prime * result + ((resolved == null) ? 0 : resolved.hashCode());
         result = prime * result + resolverId;
-        result = prime * result + statusid;
+        result = prime * result + statusId;
         result = prime * result + ((submitted == null) ? 0 : submitted.hashCode());
         result = prime * result + typeId;
         result = prime * result + reimbId;
@@ -181,7 +181,7 @@ public class Reimb {
             return false;
         if (resolverId != other.resolverId)
             return false;
-        if (statusid != other.statusid)
+        if (statusId != other.statusId)
             return false;
         if (submitted == null) {
             if (other.submitted != null)
