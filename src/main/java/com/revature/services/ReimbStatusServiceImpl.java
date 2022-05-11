@@ -8,26 +8,11 @@ import org.apache.logging.log4j.Logger;
 
 public class ReimbStatusServiceImpl implements ReimbStatusService {
   private static Logger logger = LogManager.getLogger(ReimbStatusServiceImpl.class);
-  private static ReimbStatusDAOImpl reimbStatus = new ReimbStatusDAOImpl();
-
-  @Override
-  public boolean addNewReimbStatus(ReimbStatus status) {
-    return reimbStatus.insert(status);
-  }
-
-  @Override
-  public boolean updateReimbStatus(ReimbStatus status) {
-    return reimbStatus.update(status);
-  }
-
-  @Override
-  public boolean deleteReimbStatus(ReimbStatus status) {
-    return reimbStatus.delete(status);
-  }
+  private static ReimbStatusDAOImpl reimbStatusDAO = new ReimbStatusDAOImpl();
 
   @Override
   public ReimbStatus getReimbStatusById(int id) {
-    return findStatusById(id);
+    return reimbStatusDAO.findReimbStatusById(id);
   }
   
 }
