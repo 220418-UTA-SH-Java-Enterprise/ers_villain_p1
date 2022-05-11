@@ -43,8 +43,8 @@ CREATE TABLE ers_reimbursements(
 	resolved date,
 	description varchar(250),
 	receipt bytea,
-	author int NOT NULL,
-	resolver int,
+	author_id int NOT NULL,
+	resolver_id int,
 	status_id int NOT NULL,
 	type_id int NOT NULL,
 
