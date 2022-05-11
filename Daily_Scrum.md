@@ -6,6 +6,7 @@
 - Meeting Summaries
   - [Scrum 2: 5/10/22](#scrum-2-051022)
   - [Scrum 3: 5/13/22](#scrum-3-051122) 
+  - [Scrum 4: 5/14/22](#scrum-4-051222)
 
 
 
@@ -107,14 +108,136 @@
 ### **SCRUM 3: 05/11/22**
 
 
-0. Team Decisions
-1. Progress Check: 
+1. Progress Check: <br>
+
+    1. Where are we in  regard to Hibernate? 
+    2. Where are win in out understanding of servlets and our controller layer? 
+    
+    Levi:
+    - [x] Finished UserRoles (Model and Repository layers)
+    - [x] Finished User table improvements 
+        - messed up SQL code. Need to go back and fix. 
+
+    Calvin: 
+    - [x] Wrapped up and finished all SQL code for all tables 
+        - made edits and pushed ERD to dev branch 
+    - [x] Updated Git ignore file 
+    - [x] Edited POM files to prep for testing
+    - [x] Completed Reimbursement Table (Models, Respository, and Service Layer)
+    - [x] General debugging 
+    - [x] Updated logger 
+
+
+    Julian: 
+    - [x] Status table: models, repository, and services layer
+    - [x] fixed issues with lightbulb for methods 
+
+    
 2. Issues: 
+    - N/A
 3. Agenda: 
+    - [x] Daily_Scrum Document Preview 
+    - [x] ERS_REIMBURSEMENT_STATUS TABLE 
+        - _States_: Pending, Approved, Denied, Rejection (for correction) 
+        - Only method we need in Repository layer: FIND --> findById
+    - [x] Where are we in regard to Hibernate? 
+        - need to review and understand more
 4. Team Milestone/Tasks: 
 
+    **Reminders:** 
+    - [ ] Finish EC2 In-Class Challenge and send screen shots to Azhya 
+    - [ ] _**Review commits on a timely basis**_ (Deadline: Before start of next meeting)
+
+
+    **Topics to understand and implement:** 
+    - [ ] Hibernate
+    - [ ] Servlets 
+    - [ ] Controllers 
+        - generating the SERIAL ID on VSCODE
+        - changing Tomcat installation directory via VS Code 
+        - Will open it up in STS and transfer to VSCode 
+    - [ ] Unit Testing
+
+    Levi: 
+    - [ ] Adjust SQL code according to updated tables
+    - [ ] Update my service layer for my tables 
+    - [ ] Development + Create Branches when creating updates for team. 
+    - [ ] Create meeting agenda for next day-> adjust Progress Check with issues from previous day
+    - [ ] (Optional): Create document for important team resouces 
+    - [ ] Create a template for meeting notes
+
+    Calvin: 
+    - [ ] REIMBURSEMENT table
+        - controller 
+        - unit testing 
+    - [ ] Figuring out how to use Controllers in VS Code
+    
+
+    Julian: 
+    - [ ] Adjust ERS_REIMBURSEMENT_STATUS 
+        - Repository DAO -> findById method ONLY 
+        - Repository DAOImpl
+        - Services
+
+[Table of Contents](#table-of-contents)
+
+
+<br>
+
+
+
+</br>
+
+
+<hr>
+
+### **SCRUM 4: 05/12/22**
+
+1. **Progress Check** 
+    
+    Calvin: 
+    - [ ] REIMBURSEMENT table
+        - controller 
+        - unit testing 
+    - [ ] Figuring out how to use Controllers in VS Code
+
+    Julian: 
+    - [ ] Adjust ERS_REIMBURSEMENT_STATUS 
+        - Repository DAO -> findById method ONLY 
+        - Repository DAOImpl
+        - Services
+
+    Levi: 
+    - [ ] Adjust SQL code according to updated tables
+    - [ ] Update my service layer for my tables 
+    - [ ] Development + Create Branches when creating updates for team. 
+    - [ ] Create meeting agenda for next day-> adjust Progress Check with issues from previous day
+    - [ ] (Optional): Create document for important team resouces 
+    
+    
+2. **Issues** 
+
+3. **Team Milestones/Tasks** 
+- _Reminders:_
+    - [ ] 
+    - [ ] 
+- _Topics to understand and implement:_
+    - [ ] 
+    - [ ] 
+    - [ ] 
+- _Tasks_
+    - Julian: 
+        - [ ] 
+        - [ ] 
+    - Calvin: 
+        - [ ] 
+        - [ ] 
+    - Levi: 
+        - [ ] 
+        - [ ] 
 
 
 
 
 
+[Table of Contents](#table-of-contents)
