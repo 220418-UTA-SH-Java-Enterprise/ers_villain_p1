@@ -15,7 +15,7 @@ CREATE TABLE ers_reimbursement_type (
 );
 
 CREATE TABLE ers_user_roles(
-	user_role_id serial CONSTRAINT user_role_pk PRIMARY KEY,
+	role_id serial CONSTRAINT user_role_pk PRIMARY KEY,
 	user_role varchar(10) UNIQUE NOT NULL
 );
 
