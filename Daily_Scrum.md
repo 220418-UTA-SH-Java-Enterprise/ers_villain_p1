@@ -77,25 +77,31 @@
 1. **Progress Check** 
     
     - Julian: 
-        - [ ] 
-        - [ ] 
+        - [ ]  
+        - [ ]  
     <br> </br>
         
     - Calvin: 
-        - [ ] 
-        - [ ] 
+        - [ ]  
+        - [ ]  
     <br> </br>
     
     - Levi:
-        - [ ] 
-        - [ ] 
+        - [ ]  
+        - [ ]  
     <br> </br>
 
 2. **Issues** 
-    - [ ] 
-    - [ ] 
+    - [ ]  
+    - [ ]  
  <br> </br>
-3. **Team Milestones/Tasks** 
+
+3. **Agenda**
+    - [ ]  
+    - [ ]  
+ <br> </br>
+
+4. **Team Milestones/Tasks** 
 - _Reminders:_
     - [ ] 
     - [ ] 
@@ -155,6 +161,8 @@
 **Review**: The Service Layer calls what we specified in the Data Layer and adds business logic to it. This is where you would consider input validation, etc. 
 - This layer will in turn be called on by the Controller layer. 
 
+
+[Table of Contents](#table-of-contents)
 <br>
 
 
@@ -273,10 +281,19 @@
     - [ ] Create meeting agenda for next day-> adjust Progress Check with issues from previous day
     - [ ] (Optional): Create document for important team resouces 
     
-    
+<br> </br>
+
 2. **Issues** 
 
-3. **Team Milestones/Tasks** 
+    - [ ]  
+    - [ ]  
+ <br> </br>
+
+3. **Agenda** 
+    - [ ] Hibernate decision
+    - [ ]  
+ <br> </br>
+4. **Team Milestones/Tasks** 
 - _Reminders:_
     - [ ] 
     - [ ] 
@@ -296,7 +313,7 @@
         - [ ] 
 
 
-
-
-
 [Table of Contents](#table-of-contents)
+
+<hr>
+
