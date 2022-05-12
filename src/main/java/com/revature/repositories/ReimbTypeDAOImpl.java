@@ -16,7 +16,7 @@ public class ReimbTypeDAOImpl implements ReimbTypeDAO {
     private static Logger logger = LogManager.getLogger(ReimbTypeDAO.class);
 
     @Override
-    public ReimbType findById(int id) {
+    public ReimbType findTypeById(int id) {
         logger.info("In ReimbTypeDAO layer, retriving reimbursement type by id.");
         ReimbType reimbType = new ReimbType();
 
