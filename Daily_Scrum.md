@@ -291,7 +291,8 @@
 
 3. **Agenda** 
     - [ ] Hibernate decision
-    - [ ]  
+    - [ ] Going over Controller layer
+    - [ ]
  <br> </br>
 4. **Team Milestones/Tasks** 
 - _Reminders:_
