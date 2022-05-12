@@ -7,13 +7,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class App extends HttpServlet {
 
     private static final long serialVersionUID = 8339100247721381693L;
 
-    private static Logger log = Logger.getLogger(App.class);
+    private static Logger log = LogManager.getLogger(App.class);
 
     // GET methods are used to retrieve resources from an API
     @Override

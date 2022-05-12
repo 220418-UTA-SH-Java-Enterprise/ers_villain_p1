@@ -16,12 +16,13 @@ import com.revature.models.User;
 import com.revature.services.UserService;
 import com.revature.services.UserServiceImpl;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class RequestHelper {
 
     private static UserService userv = new UserServiceImpl(new UserDAOImpl());
-    private static Logger log = Logger.getLogger(RequestHelper.class);
+    private static Logger log = LogManager.getLogger(RequestHelper.class);
     private static ObjectMapper om = new ObjectMapper();
 
     public static void processAllUsers(HttpServletRequest req, HttpServletResponse resp) throws IOException {
