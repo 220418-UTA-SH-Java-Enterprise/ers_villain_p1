@@ -72,7 +72,7 @@
 
 ### **Meeting Notes Template:**
 
-### **SCRUM 4: 05/12/22**
+### **SCRUM #: ##/##/##**
 
 1. **Progress Check** 
     
