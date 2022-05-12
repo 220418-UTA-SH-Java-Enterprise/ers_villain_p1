@@ -21,7 +21,7 @@ public class ReimbTypeDAOImpl implements ReimbTypeDAO {
         ReimbType reimbType = new ReimbType();
 
         try (Connection conn = ConnectionUtil.getConnection()) {
-            String sql = "SELECT * FROM ers_reimbursement_type WHERE reimb_type_id = ?;";
+            String sql = "SELECT * FROM ers_reimbursement_type WHERE type_id = ?;";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
