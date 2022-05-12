@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ReimbStatusServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ers_villain_p1</a> &gt; <a href="index.source.html" class="el_package">com.revature.services</a> &gt; <span class="el_source">ReimbStatusServiceImpl.java</span></div><h1>ReimbStatusServiceImpl.java</h1><pre class="source lang-java linenums">package com.revature.services;
+
+import com.revature.models.ReimbStatus;
+import com.revature.repositories.ReimbStatusDAOImpl;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+<span class="nc" id="L9">public class ReimbStatusServiceImpl implements ReimbStatusService {</span>
+<span class="nc" id="L10">  private static Logger logger = LogManager.getLogger(ReimbStatusServiceImpl.class);</span>
+<span class="nc" id="L11">  private static ReimbStatusDAOImpl reimbStatus = new ReimbStatusDAOImpl();</span>
+
+  @Override
+  public boolean addNewReimbStatus(ReimbStatus status) {
+<span class="nc" id="L15">    return reimbStatus.insert(status);</span>
+  }
+
+  @Override
+  public boolean updateReimbStatus(ReimbStatus status) {
+<span class="nc" id="L20">    return reimbStatus.update(status);</span>
+  }
+
+  @Override
+  public boolean deleteReimbStatus(ReimbStatus status) {
+<span class="nc" id="L25">    return reimbStatus.delete(status);</span>
+  }
+
+  @Override
+  public ReimbStatus getReimbStatusById(int id) {
+<span class="nc" id="L30">    return reimbStatus.findStatusById(id);</span>
+  }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>
