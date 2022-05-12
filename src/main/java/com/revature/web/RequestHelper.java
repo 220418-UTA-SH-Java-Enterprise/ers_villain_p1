@@ -48,14 +48,14 @@ public class RequestHelper {
         }
         logger.info("User attempted to register with information:\n " + body);
         // capture the actual username and password values
-        String userName = values.get(0);
+        String username = values.get(0);
         String password = values.get(1);
         String firstName = values.get(2);
         String lastName = values.get(3);
         String email = values.get(4);
         int roleId = Integer.parseInt(values.get(5));
 
-        User user = new User(userName, password, firstName, lastName, email, roleId);
+        User user = new User(username, password, firstName, lastName, email, roleId);
         try {
             if (userService.addNewUser(user)) {
                 PrintWriter pw = response.getWriter();

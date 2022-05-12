@@ -21,7 +21,7 @@ public class App extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // save the URI and rewrite it to determine what functionality the user is
         // requesting based on that endpoint
-        final String URI = req.getRequestURI().replace("/HelloFrontController/", "");
+        final String URI = req.getRequestURI().replace("/ers_villain_p1/", "");
         log.info("URI: " + URI);
 
         switch (URI) {
