@@ -16,6 +16,15 @@ public class User {
         return userId;
     }
 
+    public User(String username, String password, String firstName, String lastName, String email, int roleId) {
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.roleId = roleId;
+    }
+
     public void setUserId(int userId) {
         this.userId = userId;
     }

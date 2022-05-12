@@ -25,13 +25,13 @@ public class App extends HttpServlet {
         log.info("URI: " + URI);
 
         switch (URI) {
-            case "users": // query the DB and return a list of all users
+            case "register": // query the DB and return a list of all users
                 log.info("getting user list...");
-                RequestHelper.processAllUsers(req, resp);
+                RequestHelper.processRegistration(req, resp);
                 break;
             case "user":
                 log.info("search user by name or id. URI: " + URI);
-                RequestHelper.processUserBySearchParam(req, resp);
+                // RequestHelper.processUserBySearchParam(req, resp);
                 break;
             default:
                 log.info("showing error message...");
