@@ -3,6 +3,7 @@
 
 - [Daily Meeting Format](#daily-meeting-format)
 - [Tentative Project Schedule/Deadlines](#tentative-project-scheduledeadlines)
+- [Meeting Notes Template (@Levi)](#meeting-notes-template)
 - Meeting Summaries
   - [Scrum 2: 5/10/22](#scrum-2-051022)
   - [Scrum 3: 5/13/22](#scrum-3-051122) 
@@ -60,6 +61,64 @@
 | 18 | _(**D-DAY**) P1 DEADLINE: Villain Presentation_  | 
 
 
+<br>
+
+
+
+</br>
+
+
+<hr> 
+
+### **Meeting Notes Template:**
+
+### **SCRUM 4: 05/12/22**
+
+1. **Progress Check** 
+    
+    - Julian: 
+        - [ ] 
+        - [ ] 
+    <br> </br>
+        
+    - Calvin: 
+        - [ ] 
+        - [ ] 
+    <br> </br>
+    
+    - Levi:
+        - [ ] 
+        - [ ] 
+    <br> </br>
+
+2. **Issues** 
+    - [ ] 
+    - [ ] 
+ <br> </br>
+3. **Team Milestones/Tasks** 
+- _Reminders:_
+    - [ ] 
+    - [ ] 
+ <br> </br>
+- _Topics to understand and implement:_
+    - [ ] 
+    - [ ] 
+    - [ ] 
+ <br> </br>
+- _Tasks_
+    - Julian: 
+        - [ ] 
+        - [ ] 
+ <br> </br>
+    - Calvin: 
+        - [ ] 
+        - [ ] 
+        <br> </br>
+    - Levi: 
+        - [ ] 
+        - [ ] 
+
+[Table of Contents](#table-of-contents)
 <br>
 
 
@@ -161,8 +220,8 @@
     Levi: 
     - [ ] Adjust SQL code according to updated tables
     - [ ] Update my service layer for my tables 
-    - [ ] Development + Create Branches when creating updates for team. 
-    - [ ] Create meeting agenda for next day-> adjust Progress Check with issues from previous day
+    - [x] Development + Create Branches when creating updates for team. / Give option to create branch when team member views Issue. 
+    - [x] Create meeting agenda for next day-> adjust Progress Check with issues from previous day
     - [ ] (Optional): Create document for important team resouces 
     - [ ] Create a template for meeting notes
 
