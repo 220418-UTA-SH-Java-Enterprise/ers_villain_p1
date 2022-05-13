@@ -333,53 +333,80 @@
     
     - Julian: 
         - [ ] STATUS TABLE > JUnit
-        - [ ]  
+        - [x] [Hibernate Implementation](https://www.youtube.com/watch?v=Y0EMDM_Gk3s&ab_channel=JavaGuides)
     <br> </br>
         
     - Calvin: 
-        - [ ] Controllers
+        - [x] Controllers -LEVI GET YOUR STUFF UP 
+            - Calvin fixed Levi's branching mess
         - [ ] JUnit testing 
-        - [ ] Postman
+        - [x] Postman
     <br> </br>
     
     - Levi:
         - [ ] Adjust according to Calvin's comments
         - [ ] User Table
         - [ ] Controllers
+
     <br> </br>
 
 2. **Issues** 
-    - [ ]  
-    - [ ]  
+    - [x] Time
+
  <br> </br>
 
 3. **Agenda**
-    - [ ]  
-    - [ ]  
+    - [x] Hibernate (WE'RE DOING IT!) 
+    - [ ] Icebreaker Question: Which Marvel/MCU superhero would you be?
+        - Calvin: Deadpool 
+        - Julian: Ant Man
+        - Levi: Doctor Strange 
+    - [ ] Icebreaker: Who is the best Batman so far? 
+        - Calvin: Ben Affleck (?)
+        - Julian: Michael Keaton
+        - Levi: Heath Ledger 
+    - [ ] Icebreaker: Fave games? Video games? 
+        - Calvin & Julian: Hate sports vid games 
+        - Julian: RPG, Souls games? 
+        - Calvin: 
+        - Levi: Fire Emblem 3 Houses
+    - [ ] **Meeting time for Scrum 6**: Sunday, May 15, 2022 - 6PM EST 
+
+
+
+    - tables
+        - DAOs (Hibernate)
+        - Services
+        - Controllers
+        - JUnit (JaCoCo)
+
  <br> </br>
 
 4. **Team Milestones/Tasks** 
 - _Reminders:_
-    - [ ] 
-    - [ ] 
+    - [ ] SonarCloud screenshot of a public repo to Azhya 
+    - [ ] Solve the HackerRank for today 
+    - [ ] Make sure to review, review, review 
  <br> </br>
-- _Topics to understand and implement:_
-    - [ ] 
-    - [ ] 
-    - [ ] 
- <br> </br>
+
 - _Tasks_
-    - Julian: 
-        - [ ] 
-        - [ ] 
- <br> </br>
-    - Calvin: 
-        - [ ] 
-        - [ ] 
-        <br> </br>
-    - Levi: 
-        - [ ] 
-        - [ ] 
+    - [ ] tables
+        - DAOs (Hibernate)
+        - Services
+        - Controllers
+        - JUnit (JaCoCo)
+
+
+- 캘빈 
+    - 캘 = cal 
+        - ㅋ = k; ㅐ = eh ; ㄹ = ㅣ
+    - 빈 = bin
+        - ㅂ=b; ㅣ = i (ee); ㄴ = n
+
+- 줄리안 
+    - 줄 = ㅈ = j ; ㅜ = ooh; ㄹ = l
+    - 리 = ㄹ (l) ; ㅣ (eeh)
+    - 안 = ㅇ(o) ; ㅏ(ah) ; ㄴ = n
 
 [Table of Contents](#table-of-contents)
 <br>
@@ -391,3 +418,5 @@
 
 <hr> 
 
+    
+        
