@@ -14,5 +14,5 @@ public class ReimbStatusServiceImpl implements ReimbStatusService {
   public ReimbStatus getReimbStatusById(int id) {
     return reimbStatusDAO.findReimbStatusById(id);
   }
-  
+
 }
