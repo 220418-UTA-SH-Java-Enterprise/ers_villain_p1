@@ -9,6 +9,6 @@ public interface UserDAO {
   public boolean insert(User user);
   public boolean update(User user);
   public User findById(int id);
-  public <List> ArrayList<User> findAllUsers();
+  public ArrayList<User> findAllUsers();
   public User login(String username, String password);
 }
