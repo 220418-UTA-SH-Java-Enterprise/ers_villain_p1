@@ -8,6 +8,7 @@
 
 <servlet-mapping>
 	<servlet-name>App</servlet-name>
+	<url-pattern>/users</url-pattern>
 	<url-pattern>/register</url-pattern>
 	<url-pattern>/error</url-pattern>
 </servlet-mapping>

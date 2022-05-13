@@ -83,13 +83,13 @@ public class RequestHelper {
         logger.info("inside of request helper...processfindAllUsers...");
         response.setContentType("application/json");
 
-        List<User> allUsers = userService.findAllUsers();
+        // List<User> allUsers = userService.findAllUsers();
 
-        String json = om.writeValueAsString(allUsers);
+        // String json = om.writeValueAsString(allUsers);
 
         PrintWriter out = response.getWriter();
 
-        out.println(json);
+        // out.println(json);
 
     }
 
