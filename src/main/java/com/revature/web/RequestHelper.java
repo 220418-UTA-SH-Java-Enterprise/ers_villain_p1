@@ -78,6 +78,21 @@ public class RequestHelper {
         logger.info("leaving request helper now...");
     }
 
+    public static void processFindAllUsers(HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
+        logger.info("inside of request helper...processfindAllUsers...");
+        response.setContentType("application/json");
+
+        List<User> allUsers = userService.findAllUsers();
+
+        String json = om.writeValueAsString(allUsers);
+
+        PrintWriter out = response.getWriter();
+
+        out.println(json);
+
+    }
+
     public static void processError(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         // if something goes wrong, redirect the user to a custom 404 error page
