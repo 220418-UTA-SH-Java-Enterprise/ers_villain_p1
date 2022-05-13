@@ -8,6 +8,7 @@
   - [Scrum 2: 5/10/22](#scrum-2-051022)
   - [Scrum 3: 5/13/22](#scrum-3-051122) 
   - [Scrum 4: 5/14/22](#scrum-4-051222)
+  - [Scrum 5: 5/15/22](#scrum-5-051222)
 
 
 
@@ -77,25 +78,31 @@
 1. **Progress Check** 
     
     - Julian: 
-        - [ ] 
-        - [ ] 
+        - [ ]  
+        - [ ]  
     <br> </br>
         
     - Calvin: 
-        - [ ] 
-        - [ ] 
+        - [ ]  
+        - [ ]  
     <br> </br>
     
     - Levi:
-        - [ ] 
-        - [ ] 
+        - [ ]  
+        - [ ]  
     <br> </br>
 
 2. **Issues** 
-    - [ ] 
-    - [ ] 
+    - [ ]  
+    - [ ]  
  <br> </br>
-3. **Team Milestones/Tasks** 
+
+3. **Agenda**
+    - [ ]  
+    - [ ]  
+ <br> </br>
+
+4. **Team Milestones/Tasks** 
 - _Reminders:_
     - [ ] 
     - [ ] 
@@ -155,6 +162,8 @@
 **Review**: The Service Layer calls what we specified in the Data Layer and adds business logic to it. This is where you would consider input validation, etc. 
 - This layer will in turn be called on by the Controller layer. 
 
+
+[Table of Contents](#table-of-contents)
 <br>
 
 
@@ -255,48 +264,130 @@
 1. **Progress Check** 
     
     Calvin: 
-    - [ ] REIMBURSEMENT table
-        - controller 
+    - [ ] REIMBURSEMENT table -> IN PROGRESS~~ WOOOOOOOOOOOOOOOOOOOOOOOOOO
+        - controller - in progress 
+        - server is up and running 
         - unit testing 
     - [ ] Figuring out how to use Controllers in VS Code
 
     Julian: 
-    - [ ] Adjust ERS_REIMBURSEMENT_STATUS 
+    - [x] Adjust ERS_REIMBURSEMENT_STATUS 
         - Repository DAO -> findById method ONLY 
         - Repository DAOImpl
         - Services
 
     Levi: 
-    - [ ] Adjust SQL code according to updated tables
-    - [ ] Update my service layer for my tables 
-    - [ ] Development + Create Branches when creating updates for team. 
-    - [ ] Create meeting agenda for next day-> adjust Progress Check with issues from previous day
+    - [x] Adjust SQL code according to updated tables 
+    - [x] Update my service layer for my tables 
+    - [x] Development + Create Branches when creating updates for team. 
+    - [x] Create meeting agenda for next day-> adjust Progress Check with issues from previous day
     - [ ] (Optional): Create document for important team resouces 
     
-    
+<br> </br>
+
 2. **Issues** 
 
-3. **Team Milestones/Tasks** 
+    - [x] Julian's branch went missing? 
+    - [ ] Fix the controllers (Milestone) 
+        - FIGURE IT OUT! RESEARCH BAM BAM BAM
+ <br> </br>
+
+3. **Agenda** 
+    - [x] Hibernate decision 
+        - Calvin: Will use JDBC and use Hibernate if there is time leftover 
+        - Julian: Using the STS Initializer; Manual configuration ex was with Azhya 
+            - searching for more examples without using initializer 
+        - _**FINAL DECISION**: Use JDBC and implement Hibernate after all coding with JDBC is finished._
+    - [ ] Setting up their own server 
+ <br> </br>
+4. **Team Milestones/Tasks** 
+- _Reminders:_
+    - [ ] [HackerRank Kangaroos](https://www.hackerrank.com/challenges/kangaroo/problem)
+    - [ ] Look at Calvin's assessment logic  
+ 
+- _Topics to understand and implement:_
+    - [ ] Fix the controllers -> FIGURE IT OUT 
+    - [ ] Unit testing 
+
+- _Tasks_
+    - Julian: 
+        - [ ] STATUS TABLE > JUnit
+
+    - Calvin: 
+        - [ ] Controllers 
+        - [ ] JUnit testing 
+        - [ ] Postman
+    - Levi: 
+        - [ ] Adjust according to Calvin's comments 
+        - [ ] User Table 
+        - [ ] Controllers 
+
+
+[Table of Contents](#table-of-contents)
+
+<hr>
+
+### **SCRUM 5: 05/12/22**
+
+1. **Progress Check** 
+    
+    - Julian: 
+        - [ ] STATUS TABLE > JUnit
+        - [ ]  
+    <br> </br>
+        
+    - Calvin: 
+        - [ ] Controllers
+        - [ ] JUnit testing 
+        - [ ] Postman
+    <br> </br>
+    
+    - Levi:
+        - [ ] Adjust according to Calvin's comments
+        - [ ] User Table
+        - [ ] Controllers
+    <br> </br>
+
+2. **Issues** 
+    - [ ]  
+    - [ ]  
+ <br> </br>
+
+3. **Agenda**
+    - [ ]  
+    - [ ]  
+ <br> </br>
+
+4. **Team Milestones/Tasks** 
 - _Reminders:_
     - [ ] 
     - [ ] 
+ <br> </br>
 - _Topics to understand and implement:_
     - [ ] 
     - [ ] 
     - [ ] 
+ <br> </br>
 - _Tasks_
     - Julian: 
         - [ ] 
         - [ ] 
+ <br> </br>
     - Calvin: 
         - [ ] 
         - [ ] 
+        <br> </br>
     - Levi: 
         - [ ] 
         - [ ] 
 
-
-
-
-
 [Table of Contents](#table-of-contents)
+<br>
+
+
+
+</br>
+
+
+<hr> 
+
