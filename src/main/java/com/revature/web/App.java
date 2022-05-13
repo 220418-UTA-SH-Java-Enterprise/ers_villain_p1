@@ -18,7 +18,7 @@ public class App extends HttpServlet {
 
     // GET methods are used to retrieve resources from an API
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // save the URI and rewrite it to determine what functionality the user is
         // requesting based on that endpoint
         final String URI = req.getRequestURI().replace("/ers_villain_p1/", "");
