@@ -24,14 +24,14 @@ public class ConnectionUtil {
 
         try {
             logger.debug(String.format("",
-                    System.getenv("db_url"),
-                    System.getenv("db_username"),
-                    System.getenv("db_password")));
+                    System.getenv("villain_DB_URL"),
+                    System.getenv("villain_DB_USER"),
+                    System.getenv("villain_DB_PASS")));
 
             conn = DriverManager.getConnection(
-                    System.getenv("db_url"),
-                    System.getenv("db_username"),
-                    System.getenv("db_password"));
+                    System.getenv("villain_DB_URL"),
+                    System.getenv("villain_DB_USER"),
+                    System.getenv("villain_DB_PASS"));
             logger.debug("Connection has successfully been established.");
         } catch (SQLException e) {
             logger.warn("Unable to connect to the DB.");
