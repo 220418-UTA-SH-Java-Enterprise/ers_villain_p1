@@ -1,7 +1,22 @@
 package com.revature.models;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "ers_reimbursement_status")
 public class ReimbStatus {
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  @Column(name = "reimb_status_id")
   private int reimbStatusId;
+
+  @Column(name = "reimb_status")
   private String reimbStatus;
 
   public ReimbStatus() {    
