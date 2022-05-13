@@ -1,5 +1,7 @@
 package com.revature.services;
 
+import java.util.ArrayList;
+
 import com.revature.models.User;
 import com.revature.repositories.UserDAOImpl;
 
@@ -25,7 +27,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean editUser(User user) throws Exception {
+    public User editUser(User user) throws Exception {
         if (user.getUsername().length() > 3) {
             throw new Exception("Username must be at least 3 characters long.");
         }
@@ -43,9 +45,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean deleteUser(User user) {
-        return userDAO.delete(user);
+    public ArrayList<User> getAllUsers() {
+        return userDAO.findAllUsers();
     }
+
+
 
     @Override
     public User loginUser(String username, String password) throws Exception {
@@ -58,4 +62,6 @@ public class UserServiceImpl implements UserService {
 
         return user;
     }
+
+
 }
