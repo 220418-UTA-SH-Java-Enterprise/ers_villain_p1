@@ -25,9 +25,9 @@ public class App extends HttpServlet {
         log.info("URI: " + URI);
 
         switch (URI) {
-            case "register": // query the DB and return a list of all users
+            case "users": // query the DB and return a list of all users
                 log.info("getting user list...");
-                RequestHelper.processRegistration(req, resp);
+                RequestHelper.processFindAllUsers(req, resp);
                 break;
             case "user":
                 log.info("search user by name or id. URI: " + URI);
