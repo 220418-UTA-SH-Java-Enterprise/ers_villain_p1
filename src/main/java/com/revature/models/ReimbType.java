@@ -1,7 +1,22 @@
 package com.revature.models;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table
 public class ReimbType {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "type_id")
     private int typeId;
+
+    @Column(name = "reimb_type")
     private String type;
 
     public ReimbType() {
