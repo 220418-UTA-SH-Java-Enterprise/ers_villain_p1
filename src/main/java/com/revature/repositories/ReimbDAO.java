@@ -1,22 +1,38 @@
 package com.revature.repositories;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import com.revature.models.Reimb;
+import com.revature.models.ReimbStatus;
+import com.revature.models.ReimbType;
+import com.revature.models.User;
 
 public interface ReimbDAO {
-    // Submit new reimbursement requests to
-    public boolean insert(Reimb reimb);
+    // Create Reimbursement Request
+    public int insert(Reimb reimb);
 
-    // Change anything about Reimbursement
-    public boolean update(Reimb reimb);
-
-    // View single Reimbursement request
+    // Read Reimbursement by Id
     public Reimb findById(int id);
 
-    // View all request of single user
-    public <List> ArrayList<Reimb> findByAuthId(int authId);
+    // Read Reimbursement by status
+    public List<Reimb> findById(ReimbStatus reimb);
 
-    // View all requests by status type
-    public <List> ArrayList<Reimb> findAllByStatusType(int statusTypeId);
+    // Read Reimbursement by type
+    public List<Reimb> findById(ReimbType reimb);
+
+    // Read Reimbursement by author
+    public List<Reimb> findByAuthId(User user);
+
+    // Read Reimbursement by author
+    public List<Reimb> findByResolverId(User user);
+
+    // Read Reimbursement by status type
+    public List<Reimb> findAllByStatusType(int statusTypeId);
+
+    // Update
+    public boolean update(Reimb reimb);
+
+    // Delete
+    public boolean delete(Reimb reimb);
+
 }

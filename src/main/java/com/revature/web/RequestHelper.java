@@ -15,13 +15,12 @@ import com.revature.models.User;
 import com.revature.services.UserService;
 import com.revature.services.UserServiceImpl;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.Logger;
 
 public class RequestHelper {
 
     private static UserService userService = new UserServiceImpl();
-    private static Logger logger = LogManager.getLogger(RequestHelper.class);
+    private static Logger logger = Logger.getLogger(RequestHelper.class);
     private static ObjectMapper om = new ObjectMapper();
 
     public static void processRegistration(HttpServletRequest request, HttpServletResponse response)

@@ -52,10 +52,12 @@ public class Reimb {
     private ReimbType type;
 
     public Reimb() {
+        super();
     }
 
     public Reimb(double amount, LocalDate submitted, LocalDate resolved, String description, String receipt,
             User authorId, User resolverId, ReimbStatus statusId, ReimbType typeId) {
+        super();
         this.amount = amount;
         this.submitted = submitted;
         this.resolved = resolved;
@@ -70,6 +72,7 @@ public class Reimb {
     public Reimb(int id, double amount, LocalDate submitted, LocalDate resolved, String description,
             String receipt,
             User authorId, User resolver, ReimbStatus status, ReimbType type) {
+        super();
         this.id = id;
         this.amount = amount;
         this.submitted = submitted;

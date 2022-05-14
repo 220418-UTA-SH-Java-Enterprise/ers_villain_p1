@@ -5,7 +5,10 @@ import java.util.ArrayList;
 import com.revature.models.Reimb;
 
 public interface ReimbService {
-    public boolean addNewReimbRequest(Reimb reimb);
+    // add, edit, patch, remove
+
+    // Add reimbursement request
+    public int addNewReimbRequest(Reimb reimb);
 
     public boolean editReimbRequest(Reimb reimb);
 

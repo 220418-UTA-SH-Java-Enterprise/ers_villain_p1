@@ -3,14 +3,14 @@ package com.revature.util;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+
+import org.apache.log4j.Logger;
 
 /**
  * DB Connection Utility
  */
 public class ConnectionUtil {
-    private static Logger logger = LogManager.getLogger(ConnectionUtil.class);
+    private static Logger logger = Logger.getLogger(ConnectionUtil.class);
 
     private ConnectionUtil() {
     }

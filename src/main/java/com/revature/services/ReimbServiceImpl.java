@@ -10,28 +10,32 @@ public class ReimbServiceImpl implements ReimbService {
     private ReimbDAOImpl reimbDAO = new ReimbDAOImpl();
 
     @Override
-    public boolean addNewReimbRequest(Reimb reimb) {
+    public int addNewReimbRequest(Reimb reimb) {
         return reimbDAO.insert(reimb);
     }
 
     @Override
     public boolean editReimbRequest(Reimb reimb) {
-        return reimbDAO.update(reimb);
+        // TODO Auto-generated method stub
+        return false;
     }
 
     @Override
     public Reimb getReimbRequestById(int reimbId) {
-        return reimbDAO.findById(reimbId);
+        // TODO Auto-generated method stub
+        return null;
     }
 
     @Override
     public ArrayList<Reimb> getReimbByAuthorId(int authorId) {
-        return reimbDAO.findByAuthId(authorId);
+        // TODO Auto-generated method stub
+        return null;
     }
 
     @Override
     public ArrayList<Reimb> getReimbByStatus(int StatusTypeId) {
-        return reimbDAO.findAllByStatusType(StatusTypeId);
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }

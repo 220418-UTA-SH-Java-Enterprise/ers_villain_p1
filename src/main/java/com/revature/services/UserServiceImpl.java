@@ -5,11 +5,10 @@ import java.util.ArrayList;
 import com.revature.models.User;
 import com.revature.repositories.UserDAOImpl;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.Logger;
 
 public class UserServiceImpl implements UserService {
-    private static Logger logger = LogManager.getLogger(UserServiceImpl.class);
+    private static Logger logger = Logger.getLogger(UserServiceImpl.class);
     private static UserDAOImpl userDAO = new UserDAOImpl();
 
     @Override
@@ -49,8 +48,6 @@ public class UserServiceImpl implements UserService {
         return userDAO.findAllUsers();
     }
 
-
-
     @Override
     public User loginUser(String username, String password) throws Exception {
 
@@ -62,6 +59,5 @@ public class UserServiceImpl implements UserService {
 
         return user;
     }
-
 
 }
