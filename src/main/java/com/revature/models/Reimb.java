@@ -2,55 +2,92 @@ package com.revature.models;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "res_reimbursements")
 public class Reimb {
-    private int reimbId;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "reimb_id")
+    private int id;
+
+    @Column(name = "amount")
     private double amount;
+
+    @Column(name = "submitted")
     private LocalDate submitted;
+
+    @Column(name = "resolved")
     private LocalDate resolved;
+
+    @Column(name = "description")
     private String description;
+
+    @Column(name = "receipt")
     private String receipt;
-    private int authorId;
-    private int resolverId;
-    private int statusId;
-    private int typeId;
+
+    @ManyToOne
+    @JoinColumn(name = "author_id", referencedColumnName = "user_id")
+    private User author;
+
+    @ManyToOne
+    @JoinColumn(name = "resolver_id", referencedColumnName = "user_id")
+    private User resolver;
+
+    @ManyToOne
+    @JoinColumn(name = "status_id", referencedColumnName = "status_id")
+    private ReimbStatus status;
+
+    @ManyToOne
+    @JoinColumn(name = "type_id", referencedColumnName = "type_id")
+    private ReimbType type;
 
     public Reimb() {
     }
 
     public Reimb(double amount, LocalDate submitted, LocalDate resolved, String description, String receipt,
-            int authorId, int resolverId, int statusId, int typeId) {
+            User authorId, User resolverId, ReimbStatus statusId, ReimbType typeId) {
         this.amount = amount;
         this.submitted = submitted;
         this.resolved = resolved;
         this.description = description;
         this.receipt = receipt;
-        this.authorId = authorId;
-        this.resolverId = resolverId;
-        this.statusId = statusId;
-        this.typeId = typeId;
+        this.author = authorId;
+        this.resolver = resolverId;
+        this.status = statusId;
+        this.type = typeId;
     }
 
-    public Reimb(int reimbId, double amount, LocalDate submitted, LocalDate resolved, String description,
+    public Reimb(int id, double amount, LocalDate submitted, LocalDate resolved, String description,
             String receipt,
-            int authorId, int resolverId, int statusId, int typeId) {
-        this.reimbId = reimbId;
+            User authorId, User resolver, ReimbStatus status, ReimbType type) {
+        this.id = id;
         this.amount = amount;
         this.submitted = submitted;
         this.resolved = resolved;
         this.description = description;
         this.receipt = receipt;
-        this.authorId = authorId;
-        this.resolverId = resolverId;
-        this.statusId = statusId;
-        this.typeId = typeId;
+        this.author = authorId;
+        this.resolver = resolver;
+        this.status = status;
+        this.type = type;
     }
 
     public int getReimbId() {
-        return reimbId;
+        return id;
     }
 
-    public void setReimbId(int reimbId) {
-        this.reimbId = reimbId;
+    public void setReimbId(int id) {
+        this.id = id;
     }
 
     public double getAmount() {
@@ -93,106 +130,43 @@ public class Reimb {
         this.receipt = receipt;
     }
 
-    public int getAuthorId() {
-        return authorId;
+    public User getAuthorId() {
+        return author;
     }
 
-    public void setAuthorId(int authorId) {
-        this.authorId = authorId;
+    public void setAuthorId(User author) {
+        this.author = author;
     }
 
-    public int getResolverId() {
-        return resolverId;
+    public User getResolverId() {
+        return resolver;
     }
 
-    public void setResolverId(int resolverId) {
-        this.resolverId = resolverId;
+    public void setResolverId(User resolver) {
+        this.resolver = resolver;
     }
 
-    public int getStatusId() {
-        return statusId;
+    public ReimbStatus getStatus() {
+        return status;
     }
 
-    public void setStatusId(int statusId) {
-        this.statusId = statusId;
+    public void setStatusId(ReimbStatus status) {
+        this.status = status;
     }
 
-    public int getTypeId() {
-        return typeId;
+    public ReimbType getType() {
+        return type;
     }
 
-    public void setTypeId(int typeId) {
-        this.typeId = typeId;
+    public void setType(ReimbType type) {
+        this.type = type;
     }
 
     @Override
     public String toString() {
-        return "Reimb [amount=" + amount + ", authorId=" + authorId + ", description=" + description + ", receipt="
-                + receipt + ", resolved=" + resolved + ", resolverId=" + resolverId + ", statusId=" + statusId
-                + ", submitted=" + submitted + ", typeId=" + typeId + ", reimbId=" + reimbId + "]";
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        long temp;
-        temp = Double.doubleToLongBits(amount);
-        result = prime * result + (int) (temp ^ (temp >>> 32));
-        result = prime * result + authorId;
-        result = prime * result + ((description == null) ? 0 : description.hashCode());
-        result = prime * result + ((receipt == null) ? 0 : receipt.hashCode());
-        result = prime * result + ((resolved == null) ? 0 : resolved.hashCode());
-        result = prime * result + resolverId;
-        result = prime * result + statusId;
-        result = prime * result + ((submitted == null) ? 0 : submitted.hashCode());
-        result = prime * result + typeId;
-        result = prime * result + reimbId;
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Reimb other = (Reimb) obj;
-        if (Double.doubleToLongBits(amount) != Double.doubleToLongBits(other.amount))
-            return false;
-        if (authorId != other.authorId)
-            return false;
-        if (description == null) {
-            if (other.description != null)
-                return false;
-        } else if (!description.equals(other.description))
-            return false;
-        if (receipt == null) {
-            if (other.receipt != null)
-                return false;
-        } else if (!receipt.equals(other.receipt))
-            return false;
-        if (resolved == null) {
-            if (other.resolved != null)
-                return false;
-        } else if (!resolved.equals(other.resolved))
-            return false;
-        if (resolverId != other.resolverId)
-            return false;
-        if (statusId != other.statusId)
-            return false;
-        if (submitted == null) {
-            if (other.submitted != null)
-                return false;
-        } else if (!submitted.equals(other.submitted))
-            return false;
-        if (typeId != other.typeId)
-            return false;
-        if (reimbId != other.reimbId)
-            return false;
-        return true;
+        return "Reimb [amount=" + amount + ", author=" + author + ", description=" + description + ", receipt="
+                + receipt + ", reimbId=" + id + ", resolved=" + resolved + ", resolver=" + resolver + ", status="
+                + status + ", submitted=" + submitted + ", type=" + type + "]";
     }
 
 }
