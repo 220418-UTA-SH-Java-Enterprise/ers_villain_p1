@@ -2,8 +2,10 @@ package com.revature.util;
 
 import java.util.Properties;
 
-import com.revature.models.User;
+import com.revature.models.*;
 
+import org.apache.log4j.Logger;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -32,6 +34,7 @@ public class HibernateUtil {
 
                 configuration.setProperties(settings);
                 configuration.addAnnotatedClass(User.class);
+                configuration.addAnnotatedClass(Reimb.class);
 
                 StandardServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                         .applySettings(configuration.getProperties()).build();
@@ -45,4 +48,20 @@ public class HibernateUtil {
         return sessionFactory;
     }
 
+    private static SessionFactory sf = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+    private static Logger log = Logger.getLogger(HibernateUtil.class);
+
+    private static Session ses; // save(), get(), load(), delete()
+
+    public HibernateUtil() {
+
+    }
+
+    public static Session getSession() {
+        log.info("starting hibernate connection session...");
+        if (ses == null) {
+            ses = sf.openSession();
+        }
+        return ses;
+    }
 }
