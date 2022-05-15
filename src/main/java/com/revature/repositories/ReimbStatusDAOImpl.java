@@ -13,10 +13,11 @@ public class ReimbStatusDAOImpl implements ReimbStatusDAO {
 
   @Override
   public ReimbStatus findReimbStatusById(int id) {
+    logger.info("In DAO Layer: ReimbStatuDAOeImpl.findReimbStatusById()");
     Transaction transaction = null;
     ReimbStatus reimbStatus = null;
 
-    try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+    try (Session session = HibernateUtil.getSession()) {
       // Starts the transaction
       transaction = session.beginTransaction();
 

@@ -1,8 +1,9 @@
 package com.revature.services;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import com.revature.models.Reimb;
+import com.revature.models.User;
 import com.revature.repositories.ReimbDAOImpl;
 
 public class ReimbServiceImpl implements ReimbService {
@@ -16,26 +17,22 @@ public class ReimbServiceImpl implements ReimbService {
 
     @Override
     public boolean editReimbRequest(Reimb reimb) {
-        // TODO Auto-generated method stub
-        return false;
+        return reimbDAO.update(reimb);
     }
 
     @Override
     public Reimb getReimbRequestById(int reimbId) {
-        // TODO Auto-generated method stub
-        return null;
+        return reimbDAO.findById(reimbId);
     }
 
     @Override
-    public ArrayList<Reimb> getReimbByAuthorId(int authorId) {
-        // TODO Auto-generated method stub
-        return null;
+    public List<Reimb> getReimbByAuthorId(User auth) {
+        return reimbDAO.findAllByAuthId(auth);
     }
 
     @Override
-    public ArrayList<Reimb> getReimbByStatus(int StatusTypeId) {
-        // TODO Auto-generated method stub
-        return null;
+    public List<Reimb> getReimbByStatus(int statusTypeId) {
+        return reimbDAO.findAllByStatusType(statusTypeId);
     }
 
 }

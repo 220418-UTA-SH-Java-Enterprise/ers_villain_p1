@@ -7,7 +7,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-public class UserRoleDAOImpl implements UserRoleDAO{
+public class UserRoleDAOImpl implements UserRoleDAO {
 
     private static Logger logger = Logger.getLogger(ReimbDAOImpl.class);
 
@@ -29,8 +29,4 @@ public class UserRoleDAOImpl implements UserRoleDAO{
         }
         return userRole;
     }
-    }
-
-
-    
 }
