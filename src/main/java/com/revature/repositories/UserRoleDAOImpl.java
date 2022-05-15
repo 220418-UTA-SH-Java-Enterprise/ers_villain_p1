@@ -21,7 +21,7 @@ public class UserRoleDAOImpl implements UserRoleDAO {
             // Start the transaction
             transaction = session.beginTransaction();
 
-            // Get Reimb Object
+            // Get User Role Object
             userRole = session.get(UserRole.class, id);
 
             // Commit the transaction

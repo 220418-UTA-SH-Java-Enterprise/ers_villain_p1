@@ -2,6 +2,11 @@ package com.revature.repositories;
 
 import java.util.List;
 
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
 import com.revature.models.User;
 import com.revature.util.HibernateUtil;
 
@@ -93,20 +98,32 @@ public class UserDAOImpl implements UserDAO {
 
     Transaction transaction = null;
     List<User> user = null;
+
     try (Session session = HibernateUtil.getSession()) {
-      // Start the transaction
-      transaction = session.beginTransaction();
+      // // Start the transaction
+      // transaction = session.beginTransaction();
 
-      // Get Reimb Object
-      user = session.createQuery("SELECT a FROM User a", User.class).getResultList();
+      // // Get Reimb Object
+      // user = session.createQuery("SELECT a FROM User a",
+      // User.class).getResultList();
 
-      // Commit the transaction
-      transaction.commit();
+      // // Commit the transaction
+      // transaction.commit();
+
+      CriteriaBuilder cb = session.getCriteriaBuilder();
+      CriteriaQuery<User> cq = cb.createQuery(User.class);
+      Root<User> rootEntry = cq.from(User.class);
+      CriteriaQuery<User> all = cq.select(rootEntry);
+
+      TypedQuery<User> allQuery = session.createQuery(all);
+      user = allQuery.getResultList();
     } catch (Exception e) {
-      if (transaction != null) {
-        transaction.rollback();
-      }
+      // if (transaction != null) {
+      // // transaction.rollback();
+      // }
     }
+    logger.info("fjak");
+    logger.info(user.toString());
     return user;
   }
 
