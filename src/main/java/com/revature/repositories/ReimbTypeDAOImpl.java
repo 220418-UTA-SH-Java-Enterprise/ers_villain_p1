@@ -19,20 +19,20 @@ public class ReimbTypeDAOImpl implements ReimbTypeDAO {
         logger.info("In ReimbTypeDAO layer, retriving reimbursement type by id.");
         ReimbType reimbType = new ReimbType();
 
-        try (Connection conn = ConnectionUtil.getConnection()) {
-            String sql = "SELECT * FROM ers_reimbursement_type WHERE reimb_type_id = ?;";
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setInt(1, id);
-            ResultSet rs = stmt.executeQuery();
+        // try (Connection conn = ConnectionUtil.getConnection()) {
+        // String sql = "SELECT * FROM ers_reimbursement_type WHERE reimb_type_id = ?;";
+        // PreparedStatement stmt = conn.prepareStatement(sql);
+        // stmt.setInt(1, id);
+        // ResultSet rs = stmt.executeQuery();
 
-            if (rs.next()) {
-                reimbType.setTypeId(id);
-            }
+        // if (rs.next()) {
+        // reimbType.setTypeId(id);
+        // }
 
-            logger.info("Reimbursement type search by id was successful. " + reimbType);
-        } catch (SQLException e) {
-            logger.warn("Unable to execute SQL statement", e);
-        }
+        // logger.info("Reimbursement type search by id was successful. " + reimbType);
+        // } catch (SQLException e) {
+        // logger.warn("Unable to execute SQL statement", e);
+        // }
 
         return reimbType;
     }
