@@ -13,7 +13,7 @@ public class UsersDOAImpl implements UsersDAO {
     @Override
     public void insert(User user) {
         Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try (Session session = HibernateUtil.getSession()) {
             // Start the transaction
             transaction = session.beginTransaction();
 
