@@ -1,6 +1,7 @@
 package com.revature.repositories;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.revature.models.User;
 import com.revature.util.HibernateUtil;
@@ -89,36 +90,26 @@ public class UserDAOImpl implements UserDAO {
   }
 
   @Override
-  public ArrayList<User> findAllUsers() {
+  public List<User> findAllUsers() {
     logger.info("In DAO Layer: getting all users.");
 
-    // ArrayList<User> userList = new ArrayList<User>();
-    // try (Connection conn = ConnectionUtil.getConnection()) {
-    // String sql = "SELECT * FROM ers_users; ";
+    Transaction transaction = null;
+    List<User> user = null;
+    try (Session session = HibernateUtil.getSession()) {
+      // Start the transaction
+      transaction = session.beginTransaction();
 
-    // Statement stmt = conn.createStatement();
+      // Get Reimb Object
+      user = session.createQuery("SELECT a FROM User a", User.class).getResultList();
 
-    // ResultSet rs = stmt.executeQuery(sql);
-
-    // while (rs.next()) {
-    // User user = new User();
-
-    // user.setUserId(rs.getInt("user_id"));
-    // user.setUsername(rs.getString("username"));
-    // user.setPassword(rs.getString("password"));
-    // user.setFirstName(rs.getString("first_name"));
-    // user.setLastName(rs.getString("last_name"));
-    // user.setEmail(rs.getString("email"));
-    // user.setRoleId(rs.getInt("role_id"));
-
-    // userList.add(user);
-    // }
-
-    // } catch (SQLException e) {
-    // logger.warn("Unable to execute SQL statement: " + e.getMessage(), e);
-    // return null;
-    // }
-    // return userList;
+      // Commit the transaction
+      transaction.commit();
+    } catch (Exception e) {
+      if (transaction != null) {
+        transaction.rollback();
+      }
+    }
+    return user;
   }
 
   @Override

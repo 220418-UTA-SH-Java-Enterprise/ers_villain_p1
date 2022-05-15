@@ -82,7 +82,7 @@ public class ReimbDAOImpl implements ReimbDAO {
             transaction = session.beginTransaction();
 
             // Get Reimb Object
-            reimb = session.createQuery("SELECT a FROM Student a", Reimb.class).getResultList();
+            reimb = session.createQuery("SELECT a FROM Reimb a", Reimb.class).getResultList();
 
             // Commit the transaction
             transaction.commit();
