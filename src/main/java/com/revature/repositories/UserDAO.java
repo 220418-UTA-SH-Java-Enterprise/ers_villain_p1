@@ -7,7 +7,7 @@ import com.revature.models.User;
 public interface UserDAO {
   public int insert(User user);
 
-  public User update(User user);
+  public boolean update(User user);
 
   public User findById(int id);
 

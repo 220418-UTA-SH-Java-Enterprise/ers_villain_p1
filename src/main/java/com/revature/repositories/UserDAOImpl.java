@@ -47,37 +47,23 @@ public class UserDAOImpl implements UserDAO {
   }
 
   @Override
-  public User update(User user) {
-    // try (Connection conn = ConnectionUtil.getConnection()) {
-    // logger.info("In DAO layer: updating user: " + user.getUserId());
+  public boolean update(User user) {
+    Transaction transaction = null;
+    try (Session session = HibernateUtil.getSession()) {
+      // Start the Transaction
+      transaction = session.beginTransaction();
 
-    // String sql = "UPDATE ers_users SET username = ?, password = ?, email = ?,
-    // first_name = ?, last_name = ?, role_id =? WHERE user_id = ?;";
-    // PreparedStatement stmt = conn.prepareStatement(sql,
-    // Statement.RETURN_GENERATED_KEYS);
-    // stmt.setString(1, user.getUsername());
-    // stmt.setString(2, user.getPassword());
-    // stmt.setString(3, user.getEmail());
-    // stmt.setString(4, user.getFirstName());
-    // stmt.setString(5, user.getLastName());
-    // stmt.setInt(6, user.getRoleId());
-    // stmt.setInt(7, user.getUserId());
+      // Save User object
+      session.saveOrUpdate(user);
 
-    // stmt.execute();
-
-    // ResultSet rs = stmt.getGeneratedKeys();
-
-    // if (rs.next()) {
-    // user.setUserId(rs.getInt(1));
-    // }
-
-    // logger.info("Updated user profile with id: ." + user.getUserId());
-
-    // } catch (SQLException e) {
-    // logger.warn("Unable to execute SQL statement: " + e.getMessage(), e);
-    // return null;
-    // }
-    // return user;
+      // Commit the transaction
+      transaction.commit();
+    } catch (Exception e) {
+      if (transaction != null) {
+        transaction.rollback();
+      }
+    }
+    return true;
   }
 
   @Override
