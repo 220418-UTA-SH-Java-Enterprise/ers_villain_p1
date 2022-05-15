@@ -21,9 +21,6 @@ public class ConnectionUtil {
      */
     public static Connection getConnection() {
         Connection conn = null;
-        String url = System.getenv("villain_DB_URL");
-        String user = System.getenv("villain_DB_USER");
-        String pass = System.getenv("villain_DB_PASS");
 
         try {
             logger.debug(String.format("",
