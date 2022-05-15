@@ -1,56 +1,49 @@
 package com.revature.repositories;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 import com.revature.models.User;
-import com.revature.util.ConnectionUtil;
+import com.revature.util.HibernateUtil;
 
 import org.apache.log4j.Logger;
+import org.hibernate.Session;
+
+import org.hibernate.Transaction;
 
 public class UserDAOImpl implements UserDAO {
 
   private static Logger logger = Logger.getLogger(UserDAOImpl.class);
 
   @Override
-  public boolean insert(User user) {
-    // try (Connection conn = ConnectionUtil.getConnection()) {
-    // logger.info("In DAO layer: making a new user in db...");
-    // String sql = "INSERT INTO users (username, password, email, first_name,
-    // last_name, role_id) VALUES (?, ?, ?, ?, ?, ?)";
+  public int insert(User user) {
 
-    // PreparedStatement stmt = conn.prepareStatement(sql,
-    // Statement.RETURN_GENERATED_KEYS);
-    // stmt.setString(1, user.getUsername());
-    // stmt.setString(2, user.getPassword());
-    // stmt.setString(3, user.getEmail());
-    // stmt.setString(4, user.getFirstName());
-    // stmt.setString(5, user.getLastName());
-    // stmt.setInt(6, user.getRoleId());
+    logger.info("Add reimbursement request to db. reimbursement request: " + user);
 
-    // stmt.execute();
+    Session session = HibernateUtil.getSession();
 
-    // ResultSet rs = stmt.getGeneratedKeys();
+    Transaction transaction = null;
 
-    // int genKey = 0;
-    // if (rs.next()) {
-    // genKey = rs.getInt(1);
-    // }
+    int pk = 0;
 
-    // user.setUserId(genKey);
+    try {
+      // Start the transaction
+      transaction = session.beginTransaction();
 
-    // logger.info("New user has been entered into the database.");
+      // Save the user object
+      pk = (int) session.save(user);
 
-    // conn.close();
-    // } catch (SQLException e) {
-    // logger.warn("Unable to execute SQL statement:", e);
-    // return false;
-    // }
-    // return true;
+      // Commit transaction
+      transaction.commit();
+
+    } catch (Exception e) {
+      logger.warn("Error entering the user.");
+      if (transaction != null) {
+        transaction.rollback();
+      }
+    }
+
+    // Return the primary key of the new entry
+    return pk;
   }
 
   @Override

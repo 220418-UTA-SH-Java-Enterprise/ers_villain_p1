@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.revature.models.User;
 
 public interface UserDAO {
-  public boolean insert(User user);
+  public int insert(User user);
 
   public User update(User user);
 
