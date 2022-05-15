@@ -1,6 +1,5 @@
 package com.revature.repositories;
 
-import com.revature.models.Reimb;
 import com.revature.models.ReimbType;
 import com.revature.util.HibernateUtil;
 
