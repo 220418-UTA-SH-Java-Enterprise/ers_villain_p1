@@ -78,8 +78,10 @@ public class ReimbDAOImpl implements ReimbDAO {
             // Create CriteriaQuery
             CriteriaQuery<Reimb> criteria = builder.createQuery(Reimb.class);
 
-            // TODO: Research this more
-            // https://www.baeldung.com/hibernate-criteria-queries
+            /**
+             * TODO: Research this more
+             * https://www.baeldung.com/hibernate-criteria-queries
+             */
             Root<Reimb> root = criteria.from(Reimb.class);
             criteria.select(root).where(builder.gt(root.get("author_id"), auth.getUserId()));
 
@@ -88,7 +90,7 @@ public class ReimbDAOImpl implements ReimbDAO {
 
             reimb = query.getResultList();
         } catch (Exception e) {
-
+            logger.warn("unable to complete findAllByAuthId query");
         }
         return reimb;
     }
