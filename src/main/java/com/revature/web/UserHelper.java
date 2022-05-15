@@ -11,16 +11,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.revature.models.Reimb;
 import com.revature.models.User;
+import com.revature.services.ReimbService;
+import com.revature.services.ReimbServiceImpl;
 import com.revature.services.UserService;
 import com.revature.services.UserServiceImpl;
 
 import org.apache.log4j.Logger;
 
-public class RequestHelper {
+public class UserHelper {
 
     private static UserService userService = new UserServiceImpl();
-    private static Logger logger = Logger.getLogger(RequestHelper.class);
+    private static ReimbService reimbService = new ReimbServiceImpl();
+    private static Logger logger = Logger.getLogger(UserHelper.class);
     private static ObjectMapper om = new ObjectMapper();
 
     public static void processRegistration(HttpServletRequest request, HttpServletResponse response)
@@ -90,6 +94,20 @@ public class RequestHelper {
 
         out.println(json);
 
+    }
+
+    public static void processFindAllReimbs(HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
+        logger.info("inside of request helper...processfindAllreimbs...");
+        response.setContentType("application/json");
+
+        List<Reimb> allReimbs = reimbService.getAllReimbs();
+
+        String json = om.writeValueAsString(allReimbs);
+
+        PrintWriter out = response.getWriter();
+
+        out.println(json);
     }
 
     public static void processError(HttpServletRequest req, HttpServletResponse resp)

@@ -26,15 +26,19 @@ public class App extends HttpServlet {
         switch (URI) {
             case "users": // query the DB and return a list of all users
                 log.info("getting user list...");
-                RequestHelper.processFindAllUsers(req, resp);
+                UserHelper.processFindAllUsers(req, resp);
                 break;
             case "user":
                 log.info("search user by name or id. URI: " + URI);
                 // RequestHelper.processUserBySearchParam(req, resp);
                 break;
+            case "reimbs": // query the DB and return a list of all reimbursement requests
+                log.info("getting user list...");
+                ReimbHelper.processFindAllReimbs(req, resp);
+                break;
             default:
                 log.info("showing error message...");
-                RequestHelper.processError(req, resp);
+                UserHelper.processError(req, resp);
                 break;
         }
     }
@@ -46,7 +50,7 @@ public class App extends HttpServlet {
         switch (URI) {
             case "register": // query the DB and return a list of all users
                 log.info("getting user list...");
-                RequestHelper.processRegistration(req, resp);
+                UserHelper.processRegistration(req, resp);
                 break;
             case "user":
                 log.info("search user by name or id. URI: " + URI);
@@ -54,7 +58,7 @@ public class App extends HttpServlet {
                 break;
             default:
                 log.info("showing error message...");
-                RequestHelper.processError(req, resp);
+                UserHelper.processError(req, resp);
                 break;
         }
     }
