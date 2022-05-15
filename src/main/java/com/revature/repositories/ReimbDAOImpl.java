@@ -2,15 +2,17 @@ package com.revature.repositories;
 
 import java.util.List;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+
 import com.revature.models.Reimb;
-import com.revature.models.ReimbStatus;
-import com.revature.models.ReimbType;
 import com.revature.models.User;
 import com.revature.util.HibernateUtil;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
 public class ReimbDAOImpl implements ReimbDAO {
 
@@ -49,32 +51,48 @@ public class ReimbDAOImpl implements ReimbDAO {
 
     @Override
     public Reimb findById(int id) {
-        // TODO Auto-generated method stub
-        return null;
+        Transaction transaction = null;
+        Reimb reimb = null;
+        try (Session session = HibernateUtil.getSession()) {
+            // Start the transaction
+            transaction = session.beginTransaction();
+
+            // Get Reimb Object
+            reimb = session.get(Reimb.class, id);
+
+            // Commit the transaction
+            transaction.commit();
+        }
+        return reimb;
     }
 
     @Override
-    public List<Reimb> findById(ReimbStatus reimb) {
-        // TODO Auto-generated method stub
-        return null;
-    }
+    @SuppressWarnings("unchecked")
+    public List<Reimb> findAllByAuthId(User auth) {
+        Transaction transaction = null;
+        List<Reimb> reimb = null;
+        try (Session session = HibernateUtil.getSession()) {
 
-    @Override
-    public List<Reimb> findById(ReimbType reimb) {
-        // TODO Auto-generated method stub
-        return null;
-    }
+            // Create Criteria Builder
+            CriteriaBuilder builder = session.getCriteriaBuilder();
 
-    @Override
-    public List<Reimb> findByAuthId(User user) {
-        // TODO Auto-generated method stub
-        return null;
-    }
+            // Create CriteriaQuery
+            CriteriaQuery<Reimb> criteria = builder.createQuery(Reimb.class);
 
-    @Override
-    public List<Reimb> findByResolverId(User user) {
-        // TODO Auto-generated method stub
-        return null;
+            // Start the transaction
+            transaction = session.beginTransaction();
+
+            // get the reimbursement objects
+            // reimb = criteria.where(("author_id", auth.getUserId()))
+            // (Restrictions.eq("author_id", auth.getUserId())).list();
+            // commit the transaction
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
+        return reimb;
     }
 
     @Override
