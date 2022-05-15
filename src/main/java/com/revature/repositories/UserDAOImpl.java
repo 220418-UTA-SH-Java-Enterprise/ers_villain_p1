@@ -1,6 +1,5 @@
 package com.revature.repositories;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.revature.models.User;
@@ -8,7 +7,6 @@ import com.revature.util.HibernateUtil;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
-
 import org.hibernate.Transaction;
 
 public class UserDAOImpl implements UserDAO {
@@ -112,34 +110,34 @@ public class UserDAOImpl implements UserDAO {
     return user;
   }
 
-  @Override
-  public User login(String username, String password) {
-    logger.info("In DAO Layer: UserDAOImpl() - attemptint to login user.");
-    // User user = new User();
-    // try (Connection conn = ConnectionUtil.getConnection()) {
-    // String sql = "SELECT * from users where username = ? AND password = ?;";
+  // @Override
+  // public User login(String username, String password) {
+  // logger.info("In DAO Layer: UserDAOImpl() - attemptint to login user.");
+  // // User user = new User();
+  // // try (Connection conn = ConnectionUtil.getConnection()) {
+  // // String sql = "SELECT * from users where username = ? AND password = ?;";
 
-    // PreparedStatement stmt = conn.prepareStatement(sql);
-    // stmt.setString(1, username);
-    // stmt.setString(2, password);
+  // // PreparedStatement stmt = conn.prepareStatement(sql);
+  // // stmt.setString(1, username);
+  // // stmt.setString(2, password);
 
-    // ResultSet rs = stmt.executeQuery();
+  // // ResultSet rs = stmt.executeQuery();
 
-    // if (rs.next()) {
-    // user.setUserId(rs.getInt("id"));
-    // user.setUsername(rs.getString("username"));
-    // // user.setPassword(rs.getString("password")); // Don't return the
-    // password...
-    // user.setFirstName(rs.getString("first_name"));
-    // user.setLastName(rs.getString("last_name"));
-    // user.setEmail(rs.getString("email"));
-    // user.setRoleId(rs.getInt("role_id"));
-    // }
-    // } catch (SQLException e) {
-    // logger.warn("Unable to execute query");
-    // return null;
-    // }
-    // return user;
-  }
+  // // if (rs.next()) {
+  // // user.setUserId(rs.getInt("id"));
+  // // user.setUsername(rs.getString("username"));
+  // // // user.setPassword(rs.getString("password")); // Don't return the
+  // // password...
+  // // user.setFirstName(rs.getString("first_name"));
+  // // user.setLastName(rs.getString("last_name"));
+  // // user.setEmail(rs.getString("email"));
+  // // user.setRoleId(rs.getInt("role_id"));
+  // // }
+  // // } catch (SQLException e) {
+  // // logger.warn("Unable to execute query");
+  // // return null;
+  // // }
+  // // return user;
+  // }
 
 }

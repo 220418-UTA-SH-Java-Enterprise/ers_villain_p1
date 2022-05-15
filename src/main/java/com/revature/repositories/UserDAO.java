@@ -13,5 +13,5 @@ public interface UserDAO {
 
   public List<User> findAllUsers();
 
-  public User login(String username, String password);
+  // public User login(String username, String password);
 }
