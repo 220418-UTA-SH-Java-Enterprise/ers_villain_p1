@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 import com.revature.models.Reimb;
 import com.revature.models.User;
@@ -12,7 +13,7 @@ import com.revature.util.HibernateUtil;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.criterion.Restrictions;
+import org.hibernate.query.Query;
 
 public class ReimbDAOImpl implements ReimbDAO {
 
@@ -67,9 +68,7 @@ public class ReimbDAOImpl implements ReimbDAO {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public List<Reimb> findAllByAuthId(User auth) {
-        Transaction transaction = null;
         List<Reimb> reimb = null;
         try (Session session = HibernateUtil.getSession()) {
 
@@ -79,18 +78,17 @@ public class ReimbDAOImpl implements ReimbDAO {
             // Create CriteriaQuery
             CriteriaQuery<Reimb> criteria = builder.createQuery(Reimb.class);
 
-            // Start the transaction
-            transaction = session.beginTransaction();
+            // TODO: Research this more
+            // https://www.baeldung.com/hibernate-criteria-queries
+            Root<Reimb> root = criteria.from(Reimb.class);
+            criteria.select(root).where(builder.gt(root.get("author_id"), auth.getUserId()));
 
-            // get the reimbursement objects
-            // reimb = criteria.where(("author_id", auth.getUserId()))
-            // (Restrictions.eq("author_id", auth.getUserId())).list();
-            // commit the transaction
-            transaction.commit();
+            // Execute the query
+            Query<Reimb> query = session.createQuery(criteria);
+
+            reimb = query.getResultList();
         } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
+
         }
         return reimb;
     }
