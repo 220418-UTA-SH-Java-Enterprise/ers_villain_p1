@@ -1,8 +1,10 @@
 package com.revature.services;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.revature.models.Reimb;
+import com.revature.models.User;
 
 public interface ReimbService {
     // add, edit, patch, remove
@@ -14,7 +16,7 @@ public interface ReimbService {
 
     public Reimb getReimbRequestById(int reimbId);
 
-    public ArrayList<Reimb> getReimbByAuthorId(int authorId);
+    public List<Reimb> getReimbByAuthorId(User auth);
 
-    public ArrayList<Reimb> getReimbByStatus(int StatusTypeId);
+    public List<Reimb> getReimbByStatus(int StatusTypeId);
 }
