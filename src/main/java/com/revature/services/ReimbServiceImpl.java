@@ -26,6 +26,11 @@ public class ReimbServiceImpl implements ReimbService {
     }
 
     @Override
+    public List<Reimb> getAllReimbs() {
+        return reimbDAO.findAllReimbs();
+    }
+
+    @Override
     public List<Reimb> getReimbByAuthorId(User auth) {
         return reimbDAO.findAllByAuthId(auth);
     }
