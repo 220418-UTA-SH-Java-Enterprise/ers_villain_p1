@@ -1,17 +1,17 @@
 package com.revature.services;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import com.revature.models.User;
 
 public interface UserService {
-    public boolean addNewUser(User user) throws Exception;
+    public int addNewUser(User user) throws Exception;
 
-    public User editUser(User user) throws Exception;
+    public boolean editUser(User user) throws Exception;
 
     public User getUserById(int id);
 
-    public ArrayList<User> getAllUsers();
+    public List<User> getAllUsers();
 
-    public User loginUser(String username, String password) throws Exception;
+    // public User loginUser(String username, String password) throws Exception;
 }

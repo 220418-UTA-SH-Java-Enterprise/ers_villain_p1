@@ -1,6 +1,6 @@
 package com.revature.services;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import com.revature.models.User;
 import com.revature.repositories.UserDAOImpl;
@@ -12,7 +12,7 @@ public class UserServiceImpl implements UserService {
     private static UserDAOImpl userDAO = new UserDAOImpl();
 
     @Override
-    public boolean addNewUser(User user) throws Exception {
+    public int addNewUser(User user) throws Exception {
         logger.info("In service Layer: UserServiceImpl.addNewUser()");
         if (user.getUsername().length() > 3) {
             throw new Exception("Username must be at least 3 characters long.");
@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User editUser(User user) throws Exception {
+    public boolean editUser(User user) throws Exception {
         if (user.getUsername().length() > 3) {
             throw new Exception("Username must be at least 3 characters long.");
         }
@@ -44,20 +44,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ArrayList<User> getAllUsers() {
+    public List<User> getAllUsers() {
         return userDAO.findAllUsers();
     }
 
-    @Override
-    public User loginUser(String username, String password) throws Exception {
+    // @Override
+    // public User loginUser(String username, String password) throws Exception {
 
-        User user = userDAO.login(username, password);
+    // User user = userDAO.login(username, password);
 
-        if (user == null) {
-            throw new Exception("Invalid username or password");
-        }
+    // if (user == null) {
+    // throw new Exception("Invalid username or password");
+    // }
 
-        return user;
-    }
+    // return user;
+    // }
 
 }

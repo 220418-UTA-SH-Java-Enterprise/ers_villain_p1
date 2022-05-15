@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.models.Reimb;
 import com.revature.models.User;
+import com.revature.models.UserRole;
 import com.revature.services.ReimbService;
 import com.revature.services.ReimbServiceImpl;
 import com.revature.services.UserService;
@@ -56,9 +57,12 @@ public class UserHelper {
         String firstName = values.get(2);
         String lastName = values.get(3);
         String email = values.get(4);
-        int roleId = Integer.parseInt(values.get(5));
+        int roleId = 1;
+        
+        UserRole role = new UserRole();
+        role.setRoleId(roleId);
 
-        User user = new User(username, password, firstName, lastName, email, roleId);
+        User user = new User(username, password, firstName, lastName, email, role);
         try {
             if (userService.addNewUser(user)) {
                 PrintWriter pw = response.getWriter();
