@@ -58,27 +58,25 @@ public class UserHelper {
         String lastName = values.get(3);
         String email = values.get(4);
         int roleId = 1;
-        
+
         UserRole role = new UserRole();
         role.setRoleId(roleId);
 
         User user = new User(username, password, firstName, lastName, email, role);
         try {
-            if (userService.addNewUser(user)) {
-                PrintWriter pw = response.getWriter();
-                // user.setUserId(targetId);
-                logger.info("New user: " + user);
-                String json = om.writeValueAsString(user);
-                pw.println(json);
-                System.out.println("JSON:\n" + json);
+            user.setUserId(userService.addNewUser(user));
 
-                response.setContentType("application/json");
-                response.setStatus(200); // SUCCESSFUL!
-                logger.info("User has successfully been created.");
-            } else {
-                response.setContentType("application/json");
-                response.setStatus(204); // this means that the connection was successful but no user created!
-            }
+            PrintWriter pw = response.getWriter();
+            // user.setUserId(targetId);
+            logger.info("New user: " + user);
+            String json = om.writeValueAsString(user);
+            pw.println(json);
+            System.out.println("JSON:\n" + json);
+
+            response.setContentType("application/json");
+            response.setStatus(200); // SUCCESSFUL!
+            logger.info("User has successfully been created.");
+
         } catch (Exception e) {
             logger.warn("Yeah, something went wrong creating a user.");
         }
