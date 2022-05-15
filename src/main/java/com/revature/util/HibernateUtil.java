@@ -12,8 +12,15 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
 
+/**
+ * Utility to connect to the Hibernate API and set configuraiton
+ */
 public class HibernateUtil {
     private static SessionFactory sessionFactory;
+
+    public HibernateUtil() {
+        super();
+    }
 
     public static SessionFactory getSessionFactory() {
         if (sessionFactory == null) {
@@ -53,10 +60,11 @@ public class HibernateUtil {
 
     private static Session ses; // save(), get(), load(), delete()
 
-    public HibernateUtil() {
-
-    }
-
+    /**
+     * Returns the Hibernate Session
+     * 
+     * @return session
+     */
     public static Session getSession() {
         log.info("starting hibernate connection session...");
         if (ses == null) {

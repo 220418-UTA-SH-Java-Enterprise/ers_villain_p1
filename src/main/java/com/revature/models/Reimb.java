@@ -133,11 +133,11 @@ public class Reimb {
         this.receipt = receipt;
     }
 
-    public User getAuthorId() {
+    public User getAuthor() {
         return author;
     }
 
-    public void setAuthorId(User author) {
+    public void setAuthor(User author) {
         this.author = author;
     }
 

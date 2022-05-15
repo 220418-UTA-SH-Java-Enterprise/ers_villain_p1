@@ -2,15 +2,18 @@ package com.revature.repositories;
 
 import java.util.List;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
 import com.revature.models.Reimb;
-import com.revature.models.ReimbStatus;
-import com.revature.models.ReimbType;
 import com.revature.models.User;
 import com.revature.util.HibernateUtil;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 public class ReimbDAOImpl implements ReimbDAO {
 
@@ -49,50 +52,96 @@ public class ReimbDAOImpl implements ReimbDAO {
 
     @Override
     public Reimb findById(int id) {
-        // TODO Auto-generated method stub
-        return null;
+        logger.info("Find reimbursement by id: " + id);
+        Transaction transaction = null;
+        Reimb reimb = null;
+        try (Session session = HibernateUtil.getSession()) {
+            // Start the transaction
+            transaction = session.beginTransaction();
+
+            // Get Reimb Object
+            reimb = session.get(Reimb.class, id);
+
+            // Commit the transaction
+            transaction.commit();
+        }
+        return reimb;
     }
 
     @Override
-    public List<Reimb> findById(ReimbStatus reimb) {
-        // TODO Auto-generated method stub
-        return null;
-    }
+    public List<Reimb> findAllByAuthId(User auth) {
+        logger.info("Find reimbursement by author id: " + auth.getUserId());
+        List<Reimb> reimb = null;
+        try (Session session = HibernateUtil.getSession()) {
 
-    @Override
-    public List<Reimb> findById(ReimbType reimb) {
-        // TODO Auto-generated method stub
-        return null;
-    }
+            // Create Criteria Builder
+            CriteriaBuilder builder = session.getCriteriaBuilder();
 
-    @Override
-    public List<Reimb> findByAuthId(User user) {
-        // TODO Auto-generated method stub
-        return null;
-    }
+            // Create CriteriaQuery
+            CriteriaQuery<Reimb> criteria = builder.createQuery(Reimb.class);
 
-    @Override
-    public List<Reimb> findByResolverId(User user) {
-        // TODO Auto-generated method stub
-        return null;
+            /**
+             * TODO: Research this more
+             * https://www.baeldung.com/hibernate-criteria-queries
+             */
+            Root<Reimb> root = criteria.from(Reimb.class);
+            criteria.select(root).where(builder.gt(root.get("author_id"), auth.getUserId()));
+
+            // Execute the query
+            Query<Reimb> query = session.createQuery(criteria);
+
+            reimb = query.getResultList();
+        } catch (Exception e) {
+            logger.warn("unable to complete findAllByAuthId query");
+        }
+        return reimb;
     }
 
     @Override
     public List<Reimb> findAllByStatusType(int statusTypeId) {
-        // TODO Auto-generated method stub
-        return null;
+        List<Reimb> reimb = null;
+        try (Session session = HibernateUtil.getSession()) {
+
+            // Create Criteria Builder
+            CriteriaBuilder builder = session.getCriteriaBuilder();
+
+            // Create CriteriaQuery
+            CriteriaQuery<Reimb> criteria = builder.createQuery(Reimb.class);
+
+            /**
+             * TODO: Research this more
+             * https://www.baeldung.com/hibernate-criteria-queries
+             */
+            Root<Reimb> root = criteria.from(Reimb.class);
+            criteria.select(root).where(builder.gt(root.get("status_id"), statusTypeId));
+
+            // Execute the query
+            Query<Reimb> query = session.createQuery(criteria);
+
+            reimb = query.getResultList();
+        } catch (Exception e) {
+            logger.warn("unable to complete findAllByStatusType query");
+        }
+        return reimb;
     }
 
     @Override
     public boolean update(Reimb reimb) {
-        // TODO Auto-generated method stub
-        return false;
-    }
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getSession()) {
+            // Start the Transaction
+            transaction = session.beginTransaction();
 
-    @Override
-    public boolean delete(Reimb reimb) {
-        // TODO Auto-generated method stub
-        return false;
-    }
+            // Save Reimbursement object
+            session.saveOrUpdate(reimb);
 
+            // Commit the transaction
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
+        return true;
+    }
 }
