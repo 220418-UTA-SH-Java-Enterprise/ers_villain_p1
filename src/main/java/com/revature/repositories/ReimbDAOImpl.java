@@ -52,6 +52,7 @@ public class ReimbDAOImpl implements ReimbDAO {
 
     @Override
     public Reimb findById(int id) {
+        logger.info("Find reimbursement by id: " + id);
         Transaction transaction = null;
         Reimb reimb = null;
         try (Session session = HibernateUtil.getSession()) {
@@ -69,6 +70,7 @@ public class ReimbDAOImpl implements ReimbDAO {
 
     @Override
     public List<Reimb> findAllByAuthId(User auth) {
+        logger.info("Find reimbursement by author id: " + auth.getUserId());
         List<Reimb> reimb = null;
         try (Session session = HibernateUtil.getSession()) {
 
@@ -97,14 +99,50 @@ public class ReimbDAOImpl implements ReimbDAO {
 
     @Override
     public List<Reimb> findAllByStatusType(int statusTypeId) {
-        // TODO Auto-generated method stub
-        return null;
+        List<Reimb> reimb = null;
+        try (Session session = HibernateUtil.getSession()) {
+
+            // Create Criteria Builder
+            CriteriaBuilder builder = session.getCriteriaBuilder();
+
+            // Create CriteriaQuery
+            CriteriaQuery<Reimb> criteria = builder.createQuery(Reimb.class);
+
+            /**
+             * TODO: Research this more
+             * https://www.baeldung.com/hibernate-criteria-queries
+             */
+            Root<Reimb> root = criteria.from(Reimb.class);
+            criteria.select(root).where(builder.gt(root.get("status_id"), statusTypeId));
+
+            // Execute the query
+            Query<Reimb> query = session.createQuery(criteria);
+
+            reimb = query.getResultList();
+        } catch (Exception e) {
+            logger.warn("unable to complete findAllByStatusType query");
+        }
+        return reimb;
     }
 
     @Override
     public boolean update(Reimb reimb) {
-        // TODO Auto-generated method stub
-        return false;
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getSession()) {
+            // Start the Transaction
+            transaction = session.beginTransaction();
+
+            // Save Reimbursement object
+            session.saveOrUpdate(reimb);
+
+            // Commit the transaction
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
+        return true;
     }
 
     @Override
