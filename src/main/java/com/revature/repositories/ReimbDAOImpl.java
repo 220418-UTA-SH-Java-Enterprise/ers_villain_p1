@@ -144,11 +144,4 @@ public class ReimbDAOImpl implements ReimbDAO {
         }
         return true;
     }
-
-    @Override
-    public boolean delete(Reimb reimb) {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
 }
