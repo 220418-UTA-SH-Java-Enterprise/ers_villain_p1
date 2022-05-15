@@ -21,7 +21,4 @@ public interface ReimbDAO {
     // Update
     public boolean update(Reimb reimb); //
 
-    // Delete
-    public boolean delete(Reimb reimb); //
-
 }
