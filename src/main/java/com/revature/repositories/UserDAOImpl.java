@@ -116,6 +116,7 @@ public class UserDAOImpl implements UserDAO {
       CriteriaQuery<User> all = cq.select(rootEntry);
 
       TypedQuery<User> allQuery = session.createQuery(all);
+      logger.info(allQuery.toString());
       user = allQuery.getResultList();
     } catch (Exception e) {
       // if (transaction != null) {
