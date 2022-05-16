@@ -14,9 +14,9 @@ import javax.persistence.Table;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private int userId;
+    private int id;
 
     @Column(name = "username")
     private String username;
@@ -41,7 +41,7 @@ public class User {
     }
 
     public int getUserId() {
-        return userId;
+        return id;
     }
 
     public User(String username, String password, String firstName, String lastName, String email, UserRole role) {
@@ -53,8 +53,12 @@ public class User {
         this.role = role;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getUsername() {
@@ -97,17 +101,17 @@ public class User {
         this.email = email;
     }
 
-    public UserRole getRoleId() {
+    public UserRole getRole() {
         return role;
     }
 
-    public void setRoleId(UserRole role) {
+    public void setRole(UserRole role) {
         this.role = role;
     }
 
     @Override
     public String toString() {
         return "Users [email=" + email + ", firstName=" + firstName + ", lastName=" + lastName + ", password="
-                + password + ", roleId=" + role + ", userId=" + userId + ", username=" + username + "]";
+                + password + ", roleId=" + role + ", userId=" + id + ", username=" + username + "]";
     }
 }

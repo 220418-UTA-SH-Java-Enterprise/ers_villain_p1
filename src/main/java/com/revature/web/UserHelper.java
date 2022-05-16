@@ -16,14 +16,13 @@ import com.revature.models.User;
 import com.revature.models.UserRole;
 import com.revature.services.ReimbService;
 import com.revature.services.ReimbServiceImpl;
-import com.revature.services.UserService;
 import com.revature.services.UserServiceImpl;
 
 import org.apache.log4j.Logger;
 
 public class UserHelper {
 
-    private static UserService userService = new UserServiceImpl();
+    private static UserServiceImpl userService = new UserServiceImpl();
     private static ReimbService reimbService = new ReimbServiceImpl();
     private static Logger logger = Logger.getLogger(UserHelper.class);
     private static ObjectMapper om = new ObjectMapper();
@@ -64,7 +63,7 @@ public class UserHelper {
 
         User user = new User(username, password, firstName, lastName, email, role);
         try {
-            user.setUserId(userService.addNewUser(user));
+            user.setId(userService.addNewUser(user));
 
             PrintWriter pw = response.getWriter();
             // user.setUserId(targetId);

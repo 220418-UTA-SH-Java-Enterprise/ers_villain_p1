@@ -12,14 +12,14 @@ import javax.persistence.Table;
 public class ReimbStatus {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  @Column(name = "reimb_status_id")
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "status_id")
   private int reimbStatusId;
 
   @Column(name = "reimb_status")
   private String reimbStatus;
 
-  public ReimbStatus() {    
+  public ReimbStatus() {
   }
 
   public ReimbStatus(String reimbStatus) {
@@ -79,7 +79,5 @@ public class ReimbStatus {
       return false;
     return true;
   }
-
-  
 
 }

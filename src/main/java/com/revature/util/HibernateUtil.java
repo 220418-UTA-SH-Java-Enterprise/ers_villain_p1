@@ -14,9 +14,9 @@ public class HibernateUtil {
     }
 
     private static SessionFactory sf = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
-    private static Logger log = Logger.getLogger(HibernateUtil.class);
+    private static Logger loggger = Logger.getLogger(HibernateUtil.class);
 
-    private static Session ses; // save(), get(), load(), delete()
+    private static Session session;
 
     /**
      * Returns the Hibernate Session
@@ -24,10 +24,10 @@ public class HibernateUtil {
      * @return session
      */
     public static Session getSession() {
-        log.info("starting hibernate connection session...");
-        if (ses == null) {
-            ses = sf.openSession();
+        loggger.info("starting hibernate connection session...");
+        if (session == null) {
+            session = sf.openSession();
         }
-        return ses;
+        return session;
     }
 }

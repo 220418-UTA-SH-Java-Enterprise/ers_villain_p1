@@ -16,7 +16,7 @@ import javax.persistence.Table;
 public class Reimb {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "reimb_id")
     private int id;
 

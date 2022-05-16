@@ -1,5 +1,6 @@
 package com.revature.repositories;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.TypedQuery;
@@ -96,36 +97,19 @@ public class UserDAOImpl implements UserDAO {
   public List<User> findAllUsers() {
     logger.info("In DAO Layer: getting all users.");
 
-    Transaction transaction = null;
-    List<User> user = null;
+    // Transaction transaction = null;
+    List<User> users;
+    Session session = HibernateUtil.getSession();
 
-    try (Session session = HibernateUtil.getSession()) {
-      // // Start the transaction
-      // transaction = session.beginTransaction();
+    // Get Reimb Object
+    users = session.createNativeQuery("SELECT * FROM ers_users ORDER BY user_id",
+        User.class).list();
 
-      // // Get Reimb Object
-      // user = session.createQuery("SELECT a FROM User a",
-      // User.class).getResultList();
-
-      // // Commit the transaction
-      // transaction.commit();
-
-      CriteriaBuilder cb = session.getCriteriaBuilder();
-      CriteriaQuery<User> cq = cb.createQuery(User.class);
-      Root<User> rootEntry = cq.from(User.class);
-      CriteriaQuery<User> all = cq.select(rootEntry);
-
-      TypedQuery<User> allQuery = session.createQuery(all);
-      logger.info(allQuery.toString());
-      user = allQuery.getResultList();
-    } catch (Exception e) {
-      // if (transaction != null) {
-      // // transaction.rollback();
-      // }
+    for (User user : users) {
+      logger.info(user);
     }
-    logger.info("fjak");
-    logger.info(user.toString());
-    return user;
+    logger.info(users);
+    return users;
   }
 
   // @Override
