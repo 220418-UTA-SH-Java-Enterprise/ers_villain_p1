@@ -18,14 +18,15 @@ import com.revature.models.Reimb;
 import com.revature.models.ReimbStatus;
 import com.revature.models.ReimbType;
 import com.revature.models.User;
-import com.revature.services.ReimbService;
 import com.revature.services.ReimbServiceImpl;
+import com.revature.services.UserServiceImpl;
 
 import org.apache.log4j.Logger;
 
 public class ReimbHelper {
 
-    private static ReimbService reimbService = new ReimbServiceImpl();
+    private static ReimbServiceImpl reimbService = new ReimbServiceImpl();
+    private static UserServiceImpl userService = new UserServiceImpl();
     private static Logger logger = Logger.getLogger(UserHelper.class);
     private static ObjectMapper om = JsonMapper.builder()
             .addModule(new JavaTimeModule())
@@ -127,5 +128,22 @@ public class ReimbHelper {
         ReimbType type = new ReimbType();
 
         return type;
+    }
+
+    public static void processFindResolvedByUserId(HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
+        logger.info("inside of request helper...processfindAllreimbs...");
+        response.setContentType("application/json");
+        int id = Integer.parseInt(request.getParameter("id"));
+
+        User user = userService.getUserById(id);
+
+        List<Reimb> allReimbs = reimbService.getResolvedReimbsByUserId(user);
+
+        String json = om.writeValueAsString(allReimbs);
+
+        PrintWriter out = response.getWriter();
+
+        out.println(json);
     }
 }
