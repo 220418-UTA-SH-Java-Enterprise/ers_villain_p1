@@ -2,12 +2,17 @@ package com.revature.repositories;
 
 import java.util.List;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
 import com.revature.models.User;
 import com.revature.util.HibernateUtil;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 public class UserDAOImpl implements UserDAO {
 
@@ -68,21 +73,43 @@ public class UserDAOImpl implements UserDAO {
   @Override
   public User findById(int id) {
     logger.info("In DAO Layer: getting user with user_id: " + id);
-    Transaction findByIdTx = null;
+    // Transaction findByIdTx = null;
     User user = null;
+    // try (Session session = HibernateUtil.getSession()) {
+    // // Start the transaction
+    // findByIdTx = session.beginTransaction();
+
+    // // Get User Object
+    // user = session.get(User.class, id);
+
+    // // Commit the transaction
+    // findByIdTx.commit();
+    // } catch (Exception e) {
+    // if (findByIdTx != null) {
+    // findByIdTx.rollback();
+    // }
+    // }
     try (Session session = HibernateUtil.getSession()) {
-      // Start the transaction
-      findByIdTx = session.beginTransaction();
 
-      // Get User Object
-      user = session.get(User.class, id);
+      // Create Criteria Builder
+      CriteriaBuilder builder = session.getCriteriaBuilder();
 
-      // Commit the transaction
-      findByIdTx.commit();
+      // Create CriteriaQuery
+      CriteriaQuery<User> criteria = builder.createQuery(User.class);
+
+      /**
+       * TODO: Research this more
+       * https://www.baeldung.com/hibernate-criteria-queries
+       */
+      Root<User> root = criteria.from(User.class);
+      criteria.select(root).where(builder.gt(root.get("user_id"), id));
+
+      // Execute the query
+      Query<User> query = session.createQuery(criteria);
+
+      user = query.getSingleResult();
     } catch (Exception e) {
-      if (findByIdTx != null) {
-        findByIdTx.rollback();
-      }
+      logger.warn("unable to complete findAllByStatusType query");
     }
     logger.info("returning user: " + user);
     return user;
