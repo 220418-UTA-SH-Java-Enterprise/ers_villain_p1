@@ -9,18 +9,15 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.revature.models.Reimb;
 import com.revature.models.User;
 import com.revature.models.UserRole;
-import com.revature.services.ReimbService;
-import com.revature.services.ReimbServiceImpl;
 import com.revature.services.UserServiceImpl;
+
 import org.apache.log4j.Logger;
 
 public class UserHelper {
 
     private static UserServiceImpl userService = new UserServiceImpl();
-    private static ReimbService reimbService = new ReimbServiceImpl();
     private static Logger logger = Logger.getLogger(UserHelper.class);
     private static ObjectMapper om = new ObjectMapper();
 
@@ -141,13 +138,6 @@ public class UserHelper {
             // 4. Use a Print Writer to write the objects to the reponse body
             PrintWriter out = response.getWriter();
             out.println(json);
-        } else if (body.startsWith("firtname")) {
-            // serch by firstname...
-
-            // 1. Set the content type to return text to the browser
-            // 2. Get the user in the Databse by id
-            // 3. Turn the list of Java objects into a JSON string (Jackson Databind)
-            // 4. Use a Print Writer to write the objects to the reponse body
         }
 
     }

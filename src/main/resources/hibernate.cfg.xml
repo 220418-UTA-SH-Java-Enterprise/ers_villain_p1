@@ -8,11 +8,10 @@
   
         <!-- Connection settings -->
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-        <!-- 
         <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/JuCaLe</property>
         <property name="hibernate.connection.username">dev</property>
         <property name="hibernate.connection.password">password</property>
-        -->
+       
   
         <!-- SQL dialect -->
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
@@ -24,7 +23,7 @@
   		<property name="hibernate.connection.pool_size">10</property>
   
         <!-- Update database on startup -->
-        <property name="hibernate.hbm2ddl.auto">create</property>
+        <property name="hibernate.hbm2ddl.auto">validate</property>
   		<!-- NONE, CREATE, UPDATE, VALIDATE (prod) -->
   
         <!-- Annotated entity classes -->
