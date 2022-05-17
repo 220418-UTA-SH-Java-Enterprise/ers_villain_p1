@@ -80,7 +80,7 @@ public class ReimbDAOImpl implements ReimbDAO {
         Session session = HibernateUtil.getSession();
 
         // Get Reimb Object
-        reimbs = session.createNativeQuery("SELECT * FROM ers_reimbs ORDER BY user_id",
+        reimbs = session.createNativeQuery("SELECT * FROM ers_reimbs ORDER BY auth_id",
                 Reimb.class).list();
 
         for (Reimb reimb : reimbs) {
