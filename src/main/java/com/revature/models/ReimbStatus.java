@@ -17,18 +17,18 @@ public class ReimbStatus {
   private int reimbStatusId;
 
   @Column(name = "reimb_status")
-  private String reimbStatusStatus;
+  private String reimbStatus;
 
   public ReimbStatus() {
   }
 
-  public ReimbStatus(String reimbStatusStatus) {
-    this.reimbStatusStatus = reimbStatusStatus;
+  public ReimbStatus(String reimbStatus) {
+    this.reimbStatus = reimbStatus;
   }
 
-  public ReimbStatus(int reimbStatusId, String reimbStatusStatus) {
+  public ReimbStatus(int reimbStatusId, String reimbStatus) {
     this.reimbStatusId = reimbStatusId;
-    this.reimbStatusStatus = reimbStatusStatus;
+    this.reimbStatus = reimbStatus;
   }
 
   public int getReimbStatusId() {
@@ -39,24 +39,24 @@ public class ReimbStatus {
     this.reimbStatusId = reimbStatusId;
   }
 
-  public String getReimbStatusStatus() {
-    return reimbStatusStatus;
+  public String getReimbStatus() {
+    return reimbStatus;
   }
 
   public void setReimbStatus(String reimbStatus) {
-    this.reimbStatusStatus = reimbStatusStatus;
+    this.reimbStatus = reimbStatus;
   }
 
   @Override
   public String toString() {
-    return "ReimbStatus [reimbStatus=" + reimbStatusStatus + ", reimbStatusId=" + reimbStatusId + "]";
+    return "ReimbStatus [reimbStatus=" + reimbStatus + ", reimbStatusId=" + reimbStatusId + "]";
   }
 
   @Override
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((reimbStatusStatus == null) ? 0 : reimbStatusStatus.hashCode());
+    result = prime * result + ((reimbStatus == null) ? 0 : reimbStatus.hashCode());
     result = prime * result + reimbStatusId;
     return result;
   }
@@ -70,14 +70,13 @@ public class ReimbStatus {
     if (getClass() != obj.getClass())
       return false;
     ReimbStatus other = (ReimbStatus) obj;
-    if (reimbStatusStatus == null) {
-      if (other.reimbStatusStatus != null)
+    if (reimbStatus == null) {
+      if (other.reimbStatus != null)
         return false;
-    } else if (!reimbStatusStatus.equals(other.reimbStatusStatus))
+    } else if (!reimbStatus.equals(other.reimbStatus))
       return false;
     if (reimbStatusId != other.reimbStatusId)
       return false;
     return true;
   }
-
 }
