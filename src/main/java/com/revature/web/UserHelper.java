@@ -5,11 +5,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.models.Reimb;
 import com.revature.models.User;
@@ -17,7 +15,6 @@ import com.revature.models.UserRole;
 import com.revature.services.ReimbService;
 import com.revature.services.ReimbServiceImpl;
 import com.revature.services.UserServiceImpl;
-
 import org.apache.log4j.Logger;
 
 public class UserHelper {
@@ -46,8 +43,7 @@ public class UserHelper {
         List<String> values = new ArrayList<String>();
 
         for (String pair : sepByAmp) { // each element in array looks like this
-            values.add(pair.substring(pair.indexOf("=") + 1)); // trim each String element in the array to just value ->
-                                                               // [bob, pass]
+            values.add(pair.substring(pair.indexOf("=") + 1));
         }
         logger.info("User attempted to register with information:\n " + body);
         // capture the actual username and password values

@@ -75,23 +75,19 @@ public class ReimbDAOImpl implements ReimbDAO {
     @Override
     public List<Reimb> findAllReimbs() {
         logger.info("Find all reimbursements");
-        Transaction transaction = null;
-        List<Reimb> reimb = null;
-        try (Session session = HibernateUtil.getSession()) {
-            // Start the transaction
-            transaction = session.beginTransaction();
+        // Transaction transaction = null;
+        List<Reimb> reimbs;
+        Session session = HibernateUtil.getSession();
 
-            // Get Reimb Object
-            reimb = session.createQuery("SELECT a FROM Reimb a", Reimb.class).getResultList();
+        // Get Reimb Object
+        reimbs = session.createNativeQuery("SELECT * FROM ers_reimbs ORDER BY user_id",
+                Reimb.class).list();
 
-            // Commit the transaction
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
+        for (Reimb reimb : reimbs) {
+            logger.info(reimb);
         }
-        return reimb;
+        logger.info(reimbs);
+        return reimbs;
     }
 
     @Override
