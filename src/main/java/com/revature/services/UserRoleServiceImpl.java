@@ -10,6 +10,15 @@ public class UserRoleServiceImpl implements UserRoleService{
     private static Logger logger = Logger.getLogger(UserRoleServiceImpl.class);
     private static UserRoleDAOImpl userRoleDAO = new UserRoleDAOImpl();
 
+    public UserRoleServiceImpl() {
+
+    }
+
+    public UserRoleServiceImpl(UserRoleDAOImpl dao) {
+        super();
+        this.userRoleDAO = dao;
+    }
+
     @Override
     public UserRole getByRoleId(int id) {
         logger.info("In Service Layer: UserRoleServiceImpl.getByRoleId()");
