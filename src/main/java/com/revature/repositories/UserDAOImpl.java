@@ -68,20 +68,20 @@ public class UserDAOImpl implements UserDAO {
   @Override
   public User findById(int id) {
     logger.info("In DAO Layer: getting user with user_id: " + id);
-    Transaction transaction = null;
+    Transaction findByIdTx = null;
     User user = null;
     try (Session session = HibernateUtil.getSession()) {
       // Start the transaction
-      transaction = session.beginTransaction();
+      findByIdTx = session.beginTransaction();
 
       // Get User Object
       user = session.get(User.class, id);
 
       // Commit the transaction
-      transaction.commit();
+      findByIdTx.commit();
     } catch (Exception e) {
-      if (transaction != null) {
-        transaction.rollback();
+      if (findByIdTx != null) {
+        findByIdTx.rollback();
       }
     }
     logger.info("returning user: " + user);
