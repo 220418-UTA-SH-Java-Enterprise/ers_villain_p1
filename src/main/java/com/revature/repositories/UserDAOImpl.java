@@ -54,7 +54,7 @@ public class UserDAOImpl implements UserDAO {
   public boolean update(User user) {
     Transaction transaction = null;
     try {
-      Session session = HibernateUtil.getSession()
+      Session session = HibernateUtil.getSession();
       // Start the Transaction
       transaction = session.beginTransaction();
 
