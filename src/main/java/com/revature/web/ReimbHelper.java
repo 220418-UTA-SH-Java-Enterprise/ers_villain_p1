@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.json.JsonMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.revature.models.Reimb;
 import com.revature.services.ReimbService;
 import com.revature.services.ReimbServiceImpl;
@@ -18,7 +20,9 @@ public class ReimbHelper {
 
     private static ReimbService reimbService = new ReimbServiceImpl();
     private static Logger logger = Logger.getLogger(UserHelper.class);
-    private static ObjectMapper om = new ObjectMapper();
+    private static ObjectMapper om = JsonMapper.builder()
+            .addModule(new JavaTimeModule())
+            .build();
 
     public static void processFindAllReimbs(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
