@@ -65,6 +65,27 @@ public class UserServiceTest extends TestCase {
     }
 
 
+    @Test
+    public void test_getByIdSuccess(){
+        when(mockdao.findById(2)).thenReturn(u2);
+
+        assertEquals(u2, userv.getUserById(2));
+    }
+
+    @Test
+    public void test_getAllUsersSuccess(){
+        when(mockdao.findAllUsers()).thenReturn(mockDb);
+
+        assertEquals(mockDb, userv.getAllUsers());
+
+    }
+
+    // @Override
+    // public List<User> getAllUsers() {
+    //     return userDAO.findAllUsers();
+    // }
+
+
 
 
 
