@@ -13,6 +13,13 @@ public class HibernateUtil {
         super();
     }
 
+    // private static Configuration cfg = new Configuration()
+    // .setProperty("hibernate.connection.url", System.getenv("villain_DB_URL"))
+    // .setProperty("hibernate.connection.username",
+    // System.getenv("villain_DB_USER"))
+    // .setProperty("hibernate.connection.url", System.getenv("villain_DB_PASS"));
+    // private static SessionFactory sf = cfg.configure("hibernate.cfg.xml")
+    // .buildSessionFactory();
     private static SessionFactory sf = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
     private static Logger loggger = Logger.getLogger(HibernateUtil.class);
 
