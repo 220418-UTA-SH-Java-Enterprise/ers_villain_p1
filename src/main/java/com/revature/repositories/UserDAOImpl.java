@@ -53,7 +53,8 @@ public class UserDAOImpl implements UserDAO {
   @Override
   public boolean update(User user) {
     Transaction transaction = null;
-    try (Session session = HibernateUtil.getSession()) {
+    try {
+      Session session = HibernateUtil.getSession()
       // Start the Transaction
       transaction = session.beginTransaction();
 
@@ -73,45 +74,23 @@ public class UserDAOImpl implements UserDAO {
   @Override
   public User findById(int id) {
     logger.info("In DAO Layer: getting user with user_id: " + id);
-    // Transaction findByIdTx = null;
+
     User user = null;
-    // try (Session session = HibernateUtil.getSession()) {
-    // // Start the transaction
-    // findByIdTx = session.beginTransaction();
 
-    // // Get User Object
-    // user = session.get(User.class, id);
+    try {
+      Session session = HibernateUtil.getSession();
+      // Get Reimb Object
+      user = session.createNativeQuery("SELECT * FROM ers_users WHERE user_id = " + id + " ORDER BY user_id",
+          User.class).getSingleResult();
 
-    // // Commit the transaction
-    // findByIdTx.commit();
-    // } catch (Exception e) {
-    // if (findByIdTx != null) {
-    // findByIdTx.rollback();
-    // }
-    // }
-    try (Session session = HibernateUtil.getSession()) {
+      logger.info(user);
 
-      // Create Criteria Builder
-      CriteriaBuilder builder = session.getCriteriaBuilder();
-
-      // Create CriteriaQuery
-      CriteriaQuery<User> criteria = builder.createQuery(User.class);
-
-      /**
-       * TODO: Research this more
-       * https://www.baeldung.com/hibernate-criteria-queries
-       */
-      Root<User> root = criteria.from(User.class);
-      criteria.select(root).where(builder.gt(root.get("user_id"), id));
-
-      // Execute the query
-      Query<User> query = session.createQuery(criteria);
-
-      user = query.getSingleResult();
     } catch (Exception e) {
       logger.warn("unable to complete findAllByStatusType query");
     }
+
     logger.info("returning user: " + user);
+
     return user;
   }
 
@@ -119,7 +98,6 @@ public class UserDAOImpl implements UserDAO {
   public List<User> findAllUsers() {
     logger.info("In DAO Layer: getting all users.");
 
-    // Transaction transaction = null;
     List<User> users;
     Session session = HibernateUtil.getSession();
 
