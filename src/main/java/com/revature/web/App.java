@@ -30,7 +30,7 @@ public class App extends HttpServlet {
                 break;
             case "user":
                 log.info("search user by name or id. URI: " + URI);
-                // RequestHelper.processUserBySearchParam(req, resp);
+                UserHelper.processFindUserbyId(req, resp);
                 break;
             case "reimbs": // query the DB and return a list of all reimbursement requests
                 log.info("getting user list...");
@@ -52,9 +52,8 @@ public class App extends HttpServlet {
                 log.info("getting user list...");
                 UserHelper.processRegistration(req, resp);
                 break;
-            case "user":
-                log.info("search user by name or id. URI: " + URI);
-                // RequestHelper.processUserBySearchParam(req, resp);
+            case "login": // login
+                // UserHelper.processLogin(req, resp);
                 break;
             default:
                 log.info("showing error message...");

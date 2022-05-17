@@ -84,6 +84,7 @@ public class UserDAOImpl implements UserDAO {
         transaction.rollback();
       }
     }
+    logger.info("returning user: " + user);
     return user;
   }
 
