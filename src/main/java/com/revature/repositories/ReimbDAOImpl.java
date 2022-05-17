@@ -75,7 +75,7 @@ public class ReimbDAOImpl implements ReimbDAO {
     @Override
     public List<Reimb> findAllReimbs() {
         logger.info("Find all reimbursements");
-        // Transaction transaction = null;
+
         List<Reimb> reimbs;
         Session session = HibernateUtil.getSession();
 
