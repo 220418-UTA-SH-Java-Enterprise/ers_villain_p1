@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table
+@Table(name = "ers_reimbursement_type")
 public class ReimbType {
 
     @Id

@@ -34,7 +34,7 @@ public class User {
     private String email;
 
     @ManyToOne
-    @JoinColumn(name = "role_id", referencedColumnName = "user_role_id")
+    @JoinColumn(name = "role_id", referencedColumnName = "role_id")
     private UserRole role;
 
     public User() {
