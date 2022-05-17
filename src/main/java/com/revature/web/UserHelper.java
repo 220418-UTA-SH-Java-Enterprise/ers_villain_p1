@@ -93,18 +93,62 @@ public class UserHelper {
 
     }
 
-    public static void processFindAllReimbs(HttpServletRequest request, HttpServletResponse response)
-            throws IOException {
-        logger.info("inside of request helper...processfindAllreimbs...");
-        response.setContentType("application/json");
+    public static void processFindUserbyId(HttpServletRequest request, HttpServletResponse response)
+    throws IOException {
+        logger.info("In UserHelper, searching for user.");
 
-        List<Reimb> allReimbs = reimbService.getAllReimbs();
+        BufferedReader reader = request.getReader(); 
+        StringBuilder s = new StringBuilder(); 
 
-        String json = om.writeValueAsString(allReimbs);
+        String line = reader.readLine(); 
+        while(line != null) {
+            s.append(line); 
+            line = reader.readLine(); 
+        }
 
-        PrintWriter out = response.getWriter();
+         // username=charlie&password=alhaejklf&firstname=John&lastname=Smith
+        String body = s.toString(); 
 
-        out.println(json);
+        /**
+         * Turns the string into an array
+         * [0] username=charlie
+         * [1] password=alhaejklf
+         * [2] firstname=John
+         * [3] lastname=Smith
+         */
+        String[] setByAmp = body.split("&"); 
+
+        List<String> values = new ArrayList<String>(); 
+
+        for(String pair : setByAmp) {
+            values.add(pair.substring(pair.indexOf("=") + 1)); 
+        }
+        logger.info("User attempting to locate user with id" + body); 
+        
+        if (body.startsWith("id")) {
+
+             // 1. Set the content type to return text to the browser
+            response.setContentType("application/json");
+
+            // 2. Get the user in the Databse by id
+            int id = Integer.parseInt(values.get(0)); 
+            User user = userService.getUserById(id); 
+
+            // 3. Turn the list of Java objects into a JSON string (Jackson Databind)
+            String json = om.writeValueAsString(user);
+            
+            // 4. Use a Print Writer to write the objects to the reponse body
+            PrintWriter out = response.getWriter();
+            out.println(json); 
+        } else if(body.startsWith("firtname")) {
+            // serch by firstname...
+
+            // 1. Set the content type to return text to the browser
+            // 2. Get the user in the Databse by id
+            // 3. Turn the list of Java objects into a JSON string (Jackson Databind)
+            // 4. Use a Print Writer to write the objects to the reponse body
+        }
+    
     }
 
     public static void processError(HttpServletRequest req, HttpServletResponse resp)
@@ -116,4 +160,8 @@ public class UserHelper {
          * it just forwards it to a new resource, and we also maintain the URL
          */
     }
+
+
+
 }
+ 
