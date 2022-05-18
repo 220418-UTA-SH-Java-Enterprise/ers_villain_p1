@@ -1,179 +1,155 @@
 package com.revature.repositories;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 import com.revature.models.User;
-import com.revature.util.ConnectionUtil;
+import com.revature.util.HibernateUtil;
 
 import org.apache.log4j.Logger;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 public class UserDAOImpl implements UserDAO {
 
   private static Logger logger = Logger.getLogger(UserDAOImpl.class);
 
   @Override
-  public boolean insert(User user) {
-    try (Connection conn = ConnectionUtil.getConnection()) {
-      logger.info("In DAO layer: making a new user in db...");
-      String sql = "INSERT INTO users (username, password, email, first_name, last_name, role_id) VALUES (?, ?, ?, ?, ?, ?)";
+  public int insert(User user) {
 
-      PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-      stmt.setString(1, user.getUsername());
-      stmt.setString(2, user.getPassword());
-      stmt.setString(3, user.getEmail());
-      stmt.setString(4, user.getFirstName());
-      stmt.setString(5, user.getLastName());
-      stmt.setInt(6, user.getRoleId());
+    logger.info("Add reimbursement request to db. reimbursement request: " + user);
 
-      stmt.execute();
+    Session session = HibernateUtil.getSession();
 
-      ResultSet rs = stmt.getGeneratedKeys();
+    Transaction transaction = null;
 
-      int genKey = 0;
-      if (rs.next()) {
-        genKey = rs.getInt(1);
+    int pk = 0;
+
+    try {
+      // Start the transaction
+      transaction = session.beginTransaction();
+
+      // Save the user object
+      pk = (int) session.save(user);
+
+      // Commit transaction
+      transaction.commit();
+
+    } catch (Exception e) {
+      logger.warn("Error entering the user.");
+      if (transaction != null) {
+        transaction.rollback();
       }
-
-      user.setUserId(genKey);
-
-      logger.info("New user has been entered into the database.");
-
-      conn.close();
-    } catch (SQLException e) {
-      logger.warn("Unable to execute SQL statement:", e);
-      return false;
     }
-    return true;
+
+    // Return the primary key of the new entry
+    return pk;
   }
 
   @Override
-  public User update(User user) {
-    try (Connection conn = ConnectionUtil.getConnection()) {
-      logger.info("In DAO layer: updating user: " + user.getUserId());
+  public boolean update(User user) {
+    Transaction transaction = null;
+    try {
+      Session session = HibernateUtil.getSession();
+      // Start the Transaction
+      transaction = session.beginTransaction();
 
-      String sql = "UPDATE ers_users SET username = ?, password = ?, email = ?, first_name = ?, last_name = ?, role_id =? WHERE user_id = ?;";
-      PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-      stmt.setString(1, user.getUsername());
-      stmt.setString(2, user.getPassword());
-      stmt.setString(3, user.getEmail());
-      stmt.setString(4, user.getFirstName());
-      stmt.setString(5, user.getLastName());
-      stmt.setInt(6, user.getRoleId());
-      stmt.setInt(7, user.getUserId());
+      // Save User object
+      session.saveOrUpdate(user);
 
-      stmt.execute();
-
-      ResultSet rs = stmt.getGeneratedKeys();
-
-      if (rs.next()) {
-        user.setUserId(rs.getInt(1));
+      // Commit the transaction
+      transaction.commit();
+    } catch (Exception e) {
+      if (transaction != null) {
+        transaction.rollback();
       }
-
-      logger.info("Updated user profile with id: ." + user.getUserId());
-
-    } catch (SQLException e) {
-      logger.warn("Unable to execute SQL statement: " + e.getMessage(), e);
-      return null;
     }
-    return user;
+    return true;
   }
 
   @Override
   public User findById(int id) {
     logger.info("In DAO Layer: getting user with user_id: " + id);
 
-    User user = new User();
+    User user = null;
 
-    try (Connection conn = ConnectionUtil.getConnection()) {
-      String sql = "SELECT * FROM ers_users WHERE user_id = " + id + ";";
+    try {
+      Session session = HibernateUtil.getSession();
+      
+      // Get User Object
+      user = session.createNativeQuery("SELECT * FROM ers_users WHERE user_id = " + id + " ORDER BY user_id",
+          User.class).getSingleResult();
+      
+      logger.info(user);
 
-      Statement stmt = conn.createStatement();
-      ResultSet rs = stmt.executeQuery(sql);
-
-      if (rs.next()) {
-
-        // Update the object with the results of the query
-        user.setUserId(rs.getInt("user_id"));
-        user.setUsername(rs.getString("username"));
-        user.setPassword(rs.getString("password"));
-        user.setFirstName(rs.getString("first_name"));
-        user.setLastName(rs.getString("last_name"));
-        user.setEmail(rs.getString("email"));
-        user.setRoleId(rs.getInt("role_id"));
-      }
-
-    } catch (SQLException e) {
-      logger.warn("Unable to execute SQL statement: " + e.getMessage(), e);
-      return null;
+    } catch (Exception e) {
+      logger.warn("unable to complete findAllByStatusType query");
     }
+
+    logger.info("returning user: " + user);
+
     return user;
   }
 
   @Override
-  public ArrayList<User> findAllUsers() {
+  public List<User> findAllUsers() {
     logger.info("In DAO Layer: getting all users.");
 
-    ArrayList<User> userList = new ArrayList<User>();
-    try (Connection conn = ConnectionUtil.getConnection()) {
-      String sql = "SELECT * FROM ers_users; ";
+    List<User> users;
+    Session session = HibernateUtil.getSession();
 
-      Statement stmt = conn.createStatement();
+    // Get Reimb Object
+    users = session.createNativeQuery("SELECT * FROM ers_users ORDER BY user_id",
+        User.class).list();
 
-      ResultSet rs = stmt.executeQuery(sql);
-
-      while (rs.next()) {
-        User user = new User();
-
-        user.setUserId(rs.getInt("user_id"));
-        user.setUsername(rs.getString("username"));
-        user.setPassword(rs.getString("password"));
-        user.setFirstName(rs.getString("first_name"));
-        user.setLastName(rs.getString("last_name"));
-        user.setEmail(rs.getString("email"));
-        user.setRoleId(rs.getInt("role_id"));
-
-        userList.add(user);
-      }
-
-    } catch (SQLException e) {
-      logger.warn("Unable to execute SQL statement: " + e.getMessage(), e);
-      return null;
+    for (User user : users) {
+      logger.info(user);
     }
-    return userList;
+    logger.info(users);
+    return users;
+  }
+
+  @Override
+  public List<User> findAllEmpByRoleId(int roleId) {
+    logger.info("In DAO Layer: getting all employees with role_id: " + roleId);
+
+    List<User> employees = null;
+
+    try {
+      Session session = HibernateUtil.getSession();
+      // Get Reimb Object
+      employees = session.createNativeQuery("SELECT * FROM ers_users WHERE role_id = " + roleId + ";",
+          User.class).list();
+
+      for (User e : employees) {
+        logger.info(e);
+      }
+    } catch (Exception e) {
+      logger.warn("unable to complete findAllByRoleId query");
+    }
+    return employees;
   }
 
   @Override
   public User login(String username, String password) {
-    logger.info("In DAO Layer: UserDAOImpl() - attemptint to login user.");
+    logger.info("In DAO Layer: UserDAOImpl() - attempting to login user.");
+    
     User user = new User();
-    try (Connection conn = ConnectionUtil.getConnection()) {
-      String sql = "SELECT * from users where username = ? AND password = ?;";
 
-      PreparedStatement stmt = conn.prepareStatement(sql);
-      stmt.setString(1, username);
-      stmt.setString(2, password);
+    try {
+      Session session = HibernateUtil.getSession();
 
-      ResultSet rs = stmt.executeQuery();
+      user = session.createNativeQuery("SELECT * FROM ers_users WHERE username = '" + username + "' AND password = '" + password + "' ;", User.class).getSingleResult();
 
-      if (rs.next()) {
-        user.setUserId(rs.getInt("id"));
-        user.setUsername(rs.getString("username"));
-        // user.setPassword(rs.getString("password")); // Don't return the password...
-        user.setFirstName(rs.getString("first_name"));
-        user.setLastName(rs.getString("last_name"));
-        user.setEmail(rs.getString("email"));
-        user.setRoleId(rs.getInt("role_id"));
-      }
-    } catch (SQLException e) {
-      logger.warn("Unable to execute query");
-      return null;
+      logger.info(user);
+
+    } catch (Exception e) {
+      logger.warn("Unable to complete login query");
     }
     return user;
   }
-
 }

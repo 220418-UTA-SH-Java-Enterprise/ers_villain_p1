@@ -7,14 +7,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
 @Entity
 @Table(name = "ers_user_roles")
 public class UserRole {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "user_role_id") 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "role_id")
     private int roleId;
 
     @Column(name = "user_role")

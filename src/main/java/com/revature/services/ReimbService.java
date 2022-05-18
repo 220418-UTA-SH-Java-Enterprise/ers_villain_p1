@@ -13,11 +13,17 @@ public interface ReimbService {
 
     public boolean editReimbRequest(Reimb reimb);
 
-    public Reimb getReimbRequestById(int reimbId);
-
     public List<Reimb> getAllReimbs();
 
-    public List<Reimb> getReimbByAuthorId(User auth);
+    public List<Reimb> getAllPendingReimbs();
 
-    public List<Reimb> getReimbByStatus(int StatusTypeId);
+    public List<Reimb> getAllResolvedReimbs();
+
+    // public List<Reimb> getResolvedReimbsByUserId(User user);
+
+    public List<Reimb> getResolvedReimbsByUserId(User user);
+
+    public List<Reimb> getPendingReimbsByUserId(User user);
+
+    // public List<Reimb> getReimbByStatus(int StatusTypeId);
 }

@@ -14,21 +14,23 @@ public class ReimbStatusDAOImpl implements ReimbStatusDAO {
   @Override
   public ReimbStatus findReimbStatusById(int id) {
     logger.info("In DAO Layer: ReimbStatuDAOeImpl.findReimbStatusById()");
-    Transaction transaction = null;
+    Transaction findReimbStatusByIdTx = null;
     ReimbStatus reimbStatus = null;
 
-    try (Session session = HibernateUtil.getSession()) {
+    try {
+      Session session = HibernateUtil.getSession();
+
       // Starts the transaction
-      transaction = session.beginTransaction();
+      findReimbStatusByIdTx = session.beginTransaction();
 
       // get Reimbursement Status using id property
       reimbStatus = session.get(ReimbStatus.class, id);
 
       // Commit Transaction
-      transaction.commit();
+      findReimbStatusByIdTx.commit();
     } catch (Exception e) {
-      if (transaction != null) {
-        transaction.rollback();
+      if (findReimbStatusByIdTx != null) {
+        findReimbStatusByIdTx.rollback();
       }
       e.printStackTrace();
     }

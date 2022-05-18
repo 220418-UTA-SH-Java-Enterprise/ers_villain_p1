@@ -14,9 +14,9 @@ import javax.persistence.Table;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private int userId;
+    private int id;
 
     @Column(name = "username")
     private String username;
@@ -34,27 +34,42 @@ public class User {
     private String email;
 
     @ManyToOne
-    @JoinColumn(name = "role_id", referencedColumnName = "user_role_id")
-    private int roleId;
+    @JoinColumn(name = "role_id", referencedColumnName = "role_id")
+    private UserRole role;
 
     public User() {
     }
 
     public int getUserId() {
-        return userId;
+        return id;
     }
 
-    public User(String username, String password, String firstName, String lastName, String email, int roleId) {
+    public User(int id, String username, String password, String firstName, String lastName, String email,
+            UserRole role) {
+        this.id = id;
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.roleId = roleId;
+        this.role = role;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public User(String username, String password, String firstName, String lastName, String email, UserRole role) {
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.role = role;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getUsername() {
@@ -97,17 +112,17 @@ public class User {
         this.email = email;
     }
 
-    public int getRoleId() {
-        return roleId;
+    public UserRole getRole() {
+        return role;
     }
 
-    public void setRoleId(int roleId) {
-        this.roleId = roleId;
+    public void setRole(UserRole role) {
+        this.role = role;
     }
 
     @Override
     public String toString() {
         return "Users [email=" + email + ", firstName=" + firstName + ", lastName=" + lastName + ", password="
-                + password + ", roleId=" + roleId + ", userId=" + userId + ", username=" + username + "]";
+                + password + ", roleId=" + role + ", userId=" + id + ", username=" + username + "]";
     }
 }

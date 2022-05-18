@@ -17,16 +17,20 @@ public class UserRoleDAOImpl implements UserRoleDAO {
 
         Transaction transaction = null;
         UserRole userRole = null;
-        try (Session session = HibernateUtil.getSession()) {
+        try {
+            Session session = HibernateUtil.getSession();
             // Start the transaction
             transaction = session.beginTransaction();
 
-            // Get Reimb Object
+            // Get User Role Object
             userRole = session.get(UserRole.class, id);
 
             // Commit the transaction
             transaction.commit();
+        } catch (Exception e) {
+            logger.warn("Unable to complete UserRoleDAO transaction");
         }
         return userRole;
     }
+
 }

@@ -1,5 +1,6 @@
 package com.revature.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.revature.models.Reimb;
@@ -21,23 +22,49 @@ public class ReimbServiceImpl implements ReimbService {
     }
 
     @Override
-    public Reimb getReimbRequestById(int reimbId) {
-        return reimbDAO.findById(reimbId);
-    }
-
-    @Override
     public List<Reimb> getAllReimbs() {
         return reimbDAO.findAllReimbs();
     }
 
+    // @Override
+    // public List<Reimb> getResolvedReimbsByUserId(User user) {
+    // List<Reimb> reimbs = new ArrayList<Reimb>();
+    // reimbs = reimbDAO.findAllResolvedByAuthId(user);
+    // return reimbs;
+    // }
+
     @Override
-    public List<Reimb> getReimbByAuthorId(User auth) {
-        return reimbDAO.findAllByAuthId(auth);
+    public List<Reimb> getAllPendingReimbs() {
+        List<Reimb> reimbs = new ArrayList<Reimb>();
+        reimbs = reimbDAO.findAllPending();
+        return reimbs;
     }
 
     @Override
-    public List<Reimb> getReimbByStatus(int statusTypeId) {
-        return reimbDAO.findAllByStatusType(statusTypeId);
+    public List<Reimb> getAllResolvedReimbs() {
+        List<Reimb> reimbs = new ArrayList<Reimb>();
+        reimbs = reimbDAO.findAllResolved();
+        return reimbs;
     }
+
+    @Override
+    public List<Reimb> getResolvedReimbsByUserId(User user) {
+        List<Reimb> reimbs = new ArrayList<Reimb>();
+        reimbs = reimbDAO.findAllResolvedByAuthId(user);
+        return reimbs;
+    }
+
+    @Override
+    public List<Reimb> getPendingReimbsByUserId(User user) {
+        List<Reimb> reimbs = new ArrayList<Reimb>();
+        reimbs = reimbDAO.findAllPendingByAuthId(user);
+        return reimbs;
+    }
+
+    // @Override
+    // public List<Reimb> getReimbByStatus(int StatusTypeId) {
+    // // TODO Auto-generated method stub
+    // return null;
+    // }
 
 }

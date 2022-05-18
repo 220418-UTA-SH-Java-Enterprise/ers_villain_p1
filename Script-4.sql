@@ -62,4 +62,27 @@ FOREIGN KEY (type_id) -- name of column in current table
 REFERENCES ers_reimbursement_type(type_id) -- name of table (and column) in foreign table
 
 );
+ 
+INSERT INTO ers_reimbursement_type (reimb_type)
+VALUES 
+('Lodging'), 
+('Travel'), 
+('Food'), 
+('Other');
 
+INSERT INTO ers_reimbursement_status (reimb_status)
+VALUES 
+('Pending'), 
+('Rejected'), 
+('Approved'), 
+('Denied');
+
+INSERT INTO ers_user_roles (user_role)
+VALUES 
+('Employee'), 
+('Manager');
+
+INSERT INTO ers_users (username, PASSWORD, first_name, last_name, email, role_id)
+VALUES ('leviathan', 'password', 'Levi', 'Choi', 'lvmchoi@gmail.com',1);
+
+INSERT INTO ers_reimbursements ()

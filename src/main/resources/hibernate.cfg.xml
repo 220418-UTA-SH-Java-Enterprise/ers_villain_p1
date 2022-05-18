@@ -8,10 +8,10 @@
   
         <!-- Connection settings -->
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/JuCaLe</property>
-        <property name="hibernate.connection.username">dev</property>
-        <property name="hibernate.connection.password">password</property>
-  
+        <property name="hibernate.connection.url">jdbc:postgresql://database-2.cxjnkbtunakk.us-east-1.rds.amazonaws.com:5432/zillion</property>
+        <property name="hibernate.connection.username">JuCaLe</property>
+        <property name="hibernate.connection.password">B%R37wbSgcH2QA</property>
+       
         <!-- SQL dialect -->
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
   
@@ -22,12 +22,15 @@
   		<property name="hibernate.connection.pool_size">10</property>
   
         <!-- Update database on startup -->
-        <property name="hibernate.hbm2ddl.auto">create</property>
+        <property name="hibernate.hbm2ddl.auto">validate</property>
   		<!-- NONE, CREATE, UPDATE, VALIDATE (prod) -->
   
         <!-- Annotated entity classes -->
         <mapping class="com.revature.models.User"/>
         <mapping class="com.revature.models.UserRole"/>
+        <mapping class="com.revature.models.Reimb"/>
+        <mapping class="com.revature.models.ReimbStatus"/>
+        <mapping class="com.revature.models.ReimbType"/>
          
     </session-factory>
 </hibernate-configuration>
