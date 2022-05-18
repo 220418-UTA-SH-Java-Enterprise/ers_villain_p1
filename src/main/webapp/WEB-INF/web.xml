@@ -13,6 +13,7 @@
 	<url-pattern>/register</url-pattern>
 	<url-pattern>/reimbs</url-pattern>
 	<url-pattern>/userreimbresolved</url-pattern>
+	<url-pattern>/userreimbpending</url-pattern>
 	<url-pattern>/userupdate</url-pattern>
   <url-pattern>/employees</url-pattern>
 	<url-pattern>/error</url-pattern>
