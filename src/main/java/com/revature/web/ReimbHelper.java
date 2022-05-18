@@ -15,7 +15,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.revature.models.Reimb;
-import com.revature.models.ReimbStatus;
 import com.revature.models.ReimbType;
 import com.revature.models.User;
 import com.revature.services.ReimbServiceImpl;
@@ -33,6 +32,20 @@ public class ReimbHelper {
             .build();
 
     public static void processFindAllReimbs(HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
+        logger.info("inside of request helper...processfindAllreimbs...");
+        response.setContentType("application/json");
+
+        List<Reimb> allReimbs = reimbService.getAllReimbs();
+
+        String json = om.writeValueAsString(allReimbs);
+
+        PrintWriter out = response.getWriter();
+
+        out.println(json);
+    }
+
+    public static void processFindAllResolvedReimbs(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
         logger.info("inside of request helper...processfindAllreimbs...");
         response.setContentType("application/json");
@@ -100,11 +113,11 @@ public class ReimbHelper {
 
         // Author - needs to be an user object
         int authorId = Integer.parseInt(values.get(4));
-        User author = getUser(authorId);
+        // User author = getUser(authorId);
 
         // Status - needs to be an Reimb_Status object
         int statusId = Integer.parseInt(values.get(5));
-        ReimbStatus status = getStatus(statusId);
+        // ReimbStatus status = getStatus(statusId);
 
         // Type - needs to be a Reimb_Type object
         int typeId = Integer.parseInt(values.get(6));
@@ -112,16 +125,32 @@ public class ReimbHelper {
 
     }
 
-    private static User getUser(int userId) {
-        User user = new User();
+    public static void processPendingReimbs(HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
+        logger.info("inside of request helper...processfindAllreimbs...");
+        response.setContentType("application/json");
 
-        return user;
+        List<Reimb> pendingReimbs = reimbService.getAllPendingReimbs();
+
+        String json = om.writeValueAsString(pendingReimbs);
+
+        PrintWriter out = response.getWriter();
+
+        out.println(json);
     }
 
-    private static ReimbStatus getStatus(int statusId) {
-        ReimbStatus status = new ReimbStatus();
+    public static void processResolvedReimbs(HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
+        logger.info("inside of request helper...processfindAllreimbs...");
+        response.setContentType("application/json");
 
-        return status;
+        List<Reimb> resolvedReimbs = reimbService.getAllResolvedReimbs();
+
+        String json = om.writeValueAsString(resolvedReimbs);
+
+        PrintWriter out = response.getWriter();
+
+        out.println(json);
     }
 
     private static ReimbType getType(int typeId) {

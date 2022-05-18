@@ -19,6 +19,10 @@ public interface ReimbService {
 
     public List<Reimb> getReimbByAuthorId(User auth);
 
+    public List<Reimb> getAllPendingReimbs();
+
+    public List<Reimb> getAllResolvedReimbs();
+
     public List<Reimb> getResolvedReimbsByUserId(User user);
 
     public List<Reimb> getPendingReimbsByUserId(User user);

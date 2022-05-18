@@ -43,6 +43,15 @@ public class App extends HttpServlet {
                 log.info("getting user list...");
                 ReimbHelper.processFindAllReimbs(req, resp);
                 break;
+            case "pendingreimbs":
+                ReimbHelper.processPendingReimbs(req, resp);
+                break;
+            case "resolvedreimbs":
+                ReimbHelper.processResolvedReimbs(req, resp);
+                break;
+            case "resolved":
+                ReimbHelper.processFindAllResolvedReimbs(req, resp);
+                break;
             case "userupdate":
                 UserHelper.processUpdateUser(req, resp);
                 break;
