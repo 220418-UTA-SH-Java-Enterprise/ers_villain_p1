@@ -11,7 +11,10 @@ public interface UserDAO {
 
   public User findById(int id);
 
+  public List<User> findAllEmpByRoleId(int roleId);
+
   public List<User> findAllUsers();
 
-  // public User login(String username, String password);
+  public User login(String username, String password);
+
 }

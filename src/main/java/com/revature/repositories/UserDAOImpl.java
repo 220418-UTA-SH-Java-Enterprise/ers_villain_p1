@@ -79,10 +79,11 @@ public class UserDAOImpl implements UserDAO {
 
     try {
       Session session = HibernateUtil.getSession();
-      // Get Reimb Object
+      
+      // Get User Object
       user = session.createNativeQuery("SELECT * FROM ers_users WHERE user_id = " + id + " ORDER BY user_id",
           User.class).getSingleResult();
-
+      
       logger.info(user);
 
     } catch (Exception e) {
@@ -112,34 +113,43 @@ public class UserDAOImpl implements UserDAO {
     return users;
   }
 
-  // @Override
-  // public User login(String username, String password) {
-  // logger.info("In DAO Layer: UserDAOImpl() - attemptint to login user.");
-  // // User user = new User();
-  // // try (Connection conn = ConnectionUtil.getConnection()) {
-  // // String sql = "SELECT * from users where username = ? AND password = ?;";
+  @Override
+  public List<User> findAllEmpByRoleId(int roleId) {
+    logger.info("In DAO Layer: getting all employees with role_id: " + roleId);
 
-  // // PreparedStatement stmt = conn.prepareStatement(sql);
-  // // stmt.setString(1, username);
-  // // stmt.setString(2, password);
+    List<User> employees = null;
 
-  // // ResultSet rs = stmt.executeQuery();
+    try {
+      Session session = HibernateUtil.getSession();
+      // Get Reimb Object
+      employees = session.createNativeQuery("SELECT * FROM ers_users WHERE role_id = " + roleId + ";",
+          User.class).list();
 
-  // // if (rs.next()) {
-  // // user.setUserId(rs.getInt("id"));
-  // // user.setUsername(rs.getString("username"));
-  // // // user.setPassword(rs.getString("password")); // Don't return the
-  // // password...
-  // // user.setFirstName(rs.getString("first_name"));
-  // // user.setLastName(rs.getString("last_name"));
-  // // user.setEmail(rs.getString("email"));
-  // // user.setRoleId(rs.getInt("role_id"));
-  // // }
-  // // } catch (SQLException e) {
-  // // logger.warn("Unable to execute query");
-  // // return null;
-  // // }
-  // // return user;
-  // }
+      for (User e : employees) {
+        logger.info(e);
+      }
+    } catch (Exception e) {
+      logger.warn("unable to complete findAllByRoleId query");
+    }
+    return employees;
+  }
 
+  @Override
+  public User login(String username, String password) {
+    logger.info("In DAO Layer: UserDAOImpl() - attempting to login user.");
+    
+    User user = new User();
+
+    try {
+      Session session = HibernateUtil.getSession();
+
+      user = session.createNativeQuery("SELECT * FROM ers_users WHERE username = '" + username + "' AND password = '" + password + "' ;", User.class).getSingleResult();
+
+      logger.info(user);
+
+    } catch (Exception e) {
+      logger.warn("Unable to complete login query");
+    }
+    return user;
+  }
 }

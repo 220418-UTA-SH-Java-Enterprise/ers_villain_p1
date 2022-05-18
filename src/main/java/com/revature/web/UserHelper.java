@@ -142,11 +142,82 @@ public class UserHelper {
 
     }
 
+    public static void processUpdateUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        // Update user stuff goes here...
+    }
+
+    public static void processFindAllEmployees(HttpServletRequest request, HttpServletResponse response) throws IOException {
+                logger.info("Inside of request helper...processfindAllEmployees...");
+                response.setContentType("application/json");
+        
+                List<User> allEmployees = userService.getAllEmpById();
+        
+                String json = om.writeValueAsString(allEmployees);
+        
+                PrintWriter out = response.getWriter();
+        
+                out.println(json);
+    }
+
+    public static void processLogin(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        logger.info("Inside of request helper...processLogin...");
+        response.setContentType("application/json");
+
+        BufferedReader reader = request.getReader();
+        StringBuilder s = new StringBuilder();
+
+        String line = reader.readLine();
+        while (line != null) {
+            s.append(line);
+            line = reader.readLine();
+        }
+
+        String body = s.toString();
+        logger.info(body);
+
+        String[] setByAmp = body.split("&");
+
+        List<String> values = new ArrayList<String>();
+
+        for (String pair : setByAmp) {
+            values.add(pair.substring(pair.indexOf("=") + 1));
+        }
+        logger.info("User attempting to locate user with id and password" + body);
+
+        String username = values.get(0);
+        String password = values.get(1); 
+
+        // 1. Set the content type to return text to the browser
+        response.setContentType("application/json");
+
+            // 2. Get the user in the Databse by name and password. 
+            User user = null;
+            try {
+                user = userService.loginUser(username, password);
+                if (user.getUserId()== 0) {
+                    response.setStatus(401);
+                    response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid username and password.");
+                }
+            } catch (Exception e) {
+                response.setStatus(401);
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST, e.getMessage());
+            }
+
+            // 3. Turn the list of Java objects into a JSON string (Jackson Databind)
+            String json = om.writeValueAsString(user);
+
+            // 4. Use a Print Writer to write the objects to the reponse body
+            PrintWriter out = response.getWriter();
+            out.println(json);
+        
+}
+
+
     public static void processError(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         // if something goes wrong, redirect the user to a custom 404 error page
         req.getRequestDispatcher("error.html").forward(req, resp);
-        /*
+        /* 
          * Remember that the forward() method does NOT produce a new request,
          * it just forwards it to a new resource, and we also maintain the URL
          */

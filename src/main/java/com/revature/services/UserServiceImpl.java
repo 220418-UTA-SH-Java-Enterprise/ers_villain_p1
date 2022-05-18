@@ -11,11 +11,11 @@ public class UserServiceImpl implements UserService {
     private static Logger logger = Logger.getLogger(UserServiceImpl.class);
     private static UserDAOImpl userDAO = new UserDAOImpl();
 
-    public UserServiceImpl(){
+    public UserServiceImpl() {
 
     }
 
-    public UserServiceImpl(UserDAOImpl dao){
+    public UserServiceImpl(UserDAOImpl dao) {
         super();
         this.userDAO = dao;
     }
@@ -57,16 +57,17 @@ public class UserServiceImpl implements UserService {
         return userDAO.findAllUsers();
     }
 
-    // @Override
-    // public User loginUser(String username, String password) throws Exception {
+    public List<User> getAllEmpById(){
+        return userDAO.findAllEmpByRoleId(1);
+    }
 
-    // User user = userDAO.login(username, password);
-
-    // if (user == null) {
-    // throw new Exception("Invalid username or password");
-    // }
-
-    // return user;
-    // }
-
+    @Override
+    public User loginUser(String username, String password) throws Exception {
+        User userlogin = userDAO.login(username, password);
+        if (userlogin == null) {
+            throw new Exception("Invalid username or password.");
+            }
+        return userlogin;
+    }
+   
 }

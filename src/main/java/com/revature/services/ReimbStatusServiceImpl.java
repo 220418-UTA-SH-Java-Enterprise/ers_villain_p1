@@ -9,6 +9,10 @@ public class ReimbStatusServiceImpl implements ReimbStatusService {
   private static Logger logger = Logger.getLogger(ReimbStatusServiceImpl.class);
   private static ReimbStatusDAOImpl reimbStatusDAO = new ReimbStatusDAOImpl();
 
+  public ReimbStatusServiceImpl() {
+    super();
+  }
+
   public ReimbStatusServiceImpl(ReimbStatusDAOImpl dao) {
     super();
     this.reimbStatusDAO = dao;

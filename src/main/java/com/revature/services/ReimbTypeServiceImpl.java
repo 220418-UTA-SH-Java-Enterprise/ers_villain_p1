@@ -10,9 +10,10 @@ public class ReimbTypeServiceImpl implements ReimbTypeService {
     private static Logger logger = Logger.getLogger(ReimbTypeServiceImpl.class);
     private static ReimbTypeDAOImpl reimbTypeDAO = new ReimbTypeDAOImpl();
 
-    public ReimbTypeServiceImpl(ReimbTypeDAOImpl dao) {
-        super();
-        this.reimbTypeDAO = dao;
+    public ReimbTypeServiceImpl() {
+    }
+
+    public ReimbTypeServiceImpl(ReimbTypeDAOImpl mockdao) {
     }
 
     @Override

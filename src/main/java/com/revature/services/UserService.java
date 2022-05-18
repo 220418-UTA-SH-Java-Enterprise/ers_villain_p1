@@ -11,7 +11,9 @@ public interface UserService {
 
     public User getUserById(int id);
 
+    public List<User> getAllEmpById(); 
+
     public List<User> getAllUsers();
 
-    // public User loginUser(String username, String password) throws Exception;
+    public User loginUser(String username, String password) throws Exception;
 }

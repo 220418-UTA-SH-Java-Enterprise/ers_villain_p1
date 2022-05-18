@@ -1,7 +1,5 @@
 package com.revature.util;
 
-import com.revature.models.*;
-
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -43,10 +41,11 @@ public class HibernateUtil {
     // .setProperty("hibernate.connection.password", "password")
 
     /**
-     * Otehr stuff
+     * Other stuff
      */
     // .setProperty("hibernate.dialect",
-    // "org.hibernate.dialect.PostgreSQLDialect").setProperty("show_sql", "true")
+    // "org.hibernate.dialect.PostgreSQLDialect")
+    // .setProperty("show_sql", "true")
 
     /**
      * POOLING
