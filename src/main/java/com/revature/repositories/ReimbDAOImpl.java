@@ -128,12 +128,14 @@ public class ReimbDAOImpl implements ReimbDAO {
 
         // 4. Create the join
         Join<Reimb, ReimbStatus> reimbStatus = reimb.join("status"); // Root's joinColumn variable
+        Join<Reimb, ReimbStatus> reimbAuth = reimb.join("author"); // Root's joinColumn variable
 
         // 5. What does this do?
         cq.select(reimb);
         cq.where(cb.and(
                 cb.notEqual(reimbStatus.get("reimbStatusId"), 3),
-                cb.notEqual(reimbStatus.get("reimbStatusId"), 4)));
+                cb.notEqual(reimbStatus.get("reimbStatusId"), 4),
+                cb.equal(reimbAuth.get("id"), auth.getUserId())));
 
         // 6. Execute Query
         Query<Reimb> query = session.createQuery(cq);
