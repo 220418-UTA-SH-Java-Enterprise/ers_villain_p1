@@ -49,6 +49,20 @@ public class ReimbServiceImpl implements ReimbService {
     }
 
     @Override
+    public List<Reimb> getAllPendingReimbs() {
+        List<Reimb> reimbs = new ArrayList<Reimb>();
+        reimbs = reimbDAO.findAllPending();
+        return reimbs;
+    }
+
+    @Override
+    public List<Reimb> getAllResolvedReimbs() {
+        List<Reimb> reimbs = new ArrayList<Reimb>();
+        reimbs = reimbDAO.findAllResolved();
+        return reimbs;
+    }
+
+    @Override
     public List<Reimb> getPendingReimbsByUserId(User user) {
         List<Reimb> reimbs = new ArrayList<Reimb>();
         reimbs = reimbDAO.findAllPendingByAuthId(user);
