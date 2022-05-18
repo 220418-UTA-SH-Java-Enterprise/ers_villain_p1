@@ -60,4 +60,25 @@ public class ReimbType {
         result = prime * result + typeId;
         return result;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        ReimbType other = (ReimbType) obj;
+        if (type == null) {
+            if (other.type != null)
+                return false;
+        } else if (!type.equals(other.type))
+            return false;
+        if (typeId != other.typeId)
+            return false;
+        return true;
+    }
+
+    
 }
