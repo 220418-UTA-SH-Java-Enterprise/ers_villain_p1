@@ -69,6 +69,18 @@ public class Reimb {
         this.type = typeId;
     }
 
+    public Reimb(double amount, LocalDate submitted, String description, String receipts, User author,
+            ReimbStatus status,
+            ReimbType type) {
+        super();
+        this.amount = amount;
+        this.submitted = submitted;
+        this.description = description;
+        this.author = author;
+        this.status = status;
+        this.type = type;
+    }
+
     public Reimb(int id, double amount, LocalDate submitted, LocalDate resolved, String description,
             String receipt,
             User authorId, User resolver, ReimbStatus status, ReimbType type) {
