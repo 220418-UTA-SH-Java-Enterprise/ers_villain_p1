@@ -94,6 +94,28 @@ public class UserDAOImpl implements UserDAO {
     return user;
   }
 
+
+  @Override
+  public List<User> findAllEmpByRoleId(int roleId) {
+    logger.info("In DAO Layer: getting all employees with role_id: " + roleId);
+
+    List<User> employees = null;
+
+    try {
+      Session session = HibernateUtil.getSession();
+      // Get Reimb Object
+      employees = session.createNativeQuery("SELECT * FROM ers_users WHERE role_id = " + roleId + ";",
+          User.class).list();
+
+      for (User e : employees) {
+        logger.info(e);
+      }
+    } catch (Exception e) {
+      logger.warn("unable to complete findAllByRoleId query");
+    }
+    return employees;
+  }
+
   @Override
   public List<User> findAllUsers() {
     logger.info("In DAO Layer: getting all users.");
@@ -108,38 +130,38 @@ public class UserDAOImpl implements UserDAO {
     for (User user : users) {
       logger.info(user);
     }
-    logger.info(users);
     return users;
+
   }
 
-  // @Override
-  // public User login(String username, String password) {
-  // logger.info("In DAO Layer: UserDAOImpl() - attemptint to login user.");
-  // // User user = new User();
-  // // try (Connection conn = ConnectionUtil.getConnection()) {
-  // // String sql = "SELECT * from users where username = ? AND password = ?;";
-
-  // // PreparedStatement stmt = conn.prepareStatement(sql);
-  // // stmt.setString(1, username);
-  // // stmt.setString(2, password);
-
-  // // ResultSet rs = stmt.executeQuery();
-
-  // // if (rs.next()) {
-  // // user.setUserId(rs.getInt("id"));
-  // // user.setUsername(rs.getString("username"));
-  // // // user.setPassword(rs.getString("password")); // Don't return the
-  // // password...
-  // // user.setFirstName(rs.getString("first_name"));
-  // // user.setLastName(rs.getString("last_name"));
-  // // user.setEmail(rs.getString("email"));
-  // // user.setRoleId(rs.getInt("role_id"));
-  // // }
-  // // } catch (SQLException e) {
-  // // logger.warn("Unable to execute query");
-  // // return null;
-  // // }
-  // // return user;
-  // }
-
 }
+
+// @Override
+// public User login(String username, String password) {
+// logger.info("In DAO Layer: UserDAOImpl() - attemptint to login user.");
+// // User user = new User();
+// // try (Connection conn = ConnectionUtil.getConnection()) {
+// // String sql = "SELECT * from users where username = ? AND password = ?;";
+
+// // PreparedStatement stmt = conn.prepareStatement(sql);
+// // stmt.setString(1, username);
+// // stmt.setString(2, password);
+
+// // ResultSet rs = stmt.executeQuery();
+
+// // if (rs.next()) {
+// // user.setUserId(rs.getInt("id"));
+// // user.setUsername(rs.getString("username"));
+// // // user.setPassword(rs.getString("password")); // Don't return the
+// // password...
+// // user.setFirstName(rs.getString("first_name"));
+// // user.setLastName(rs.getString("last_name"));
+// // user.setEmail(rs.getString("email"));
+// // user.setRoleId(rs.getInt("role_id"));
+// // }
+// // } catch (SQLException e) {
+// // logger.warn("Unable to execute query");
+// // return null;
+// // }
+// // return user;
+// }

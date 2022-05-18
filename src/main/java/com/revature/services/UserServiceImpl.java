@@ -57,6 +57,10 @@ public class UserServiceImpl implements UserService {
         return userDAO.findAllUsers();
     }
 
+    public List<User> getAllEmpById(){
+        return userDAO.findAllEmpByRoleId(1);
+    }
+
     // @Override
     // public User loginUser(String username, String password) throws Exception {
 
