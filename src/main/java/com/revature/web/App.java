@@ -43,6 +43,10 @@ public class App extends HttpServlet {
             case "userupdate":
                 UserHelper.processUpdateUser(req, resp);
                 break;
+            case "employees":
+                log.info("Get all employees by role Id...");
+                UserHelper.processFindAllEmployees(req, resp);
+                break; 
             default:
                 log.info("showing error message...");
                 UserHelper.processError(req, resp);
