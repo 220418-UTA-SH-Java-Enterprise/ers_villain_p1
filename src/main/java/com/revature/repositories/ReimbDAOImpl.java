@@ -109,41 +109,43 @@ public class ReimbDAOImpl implements ReimbDAO {
         return reimbs;
     }
 
-    @Override
-    public List<Reimb> findAllResolvedByAuthId(User auth) {
-        logger.info("Find all reimbursements");
+    // @Override
+    // public List<Reimb> findAllResolvedByAuthId(User auth) {
+    // logger.info("Find all reimbursements");
 
-        Session session = HibernateUtil.getSession();
+    // Session session = HibernateUtil.getSession();
 
-        // 1. Create Criteria Builder
-        CriteriaBuilder cb = session.getCriteriaBuilder();
+    // // 1. Create Criteria Builder
+    // CriteriaBuilder cb = session.getCriteriaBuilder();
 
-        // 2. Create Query Criteria
-        CriteriaQuery<Reimb> cq = cb.createQuery(Reimb.class);
+    // // 2. Create Query Criteria
+    // CriteriaQuery<Reimb> cq = cb.createQuery(Reimb.class);
 
-        // 3. Set the root
-        Root<Reimb> reimb = cq.from(Reimb.class);
+    // // 3. Set the root
+    // Root<Reimb> reimb = cq.from(Reimb.class);
 
-        // 4. Create the join
-        Join<Reimb, ReimbStatus> reimbStatus = reimb.join("status"); // Root's joinColumn variable
-        Join<Reimb, ReimbStatus> reimbAuth = reimb.join("author"); // Root's joinColumn variable
+    // // 4. Create the join
+    // Join<Reimb, ReimbStatus> reimbStatus = reimb.join("status"); // Root's
+    // joinColumn variable
+    // Join<Reimb, ReimbStatus> reimbAuth = reimb.join("author"); // Root's
+    // joinColumn variable
 
-        // 5. What does this do?
-        cq.select(reimb);
-        cq.where(cb.and(
-                cb.notEqual(reimbStatus.get("reimbStatusId"), 1),
-                cb.notEqual(reimbStatus.get("reimbStatusId"), 2),
-                cb.equal(reimbAuth.get("id"), auth.getUserId())));
+    // // 5. What does this do?
+    // cq.select(reimb);
+    // cq.where(cb.and(
+    // cb.notEqual(reimbStatus.get("reimbStatusId"), 1),
+    // cb.notEqual(reimbStatus.get("reimbStatusId"), 2),
+    // cb.equal(reimbAuth.get("id"), auth.getUserId())));
 
-        // 6. Execute Query
-        Query<Reimb> query = session.createQuery(cq);
+    // // 6. Execute Query
+    // Query<Reimb> query = session.createQuery(cq);
 
-        // 7. Save results to a variable (list in this case)
-        List<Reimb> reimbs = query.getResultList();
+    // // 7. Save results to a variable (list in this case)
+    // List<Reimb> reimbs = query.getResultList();
 
-        // 8. return the results
-        return reimbs;
-    }
+    // // 8. return the results
+    // return reimbs;
+    // }
 
     public List<Reimb> findAllPendingByAuthId(User auth) {
         logger.info("Find all reimbursements");
@@ -248,7 +250,7 @@ public class ReimbDAOImpl implements ReimbDAO {
     }
 
     @Override
-    public List<Reimb> findAllPendingByAuthId(User auth) {
+    public List<Reimb> findAllResolvedByAuthId(User auth) {
         logger.info("Find all reimbursements");
 
         Session session = HibernateUtil.getSession();
@@ -269,8 +271,8 @@ public class ReimbDAOImpl implements ReimbDAO {
         // 5. What does this do?
         cq.select(reimb);
         cq.where(cb.and(
-                cb.notEqual(reimbStatus.get("reimbStatusId"), 3),
-                cb.notEqual(reimbStatus.get("reimbStatusId"), 4),
+                cb.notEqual(reimbStatus.get("reimbStatusId"), 1),
+                cb.notEqual(reimbStatus.get("reimbStatusId"), 2),
                 cb.equal(reimbAuth.get("id"), auth.getUserId())));
 
         // 6. Execute Query
