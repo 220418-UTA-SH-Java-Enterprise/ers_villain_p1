@@ -59,6 +59,10 @@ public class App extends HttpServlet {
                 log.info("Get all employees by role Id...");
                 UserHelper.processFindAllEmployees(req, resp);
                 break;
+            case "login":
+                log.info("Login user with username and password...");
+                UserHelper.processLogin(req, resp);
+                break;  
             default:
                 log.info("showing error message...");
                 UserHelper.processError(req, resp);
@@ -76,7 +80,7 @@ public class App extends HttpServlet {
                 UserHelper.processRegistration(req, resp);
                 break;
             case "login": // login
-                // UserHelper.processLogin(req, resp);
+                UserHelper.processLogin(req, resp);
                 break;
             case "createreimbrequest":
                 ReimbHelper.processNewReimbRequest(req, resp);

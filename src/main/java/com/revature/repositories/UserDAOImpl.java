@@ -2,12 +2,17 @@ package com.revature.repositories;
 
 import java.util.List;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
 import com.revature.models.User;
 import com.revature.util.HibernateUtil;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 public class UserDAOImpl implements UserDAO {
 
@@ -74,10 +79,11 @@ public class UserDAOImpl implements UserDAO {
 
     try {
       Session session = HibernateUtil.getSession();
-      // Get Reimb Object
+      
+      // Get User Object
       user = session.createNativeQuery("SELECT * FROM ers_users WHERE user_id = " + id + " ORDER BY user_id",
           User.class).getSingleResult();
-
+      
       logger.info(user);
 
     } catch (Exception e) {
@@ -87,6 +93,24 @@ public class UserDAOImpl implements UserDAO {
     logger.info("returning user: " + user);
 
     return user;
+  }
+
+  @Override
+  public List<User> findAllUsers() {
+    logger.info("In DAO Layer: getting all users.");
+
+    List<User> users;
+    Session session = HibernateUtil.getSession();
+
+    // Get Reimb Object
+    users = session.createNativeQuery("SELECT * FROM ers_users ORDER BY user_id",
+        User.class).list();
+
+    for (User user : users) {
+      logger.info(user);
+    }
+    logger.info(users);
+    return users;
   }
 
   @Override
@@ -111,21 +135,21 @@ public class UserDAOImpl implements UserDAO {
   }
 
   @Override
-  public List<User> findAllUsers() {
-    logger.info("In DAO Layer: getting all users.");
+  public User login(String username, String password) {
+    logger.info("In DAO Layer: UserDAOImpl() - attempting to login user.");
+    
+    User user = new User();
 
-    List<User> users;
-    Session session = HibernateUtil.getSession();
+    try {
+      Session session = HibernateUtil.getSession();
 
-    // Get Reimb Object
-    users = session.createNativeQuery("SELECT * FROM ers_users ORDER BY user_id",
-        User.class).list();
+      user = session.createNativeQuery("SELECT * FROM ers_users WHERE username = '" + username + "' AND password = '" + password + "' ;", User.class).getSingleResult();
 
-    for (User user : users) {
       logger.info(user);
+
+    } catch (Exception e) {
+      logger.warn("Unable to complete login query");
     }
-    return users;
-
+    return user;
   }
-
 }

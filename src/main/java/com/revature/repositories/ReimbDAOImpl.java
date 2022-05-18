@@ -145,6 +145,41 @@ public class ReimbDAOImpl implements ReimbDAO {
         return reimbs;
     }
 
+    public List<Reimb> findAllPendingByAuthId(User auth) {
+        logger.info("Find all reimbursements");
+
+        Session session = HibernateUtil.getSession();
+
+        // 1. Create Criteria Builder
+        CriteriaBuilder cb = session.getCriteriaBuilder();
+
+        // 2. Create Query Criteria
+        CriteriaQuery<Reimb> cq = cb.createQuery(Reimb.class);
+
+        // 3. Set the root
+        Root<Reimb> reimb = cq.from(Reimb.class);
+
+        // 4. Create the join
+        Join<Reimb, ReimbStatus> reimbStatus = reimb.join("status"); // Root's joinColumn variable
+        Join<Reimb, ReimbStatus> reimbAuth = reimb.join("author"); // Root's joinColumn variable
+
+        // 5. What does this do?
+        cq.select(reimb);
+        cq.where(cb.and(
+                cb.notEqual(reimbStatus.get("reimbStatusId"), 3),
+                cb.notEqual(reimbStatus.get("reimbStatusId"), 4),
+                cb.equal(reimbAuth.get("id"), auth.getUserId())));
+
+        // 6. Execute Query
+        Query<Reimb> query = session.createQuery(cq);
+
+        // 7. Save results to a variable (list in this case)
+        List<Reimb> reimbs = query.getResultList();
+
+        // 8. return the results
+        return reimbs;
+    }
+
     @Override
     public List<Reimb> findAllPending() {
         logger.info("Find all reimbursements");

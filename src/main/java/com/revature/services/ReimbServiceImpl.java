@@ -48,6 +48,13 @@ public class ReimbServiceImpl implements ReimbService {
     }
 
     @Override
+    public List<Reimb> getResolvedReimbsByUserId(User user) {
+        List<Reimb> reimbs = new ArrayList<Reimb>();
+        reimbs = reimbDAO.findAllResolvedByAuthId(user);
+        return reimbs;
+    }
+
+    @Override
     public List<Reimb> getPendingReimbsByUserId(User user) {
         List<Reimb> reimbs = new ArrayList<Reimb>();
         reimbs = reimbDAO.findAllPendingByAuthId(user);
