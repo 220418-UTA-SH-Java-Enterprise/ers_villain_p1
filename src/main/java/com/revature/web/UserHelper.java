@@ -194,6 +194,10 @@ public class UserHelper {
             User user = null;
             try {
                 user = userService.loginUser(username, password);
+                if (user.getUserId()== 0) {
+                    response.setStatus(401);
+                    response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid username and password.");
+                }
             } catch (Exception e) {
                 response.setStatus(401);
                 response.sendError(HttpServletResponse.SC_BAD_REQUEST, e.getMessage());

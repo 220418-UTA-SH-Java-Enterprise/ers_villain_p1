@@ -71,7 +71,7 @@ public class App extends HttpServlet {
                 UserHelper.processRegistration(req, resp);
                 break;
             case "login": // login
-                // UserHelper.processLogin(req, resp);
+                UserHelper.processLogin(req, resp);
                 break;
             default:
                 log.info("showing error message...");
