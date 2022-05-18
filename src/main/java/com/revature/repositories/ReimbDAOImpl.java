@@ -132,7 +132,8 @@ public class ReimbDAOImpl implements ReimbDAO {
         // 5. What does this do?
         cq.select(reimb);
         cq.where(cb.and(
-                cb.notEqual(reimbStatus.get("reimbStatusId"), 2)));
+                cb.notEqual(reimbStatus.get("reimbStatusId"), 3),
+                cb.notEqual(reimbStatus.get("reimbStatusId"), 4)));
 
         // 6. Execute Query
         Query<Reimb> query = session.createQuery(cq);
