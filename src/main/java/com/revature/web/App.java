@@ -40,6 +40,9 @@ public class App extends HttpServlet {
                 log.info("getting user list...");
                 ReimbHelper.processFindAllReimbs(req, resp);
                 break;
+            case "userupdate":
+                UserHelper.processUpdateUser(req, resp);
+                break;
             default:
                 log.info("showing error message...");
                 UserHelper.processError(req, resp);

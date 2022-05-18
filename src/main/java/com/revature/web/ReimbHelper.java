@@ -133,15 +133,37 @@ public class ReimbHelper {
     public static void processFindResolvedByUserId(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
         logger.info("inside of request helper...processfindAllreimbs...");
+        BufferedReader reader = request.getReader();
+        StringBuilder s = new StringBuilder();
+
+        String line = reader.readLine();
+        while (line != null) {
+            s.append(line);
+            line = reader.readLine();
+        }
+
+        List<String> values = new ArrayList<String>();
+
+        String body = s.toString();
+        String[] sepByAmp = body.split("&");
+
+        for (String pair : sepByAmp) {
+            values.add(pair.substring(pair.indexOf("=") + 1));
+        }
+
+        logger.info("Reimbursements requested for user with information: " + body);
+        // 1. Set the content type to return text to the browser
         response.setContentType("application/json");
-        int id = Integer.parseInt(request.getParameter("id"));
 
+        // 2. Get the user in the Databse by id
+        int id = Integer.parseInt(values.get(0));
         User user = userService.getUserById(id);
-
         List<Reimb> allReimbs = reimbService.getResolvedReimbsByUserId(user);
 
+        // 3. Turn the list of Java objects into a JSON string
         String json = om.writeValueAsString(allReimbs);
 
+        // 4. Use a Print Writer to write the objects to the reponse body
         PrintWriter out = response.getWriter();
 
         out.println(json);

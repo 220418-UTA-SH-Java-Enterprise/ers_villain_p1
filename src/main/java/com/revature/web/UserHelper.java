@@ -142,6 +142,10 @@ public class UserHelper {
 
     }
 
+    public static void processUpdateUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        // Update user stuff goes here...
+    }
+
     public static void processError(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         // if something goes wrong, redirect the user to a custom 404 error page

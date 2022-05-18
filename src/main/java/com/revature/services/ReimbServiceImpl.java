@@ -43,6 +43,7 @@ public class ReimbServiceImpl implements ReimbService {
 
     public List<Reimb> getResolvedReimbsByUserId(User user) {
         List<Reimb> reimbs = new ArrayList<Reimb>();
+        reimbs = reimbDAO.findAllResolvedByAuthId(user);
         return reimbs;
     }
 
