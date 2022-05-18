@@ -142,6 +142,20 @@ public class UserHelper {
 
     }
 
+    public static void processFindAllEmployees(HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
+                logger.info("Inside of request helper...processfindAllEmployees...");
+                response.setContentType("application/json");
+        
+                List<User> allEmployees = userService.getAllEmpById();
+        
+                String json = om.writeValueAsString(allEmployees);
+        
+                PrintWriter out = response.getWriter();
+        
+                out.println(json);
+    }
+
     public static void processError(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         // if something goes wrong, redirect the user to a custom 404 error page
