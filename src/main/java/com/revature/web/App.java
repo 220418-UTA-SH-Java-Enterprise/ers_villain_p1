@@ -78,6 +78,9 @@ public class App extends HttpServlet {
             case "login": // login
                 // UserHelper.processLogin(req, resp);
                 break;
+            case "createreimbrequest":
+                ReimbHelper.processNewReimbRequest(req, resp);
+                break;
             default:
                 log.info("showing error message...");
                 UserHelper.processError(req, resp);

@@ -15,9 +15,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.revature.models.Reimb;
+import com.revature.models.ReimbStatus;
 import com.revature.models.ReimbType;
 import com.revature.models.User;
 import com.revature.services.ReimbServiceImpl;
+import com.revature.services.ReimbStatusServiceImpl;
+import com.revature.services.ReimbTypeServiceImpl;
 import com.revature.services.UserServiceImpl;
 
 import org.apache.log4j.Logger;
@@ -26,6 +29,8 @@ public class ReimbHelper {
 
     private static ReimbServiceImpl reimbService = new ReimbServiceImpl();
     private static UserServiceImpl userService = new UserServiceImpl();
+    private static ReimbTypeServiceImpl reimbTypeService = new ReimbTypeServiceImpl();
+    private static ReimbStatusServiceImpl reimbStatusService = new ReimbStatusServiceImpl();
     private static Logger logger = Logger.getLogger(UserHelper.class);
     private static ObjectMapper om = JsonMapper.builder()
             .addModule(new JavaTimeModule())
@@ -113,15 +118,27 @@ public class ReimbHelper {
 
         // Author - needs to be an user object
         int authorId = Integer.parseInt(values.get(4));
-        // User author = getUser(authorId);
+        User author = userService.getUserById(authorId);
 
         // Status - needs to be an Reimb_Status object
         int statusId = Integer.parseInt(values.get(5));
-        // ReimbStatus status = getStatus(statusId);
+        ReimbStatus status = reimbStatusService.getReimbStatusById(statusId);
 
         // Type - needs to be a Reimb_Type object
         int typeId = Integer.parseInt(values.get(6));
-        ReimbType type = getType(typeId);
+        ReimbType type = reimbTypeService.getById(typeId);
+
+        Reimb reimb = new Reimb(amount, submitted, description, receipts, author, status, type);
+
+        int pk = reimbService.addNewReimbRequest(reimb);
+
+        if (pk > 0) {
+            response.setContentType("application/json");
+            response.setStatus(200); // SUCCESSFUL!
+        } else {
+            response.setContentType("application/json");
+            response.setStatus(400);
+        }
 
     }
 
@@ -151,12 +168,6 @@ public class ReimbHelper {
         PrintWriter out = response.getWriter();
 
         out.println(json);
-    }
-
-    private static ReimbType getType(int typeId) {
-        ReimbType type = new ReimbType();
-
-        return type;
     }
 
     public static void processFindResolvedByUserId(HttpServletRequest request, HttpServletResponse response)
