@@ -15,5 +15,5 @@ public interface UserService {
 
     public List<User> getAllUsers();
 
-    // public User loginUser(String username, String password) throws Exception;
+    public User loginUser(String username, String password) throws Exception;
 }

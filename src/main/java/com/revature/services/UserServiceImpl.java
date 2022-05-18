@@ -61,15 +61,13 @@ public class UserServiceImpl implements UserService {
         return userDAO.findAllEmpByRoleId(1);
     }
 
-    // @Override
-    // public User loginUser(String username, String password) throws Exception {
-
-    // User user = userDAO.login(username, password);
-
-    // if (user == null) {
-    // throw new Exception("Invalid username or password");
-    // }
-
-    // return user;
-    // }
+    @Override
+    public User loginUser(String username, String password) throws Exception {
+        User userlogin = userDAO.login(username, password);
+        if (userlogin == null) {
+            throw new Exception("Invalid username or password.");
+            }
+        return userlogin;
+    }
+   
 }

@@ -46,7 +46,11 @@ public class App extends HttpServlet {
             case "employees":
                 log.info("Get all employees by role Id...");
                 UserHelper.processFindAllEmployees(req, resp);
-                break; 
+                break;
+            case "login":
+                log.info("Login user with username and password...");
+                UserHelper.processLogin(req, resp);
+                break;  
             default:
                 log.info("showing error message...");
                 UserHelper.processError(req, resp);
