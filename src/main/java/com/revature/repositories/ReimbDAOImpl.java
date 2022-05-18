@@ -5,13 +5,11 @@ import java.util.List;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
-import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Root;
 
 import com.revature.models.Reimb;
 import com.revature.models.ReimbStatus;
 import com.revature.models.User;
-import com.revature.services.ReimbStatusServiceImpl;
 import com.revature.util.HibernateUtil;
 
 import org.apache.log4j.Logger;
@@ -22,7 +20,6 @@ import org.hibernate.query.Query;
 public class ReimbDAOImpl implements ReimbDAO {
 
     private static Logger logger = Logger.getLogger(ReimbDAOImpl.class);
-    private static ReimbStatusServiceImpl reimbService = new ReimbStatusServiceImpl();
 
     @Override
     public int insert(Reimb reimb) {

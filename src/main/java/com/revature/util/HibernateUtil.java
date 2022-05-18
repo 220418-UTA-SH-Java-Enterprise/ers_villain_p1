@@ -1,7 +1,5 @@
 package com.revature.util;
 
-import com.revature.models.*;
-
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
