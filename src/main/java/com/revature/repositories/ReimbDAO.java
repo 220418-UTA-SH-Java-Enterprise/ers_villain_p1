@@ -13,13 +13,15 @@ public interface ReimbDAO {
     public Reimb findById(int id);
 
     // Read Reimbursement by author
-    public List<Reimb> findAllReimbs();
+    public List<Reimb> findAllReimbs(); //
 
     // Read Reimbursement by author
-    public List<Reimb> findAllByAuthId(User user); //
+    public List<Reimb> findAllByAuthId(User user); // Done
 
     // Read Reimbursement by author
-    public List<Reimb> findAllResolvedByAuthId(User user); //
+    public List<Reimb> findAllResolvedByAuthId(User user); // Done
+
+    public List<Reimb> findAllPendingByAuthId(User auth); // Done
 
     // Read Reimbursement by status type
     public List<Reimb> findAllByStatusType(int statusTypeId); //

@@ -36,6 +36,9 @@ public class App extends HttpServlet {
                 log.info("search resolved reimb by user id. URI: " + URI);
                 ReimbHelper.processFindResolvedByUserId(req, resp);
                 break;
+            case "userreimbpending":
+                ReimbHelper.processFindPendingByUserId(req, resp);
+                break;
             case "reimbs": // query the DB and return a list of all reimbursement requests
                 log.info("getting user list...");
                 ReimbHelper.processFindAllReimbs(req, resp);
