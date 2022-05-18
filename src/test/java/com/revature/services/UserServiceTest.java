@@ -1,4 +1,4 @@
-package com.revature;
+package com.revature.services;
 
 import static org.mockito.Mockito.when;
 
@@ -8,7 +8,7 @@ import java.util.List;
 import com.revature.models.User;
 import com.revature.models.UserRole;
 import com.revature.repositories.UserDAOImpl;
-import com.revature.services.UserServiceImpl;
+
 
 import org.junit.Before;
 import org.junit.Test;
@@ -46,17 +46,6 @@ public class UserServiceTest extends TestCase {
         
     }
 
-    // @Test
-    // public void testUserDAO_addNewUser() throws Exception {
-    //     User u3 = new User(3, "Leviathon", "password", "Levi", "Choi", "levichoi@gmail.com", role2);
-
-    //     mockDb.add(u3);
-
-    //     when(mockdao.insert(u3)).thenReturn(3);
-
-    //     assertEquals(3,mockdao.insert(u3));
-    // }
-
     @Test
     public void testUserService_getByIdSuccess(){
         when(mockdao.findById(2)).thenReturn(u2);
@@ -79,14 +68,6 @@ public class UserServiceTest extends TestCase {
         assertEquals(mockDb, userv.getAllUsers());
 
     }
-
-    // @Override
-    // public List<User> getAllUsers() {
-    //     return userDAO.findAllUsers();
-    // }
-
-
-
 
 
 }
