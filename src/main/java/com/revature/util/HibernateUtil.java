@@ -43,10 +43,11 @@ public class HibernateUtil {
     // .setProperty("hibernate.connection.password", "password")
 
     /**
-     * Otehr stuff
+     * Other stuff
      */
     // .setProperty("hibernate.dialect",
-    // "org.hibernate.dialect.PostgreSQLDialect").setProperty("show_sql", "true")
+    // "org.hibernate.dialect.PostgreSQLDialect")
+    // .setProperty("show_sql", "true")
 
     /**
      * POOLING

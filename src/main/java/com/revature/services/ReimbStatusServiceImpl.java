@@ -14,6 +14,9 @@ public class ReimbStatusServiceImpl implements ReimbStatusService {
     this.reimbStatusDAO = dao;
   }
 
+  public ReimbStatusServiceImpl() {
+  }
+
   @Override
   public ReimbStatus getReimbStatusById(int id) {
     logger.info("In Service Layer: ReimbStatuServiceImpl.getReimbStatusById()");

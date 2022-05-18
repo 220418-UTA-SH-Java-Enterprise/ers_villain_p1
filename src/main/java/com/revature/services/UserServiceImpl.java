@@ -11,11 +11,11 @@ public class UserServiceImpl implements UserService {
     private static Logger logger = Logger.getLogger(UserServiceImpl.class);
     private static UserDAOImpl userDAO = new UserDAOImpl();
 
-    public UserServiceImpl(){
+    public UserServiceImpl() {
 
     }
 
-    public UserServiceImpl(UserDAOImpl dao){
+    public UserServiceImpl(UserDAOImpl dao) {
         super();
         this.userDAO = dao;
     }
@@ -72,5 +72,4 @@ public class UserServiceImpl implements UserService {
 
     // return user;
     // }
-
 }

@@ -18,14 +18,15 @@ import com.revature.models.Reimb;
 import com.revature.models.ReimbStatus;
 import com.revature.models.ReimbType;
 import com.revature.models.User;
-import com.revature.services.ReimbService;
 import com.revature.services.ReimbServiceImpl;
+import com.revature.services.UserServiceImpl;
 
 import org.apache.log4j.Logger;
 
 public class ReimbHelper {
 
-    private static ReimbService reimbService = new ReimbServiceImpl();
+    private static ReimbServiceImpl reimbService = new ReimbServiceImpl();
+    private static UserServiceImpl userService = new UserServiceImpl();
     private static Logger logger = Logger.getLogger(UserHelper.class);
     private static ObjectMapper om = JsonMapper.builder()
             .addModule(new JavaTimeModule())
@@ -127,5 +128,44 @@ public class ReimbHelper {
         ReimbType type = new ReimbType();
 
         return type;
+    }
+
+    public static void processFindResolvedByUserId(HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
+        logger.info("inside of request helper...processfindAllreimbs...");
+        BufferedReader reader = request.getReader();
+        StringBuilder s = new StringBuilder();
+
+        String line = reader.readLine();
+        while (line != null) {
+            s.append(line);
+            line = reader.readLine();
+        }
+
+        List<String> values = new ArrayList<String>();
+
+        String body = s.toString();
+        String[] sepByAmp = body.split("&");
+
+        for (String pair : sepByAmp) {
+            values.add(pair.substring(pair.indexOf("=") + 1));
+        }
+
+        logger.info("Reimbursements requested for user with information: " + body);
+        // 1. Set the content type to return text to the browser
+        response.setContentType("application/json");
+
+        // 2. Get the user in the Databse by id
+        int id = Integer.parseInt(values.get(0));
+        User user = userService.getUserById(id);
+        List<Reimb> allReimbs = reimbService.getResolvedReimbsByUserId(user);
+
+        // 3. Turn the list of Java objects into a JSON string
+        String json = om.writeValueAsString(allReimbs);
+
+        // 4. Use a Print Writer to write the objects to the reponse body
+        PrintWriter out = response.getWriter();
+
+        out.println(json);
     }
 }

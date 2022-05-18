@@ -1,5 +1,6 @@
 package com.revature.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.revature.models.Reimb;
@@ -38,6 +39,12 @@ public class ReimbServiceImpl implements ReimbService {
     @Override
     public List<Reimb> getReimbByStatus(int statusTypeId) {
         return reimbDAO.findAllByStatusType(statusTypeId);
+    }
+
+    public List<Reimb> getResolvedReimbsByUserId(User user) {
+        List<Reimb> reimbs = new ArrayList<Reimb>();
+        reimbs = reimbDAO.findAllResolvedByAuthId(user);
+        return reimbs;
     }
 
 }

@@ -18,6 +18,9 @@ public interface ReimbDAO {
     // Read Reimbursement by author
     public List<Reimb> findAllByAuthId(User user); //
 
+    // Read Reimbursement by author
+    public List<Reimb> findAllResolvedByAuthId(User user); //
+
     // Read Reimbursement by status type
     public List<Reimb> findAllByStatusType(int statusTypeId); //
 

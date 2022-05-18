@@ -142,6 +142,10 @@ public class UserHelper {
 
     }
 
+    public static void processUpdateUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        // Update user stuff goes here...
+    }
+
     public static void processFindAllEmployees(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
                 logger.info("Inside of request helper...processfindAllEmployees...");

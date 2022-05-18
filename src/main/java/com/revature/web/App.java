@@ -32,9 +32,16 @@ public class App extends HttpServlet {
                 log.info("search user by name or id. URI: " + URI);
                 UserHelper.processFindUserbyId(req, resp);
                 break;
+            case "userreimbresolved":
+                log.info("search resolved reimb by user id. URI: " + URI);
+                ReimbHelper.processFindResolvedByUserId(req, resp);
+                break;
             case "reimbs": // query the DB and return a list of all reimbursement requests
                 log.info("getting user list...");
                 ReimbHelper.processFindAllReimbs(req, resp);
+                break;
+            case "userupdate":
+                UserHelper.processUpdateUser(req, resp);
                 break;
             case "employees":
                 log.info("Get all employees by role Id...");
