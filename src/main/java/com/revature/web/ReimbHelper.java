@@ -70,25 +70,16 @@ public class ReimbHelper {
         BufferedReader reader = request.getReader();
         StringBuilder s = new StringBuilder();
 
-        // We are just transferring out Reader data to our StirngBuilder
         String line = reader.readLine();
         while (line != null) {
-            // add a new line
             s.append(line);
-            // move to next line
             line = reader.readLine();
         }
 
-        String body = s.toString();
-
-        /**
-         * Separate out:
-         * amount, submitted, description, receipt, author, type
-         * Everything else should be set automatically since this is a new request
-         */
-        String[] sepByAmp = body.split("&");
-
         List<String> values = new ArrayList<String>();
+
+        String body = s.toString();
+        String[] sepByAmp = body.split("&");
 
         for (String pair : sepByAmp) {
             values.add(pair.substring(pair.indexOf("=") + 1));
@@ -106,9 +97,9 @@ public class ReimbHelper {
         double amount = Double.parseDouble(values.get(0));
 
         // Dates are fun
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         String date = values.get(1);
-        LocalDate submitted = LocalDate.parse(date, formatter);
+        LocalDate submitted = LocalDate.from(formatter.parse(date));
 
         // Description is easy
         String description = values.get(2);

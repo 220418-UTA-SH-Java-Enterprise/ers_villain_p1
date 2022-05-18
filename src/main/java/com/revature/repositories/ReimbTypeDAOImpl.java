@@ -17,7 +17,8 @@ public class ReimbTypeDAOImpl implements ReimbTypeDAO {
         Transaction transaction = null;
         ReimbType reimbType = null;
 
-        try (Session session = HibernateUtil.getSession()) {
+        try {
+            Session session = HibernateUtil.getSession();
             // Start the transaction
             transaction = session.beginTransaction();
 
@@ -26,6 +27,8 @@ public class ReimbTypeDAOImpl implements ReimbTypeDAO {
 
             // Commit the transaction
             transaction.commit();
+        } catch (Exception e) {
+            logger.warn("Unable to complete ReimbType transaction.");
         }
         return reimbType;
     }

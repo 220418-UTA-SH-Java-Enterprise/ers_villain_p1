@@ -17,7 +17,9 @@ public class ReimbStatusDAOImpl implements ReimbStatusDAO {
     Transaction findReimbStatusByIdTx = null;
     ReimbStatus reimbStatus = null;
 
-    try (Session session = HibernateUtil.getSession()) {
+    try {
+      Session session = HibernateUtil.getSession();
+
       // Starts the transaction
       findReimbStatusByIdTx = session.beginTransaction();
 
